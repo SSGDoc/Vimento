@@ -14,26 +14,31 @@
     <!--The div element for the map -->
     <div id="map"></div>
     <script>
-        // Initialize and add the map
         function initMap() {
-            // The location of Uluru
             //var jesper = { lat: 57.049280, lng: 9.879060 };
             var lp = { lat: 57.460972, lng: 9.981570 };
-            // The map, centered at Uluru
             var map = new google.maps.Map(
                 document.getElementById('map'), { zoom: 10, center: lp });
 
-            // The marker, positioned at JESPURR
             //var markerJesper = new google.maps.Marker({ position: jesper, map: map });
             //var markerLP = new google.maps.Marker({ position: lp, map: map });
 
             var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
-            var marker = new google.maps.Marker({
-                position: lp,
-                map: map,
-                icon: iconBase + 'parking_lot_maps.png'
-            });
 
+            // Her er det noget med at man kan bruge PHP til at forbinde til MySQL som giver en XML fil til nedenstående
+            var xml = "stien til en XML fil der indeholder kordinater";
+            markers = xml.documentElement.getElementsByTagName("marker");
+            for (var i = 0; i < markers.length; i++) {
+                var name = entries[i].getAttribute("name");
+                var email = entries[i].getAttribute("email");
+                var lat = entries[i].getAttribute("latitude");
+                var lng = entries[i].getAttribute("longitude");
+                point = new google.maps.LatLng(lat, lng);
+                marker = new google.maps.Marker({
+                    map: map,
+                    position: point,
+                });
+            }
         }
     </script>
     <!--Load the API from the specified URL
