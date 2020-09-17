@@ -31,5 +31,10 @@ namespace Vimento.Controllers
         {
             return View();
         }
+
+        public ActionResult Charts()
+        {
+            return View();
+        }
     }
 }
