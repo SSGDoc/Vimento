@@ -41,5 +41,10 @@ namespace Vimento.Controllers
         {
             return View();
         }
+
+        public ActionResult Leaflet()
+        {
+            return View();
+        }
     }
 }
