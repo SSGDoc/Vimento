@@ -17,7 +17,7 @@
 </head>
 <body>
     <br />
-    <div style="height: 50px">Det ser da ikke tosset ud :)</div>
+    <div style="height: 50px">Det ser da ikke tosset ud :), Her er det muligt at anvende forskellige kort layers (leaflet er bare basemap) <br /> Det du ser nu er fra Mapbox's tiles.</div>
     <div id="mapid" style="height: 600px;">  </div>
     <script>
         var mymap = L.map('mapid').setView([57.047218, 9.920100], 8);
@@ -39,5 +39,7 @@
         var marker3 = L.marker([57.221111, 9.678760]).addTo(mymap);
         var marker3 = L.marker([57.205720, 9.864940]).addTo(mymap);
     </script>
+    <br />
+    For at se en tutorial på hvordan man kan lave både cirkler, polygoner, linjer, eller pop-ups, kan du klikke <a href="https://leafletjs.com/examples/quick-start/">HER</a>
 </body>
 </html>

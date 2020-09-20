@@ -27,7 +27,7 @@ namespace Vimento.Controllers
             return View();
         }
 
-        public ActionResult MapAddress()
+        public ActionResult Gmap()
         {
             return View();
         }

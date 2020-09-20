@@ -171,7 +171,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\MapAddress.cshtml" />
+    <Content Include="Views\Home\Gmap.cshtml" />
     <Content Include="Views\Home\Charts.cshtml" />
     <Content Include="Views\Home\ArcGisMap.cshtml" />
     <Content Include="Views\Home\LeafLet.cshtml" />
