@@ -173,6 +173,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\MapAddress.cshtml" />
     <Content Include="Views\Home\Charts.cshtml" />
+    <Content Include="Views\Home\ArcGisMap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

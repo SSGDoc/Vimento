@@ -36,5 +36,10 @@ namespace Vimento.Controllers
         {
             return View();
         }
+
+        public ActionResult ArcGisMap()
+        {
+            return View();
+        }
     }
 }
