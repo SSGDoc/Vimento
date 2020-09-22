@@ -146,6 +146,10 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\MarkerScript.js" />
+    <Content Include="Scripts\Primary.js" />
+    <Content Include="XMLdata\Adresser.xml" />
+    <Content Include="XMLdata\Test.xml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -175,6 +179,7 @@
     <Content Include="Views\Home\Charts.cshtml" />
     <Content Include="Views\Home\ArcGisMap.cshtml" />
     <Content Include="Views\Home\LeafLet.cshtml" />
+    <Content Include="Views\Home\TestView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<destinations>
+  <point name="Tot Lot at Bryan Park">
+    <lat>39.15611</lat>
+    <long>-86.52664</long>
+    <type>outdoors</type>
+  </point>
+  <point name="Playground at Cascades Park">
+    <lat>39.19633</lat>
+    <long>-86.53581</long>
+    <type>outdoors</type>
+  </point>
+  <point name="Monroe County Public Library">
+    <lat>39.16667</lat>
+    <long>-86.53044</long>
+    <type>fun</type>
+  </point>
+  <point name="Bloomington Farmers Market (Saturdays Only)">
+    <lat>39.16940</lat>
+    <long>-86.53684</long>
+    <type>food</type>
+  </point>
+  <point name="WonderLab Science Museum">
+    <lat>39.1657</lat>
+    <long>-86.53658</long>
+    <type>fun</type>
+  </point>
+  <point name="Bloomington Bagel Company">
+    <lat>39.16716</lat>
+    <long>-86.52833</long>
+    <type>food</type>
+  </point>
+  <point name="Monroe County History Center">
+    <lat>39.16726</lat>
+    <long>-86.53218</long>
+    <type>fun</type>
+  </point>
+  <point name="Chocolate Moose">
+    <lat>39.16259</lat>
+    <long>-86.53353</long>
+    <type>food</type>
+  </point>
+  <point name="Bloomingfoods Market and Deli">
+    <lat>39.16397</lat>
+    <long>-86.49127</long>
+    <type>food</type>
+  </point>
+  <point name="Scholar's Inn Bakehouse">
+    <lat>39.16738</lat>
+    <long>-86.53496</long>
+    <type>food</type>
+  </point>
+  <point name="Bloomingfoods East">
+    <lat>39.16771</lat>
+    <long>-86.53713</long>
+    <type>food</type>
+  </point>
+  <point name="The Game Preserve">
+    <lat>39.16646</lat>
+    <long>-86.53424</long>
+    <type>fun</type>
+  </point>
+  <point name="John Waldron Arts Center">
+    <lat>39.16578</lat>
+    <long>-86.53377</long>
+    <type>fun</type>
+  </point>
+  <point name="Mathers Museum of World Culture">
+    <lat>39.16984</lat>
+    <long>-86.52590</long>
+    <type>fun</type>
+  </point>
+  <point name="Roots on the Square">
+    <lat>39.16742</lat>
+    <long>-86.53348</long>
+    <type>food</type>
+  </point>
+  <point name="FARMbloomington">
+    <lat>39.16645</lat>
+    <long>-86.53323</long>
+    <type>food</type>
+  </point>
+  <point name="Learning Treasures">
+    <lat>39.16576</lat>
+    <long>-86.49439</long>
+    <type>fun</type>
+  </point>
+  <point name="Movie Theater (AMC Showplace)">
+    <lat>39.15154</lat>
+    <long>-86.49548</long>
+    <type>fun</type>
+  </point>
+</destinations>
