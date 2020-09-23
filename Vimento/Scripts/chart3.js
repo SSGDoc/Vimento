@@ -24,7 +24,13 @@ function makeChart(players) {
             datasets: [
                 {
                     data: antalKunder,
-                    backgroundColor: ['rgb(255, 99, 132)', 'navy', 'orange'],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)'
+                        
+                    ],
                     borderColor: 'rgb(96, 96, 96)',
                     borderWidth: '1',
                     hoverBackgroundColor: 'rgb(255, 228, 138)'
