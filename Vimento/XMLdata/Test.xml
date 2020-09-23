@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <huse>
+    <hus>
+      <id>222</id>
+      <farve>
+        <navn>
+          gul
+        </navn>
+      </farve>
+    </hus>
+    <hus>
+      <id>333</id>
+      <farve>
+        <navn>rød</navn>
+      </farve>
+    </hus>
+    <hus>
+      <id>444</id>
+      <farve>
+        <navn> blå</navn>
+      </farve>
+    </hus>
+  </huse>
+  
+  
+  
+  
+  
+  <arbejdere>
+    <arbejder>
+      <stilling>Malker</stilling>
+      <navn>Maren</navn>
+    </arbejder>
+
+    <arbejder>
+      <stilling>Brygmester</stilling>
+      <navn>Brynjolf</navn>
+    </arbejder>
+
+    <arbejder>
+      <stilling>Smed</stilling>
+      <navn>Jarl</navn>
+    </arbejder>
+  </arbejdere> 
+</root>
