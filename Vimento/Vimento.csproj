@@ -148,10 +148,12 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\MarkerScript.js" />
     <Content Include="Scripts\Primary.js" />
+    <Content Include="Scripts\xmlChart.js" />
     <Content Include="XMLdata\Adresser.xml" />
+    <Content Include="XMLdata\Teleselskaber.xml" />
     <Content Include="XMLdata\Test.xml" />
+    <Content Include="XMLdata\test2.xml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="Scripts\chart2.js" />
     <Content Include="Scripts\chart3.js" />
     <Content Include="Scripts\doughnut.js" />
     <Content Include="Scripts\horizontalBar.js" />
@@ -166,7 +168,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\linechart.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\pie_chart.js" />
     <Content Include="Scripts\polarArea.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
