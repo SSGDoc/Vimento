@@ -1,93 +1,93 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <destinations>
-  <point name="Tot Lot at Bryan Park">
-    <lat>39.15611</lat>
-    <long>-86.52664</long>
-    <type>outdoors</type>
+  <point name="Nordjyske Bank">
+    <lat>57.459650</lat>
+    <long>9.987680</long>
+    <type>Bank</type>
   </point>
-  <point name="Playground at Cascades Park">
-    <lat>39.19633</lat>
-    <long>-86.53581</long>
-    <type>outdoors</type>
+  <point name="Hjørring Politi">
+    <lat>57.457340</lat>
+    <long>10.016110</long>
+    <type>Politi</type>
   </point>
-  <point name="Monroe County Public Library">
-    <lat>39.16667</lat>
-    <long>-86.53044</long>
+  <point name="Region Hospital">
+    <lat>57.452518</lat>
+    <long>9.996160</long>
+    <type>Hospital</type>
+  </point>
+  <point name="Vrå Hospital">
+    <lat>57.352110</lat>
+    <long>9.959410</long>
+    <type>Hospital</type>
+  </point>
+  <point name="HK Nordjylland">
+    <lat>57.439533</lat>
+    <long>10.006042</long>
+    <type>HK</type>
+  </point>
+  <point name="Lægevagten">
+    <lat>57.471323</lat>
+    <long>10.201052</long>
+    <type>food</type>
+  </point>
+  <point name="UCN- Hjørring">
+    <lat>57.458538</lat>
+    <long>10.003335</long>
     <type>fun</type>
   </point>
-  <point name="Bloomington Farmers Market (Saturdays Only)">
-    <lat>39.16940</lat>
-    <long>-86.53684</long>
+  <point name="Skat">
+    <lat>57.0542088</lat>
+    <long>9.9143724</long>
     <type>food</type>
   </point>
-  <point name="WonderLab Science Museum">
-    <lat>39.1657</lat>
-    <long>-86.53658</long>
+  <point name="Aalborg University">
+    <lat>57.0494496</lat>
+    <long>9.9191942</long>
+    <type>food</type>
+  </point>
+  <point name="Magistrenes A-Kasse">
+    <lat>57.049195</lat>
+    <long>9.921621</long>
+    <type>food</type>
+  </point>
+  <point name="Wonder Baby">
+    <lat>57.046487</lat>
+    <long>9.945559</long>
+    <type>food</type>
+  </point>
+  <point name="Business Aalborg">
+    <lat>57.046221</lat>
+    <long>9.919269</long>
     <type>fun</type>
   </point>
-  <point name="Bloomington Bagel Company">
-    <lat>39.16716</lat>
-    <long>-86.52833</long>
-    <type>food</type>
-  </point>
-  <point name="Monroe County History Center">
-    <lat>39.16726</lat>
-    <long>-86.53218</long>
+  <point name="Heart Art">
+    <lat>57.047344</lat>
+    <long>9.920272</long>
     <type>fun</type>
   </point>
-  <point name="Chocolate Moose">
-    <lat>39.16259</lat>
-    <long>-86.53353</long>
-    <type>food</type>
-  </point>
-  <point name="Bloomingfoods Market and Deli">
-    <lat>39.16397</lat>
-    <long>-86.49127</long>
-    <type>food</type>
-  </point>
-  <point name="Scholar's Inn Bakehouse">
-    <lat>39.16738</lat>
-    <long>-86.53496</long>
-    <type>food</type>
-  </point>
-  <point name="Bloomingfoods East">
-    <lat>39.16771</lat>
-    <long>-86.53713</long>
-    <type>food</type>
-  </point>
-  <point name="The Game Preserve">
-    <lat>39.16646</lat>
-    <long>-86.53424</long>
+  <point name="Aalborg Kommune">
+    <lat>57.0444127</lat>
+    <long>9.9253078</long>
     <type>fun</type>
   </point>
-  <point name="John Waldron Arts Center">
-    <lat>39.16578</lat>
-    <long>-86.53377</long>
-    <type>fun</type>
-  </point>
-  <point name="Mathers Museum of World Culture">
-    <lat>39.16984</lat>
-    <long>-86.52590</long>
-    <type>fun</type>
-  </point>
-  <point name="Roots on the Square">
-    <lat>39.16742</lat>
-    <long>-86.53348</long>
+  <point name="Ecco Alborg">
+    <lat>57.0429609</lat>
+    <long>9.9167688</long>
     <type>food</type>
   </point>
-  <point name="FARMbloomington">
-    <lat>39.16645</lat>
-    <long>-86.53323</long>
+  <point name="Restaurant Flammen">
+    <lat>57.049906</lat>
+    <long>9.922223</long>
     <type>food</type>
   </point>
-  <point name="Learning Treasures">
-    <lat>39.16576</lat>
-    <long>-86.49439</long>
+  <point name="UCN Aalborg">
+    <lat>57.032655</lat>
+    <long>9.908914</long>
     <type>fun</type>
   </point>
-  <point name="Movie Theater (AMC Showplace)">
-    <lat>39.15154</lat>
-    <long>-86.49548</long>
+  <point name="ILVA Aalborg">
+    <lat>57.033717</lat>
+    <long>9.929151</long>
     <type>fun</type>
   </point>
 </destinations>
