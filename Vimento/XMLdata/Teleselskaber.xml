@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<teleselskaber>
+  <selskab id="1">
+    <navn>Yousee</navn>
+    <kunder>450000</kunder>
+    <hastighed>150</hastighed>
+  </selskab>
+  <selskab id="2">
+    <navn>Telia</navn>
+    <kunder>150000</kunder>
+    <hastighed>135</hastighed>
+  </selskab>
+  <selskab id="3">
+    <navn>Duka</navn>
+    <kunder>50000</kunder>
+    <hastighed>50</hastighed>
+  </selskab>
+  <selskab id="4">
+    <navn>Oister</navn>
+    <kunder>135000</kunder>
+    <hastighed>75</hastighed>
+  </selskab>
+  <selskab id="5">
+    <navn>CBB</navn>
+    <kunder>225000</kunder>
+    <hastighed>50</hastighed>
+  </selskab>
+  <selskab id="6">
+    <navn>3</navn>
+    <kunder>250000</kunder>
+    <hastighed>100</hastighed>
+  </selskab>
+  <selskab id="7">
+    <navn>Telmore</navn>
+    <kunder>135000</kunder>
+    <hastighed>80</hastighed>
+  </selskab>
+  <selskab id="8">
+    <navn>Eesy</navn>
+    <kunder>10000</kunder>
+    <hastighed>35</hastighed>
+  </selskab>
+  <selskab id="9">
+    <navn>Call Me</navn>
+    <kunder>160000</kunder>
+    <hastighed>66</hastighed>
+  </selskab>
+  <selskab id="10">
+    <navn>greentel</navn>
+    <kunder>25000</kunder>
+    <hastighed>20</hastighed>
+  </selskab>
+</teleselskaber>

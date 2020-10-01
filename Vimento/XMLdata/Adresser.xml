@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<destinations>
+  <point name="Nordjyske Bank">
+    <lat>57.459650</lat>
+    <long>9.987680</long>
+    <type>Bank</type>
+  </point>
+  <point name="Hjørring Politi">
+    <lat>57.457340</lat>
+    <long>10.016110</long>
+    <type>Politi</type>
+  </point>
+  <point name="Region Hospital">
+    <lat>57.452518</lat>
+    <long>9.996160</long>
+    <type>Hospital</type>
+  </point>
+  <point name="Vrå Hospital">
+    <lat>57.352110</lat>
+    <long>9.959410</long>
+    <type>Hospital</type>
+  </point>
+  <point name="HK Nordjylland">
+    <lat>57.439533</lat>
+    <long>10.006042</long>
+    <type>HK</type>
+  </point>
+  <point name="Lægevagten">
+    <lat>57.471323</lat>
+    <long>10.201052</long>
+    <type>food</type>
+  </point>
+  <point name="UCN- Hjørring">
+    <lat>57.458538</lat>
+    <long>10.003335</long>
+    <type>fun</type>
+  </point>
+  <point name="Skat">
+    <lat>57.0542088</lat>
+    <long>9.9143724</long>
+    <type>food</type>
+  </point>
+  <point name="Aalborg University">
+    <lat>57.0494496</lat>
+    <long>9.9191942</long>
+    <type>food</type>
+  </point>
+  <point name="Magistrenes A-Kasse">
+    <lat>57.049195</lat>
+    <long>9.921621</long>
+    <type>food</type>
+  </point>
+  <point name="Wonder Baby">
+    <lat>57.046487</lat>
+    <long>9.945559</long>
+    <type>food</type>
+  </point>
+  <point name="Business Aalborg">
+    <lat>57.046221</lat>
+    <long>9.919269</long>
+    <type>fun</type>
+  </point>
+  <point name="Heart Art">
+    <lat>57.047344</lat>
+    <long>9.920272</long>
+    <type>fun</type>
+  </point>
+  <point name="Aalborg Kommune">
+    <lat>57.0444127</lat>
+    <long>9.9253078</long>
+    <type>fun</type>
+  </point>
+  <point name="Ecco Alborg">
+    <lat>57.0429609</lat>
+    <long>9.9167688</long>
+    <type>food</type>
+  </point>
+  <point name="Restaurant Flammen">
+    <lat>57.049906</lat>
+    <long>9.922223</long>
+    <type>food</type>
+  </point>
+  <point name="UCN Aalborg">
+    <lat>57.032655</lat>
+    <long>9.908914</long>
+    <type>fun</type>
+  </point>
+  <point name="ILVA Aalborg">
+    <lat>57.033717</lat>
+    <long>9.929151</long>
+    <type>fun</type>
+  </point>
+</destinations>

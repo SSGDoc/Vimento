@@ -1961,6 +1961,9 @@
     <Content Include="Content2\vendor\jquery\jquery.min.map" />
     <Content Include="Content2\vendor\jquery\jquery.slim.min.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\chart3.js" />
+    <Content Include="Scripts\doughnut.js" />
+    <Content Include="Scripts\horizontalBar.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -1970,7 +1973,9 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\linechart.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\polarArea.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1989,6 +1994,7 @@
     <Content Include="Views\Home\Charts.cshtml" />
     <Content Include="Views\Home\ArcGisMap.cshtml" />
     <Content Include="Views\Home\LeafLet.cshtml" />
+    <Content Include="Views\Home\TestView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

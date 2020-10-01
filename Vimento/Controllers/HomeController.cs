@@ -46,5 +46,10 @@ namespace Vimento.Controllers
         {
             return View();
         }
+
+        public ActionResult TestView()
+        {
+            return View();
+        }
     }
 }
