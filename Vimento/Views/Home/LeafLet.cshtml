@@ -12,6 +12,8 @@
             integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
             crossorigin=""></script>
 
+
+
     
     <title></title>
 </head>
@@ -34,10 +36,12 @@
     </script>
     <script>
         //HER KAN VI TILFØJE MARKERS
-        var marker1 = L.marker([57.060951, 9.922590]).addTo(mymap);
+      
+        var marker1 = L.marker([57.060951, 9.922590]).addTo(mymap).bindPopup("test test");
         var marker2 = L.marker([57.460972, 9.981570]).addTo(mymap);
         var marker3 = L.marker([57.221111, 9.678760]).addTo(mymap);
         var marker3 = L.marker([57.205720, 9.864940]).addTo(mymap);
+
     </script>
     <br />
     For at se en tutorial på hvordan man kan lave både cirkler, polygoner, linjer, eller pop-ups, kan du klikke <a href="https://leafletjs.com/examples/quick-start/">HER</a>
