@@ -47,7 +47,7 @@
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
 
                 <div class="sidebar-brand-text mx-3">
-                    <img class="mt-3" style="width: 100%;" src="https://i.imgur.com/cysRJJQ.png" alt="">
+                    <img class="mt-3" style="width: 100%;" src="~/Content/icons/vimento2.png" alt="">
                     <sup>2.0</sup>
                 </div>
             </a>
@@ -291,6 +291,7 @@
                                                 id: 'mapbox/streets-v11',
                                                 tileSize: 512,
                                                 zoomOffset: -1,
+
                                                 // ACCESSTOKEN FÅET FRA MAPBOX
                                                 accessToken: 'pk.eyJ1IjoibXJzYWdneSIsImEiOiJja2ZiamQ4ajYwcXh3MnhvODU4NjZrZ29xIn0.JXSCWFKMGdFElSPErRk-Zg'
                                             }).addTo(mymap);
@@ -298,10 +299,31 @@
                                         <script>
                                             //HER KAN VI TILFØJE MARKERS
 
-                                            var marker1 = L.marker([57.060951, 9.922590]).addTo(mymap).bindPopup("test test");
-                                            var marker2 = L.marker([57.460972, 9.981570]).addTo(mymap);
-                                            var marker3 = L.marker([57.221111, 9.678760]).addTo(mymap);
-                                            var marker3 = L.marker([57.205720, 9.864940]).addTo(mymap);
+
+                                            var circleIcon = L.icon({
+                                                iconUrl: '/Content/icons/MapCircle.png',
+                                                iconSize: [12, 12],
+                                                iconAnchor: [6, 6],
+                                                popupAnchor: [0, -3],
+                                                
+                                            });
+
+
+
+                                            //var circle = L.circleMarker([57.460972, 9.981570], {
+                                            //    color: '#4e73df',
+                                            //    fillColor: '#36b9cc',
+                                            //    fillOpacity: 0.7,
+                                            //    radius: 5,
+                                            //    weight: 2
+
+                                            //}).addTo(mymap);
+
+
+                                            var marker1 = L.marker([57.060951, 9.922590], { icon: circleIcon }).addTo(mymap).bindPopup("test test");
+                                            //var marker2 = L.marker([57.460972, 9.981570]).addTo(mymap);
+                                            var marker3 = L.marker([57.221111, 9.678760], { icon: circleIcon }).addTo(mymap);
+                                            var marker3 = L.marker([57.205720, 9.864940], { icon: circleIcon }).addTo(mymap);
 
                                         </script>
                                         @*<canvas id="myAreaChart"></canvas>*@
