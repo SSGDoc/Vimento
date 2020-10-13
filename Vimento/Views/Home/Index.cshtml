@@ -266,17 +266,17 @@
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">Map overview</h6>
                                     @*<div class="dropdown no-arrow">
-                                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                                <div class="dropdown-header">Dropdown Header:</div>
-                                                <a class="dropdown-item" href="#">Action</a>
-                                                <a class="dropdown-item" href="#">Another action</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#">Something else here</a>
-                                            </div>
-                                        </div>*@
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                            <div class="dropdown-header">Dropdown Header:</div>
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </div>*@
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body" style="height: 100%; padding: 0">
@@ -305,7 +305,7 @@
                                                 iconSize: [12, 12],
                                                 iconAnchor: [6, 6],
                                                 popupAnchor: [0, -3],
-                                                
+
                                             });
 
 
@@ -332,25 +332,50 @@
                             </div>
                         </div>
 
+
+                        <div class="col-xl-2 col-lg-2 m-auto">
+                            <div class="card shadow mb-4">
+                                 @*Card Header - Dropdown*@ 
+                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+
+                                    <h6 class="m-0 font-weight-bold text-primary">Adresse info</h6>
+                                    <div class="col-auto">
+                                        <i class="fas fa-map-marker-alt fa-2x text-danger"></i>
+                                    </div>
+
+                                </div>
+
+                                 @*Card Body*@ 
+                            <div class="card-body">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase">Virksomhed</div>
+                                Jesper Gadgets Aps
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Branche</div>
+                                Adult Entertainment
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Antal ansatte</div>
+                                3
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Adresse</div>
+                                Jespersvej 17
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Bedste fastnet teknologi</div>
+                                Fiber
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Maksimal download hastighed</div>
+                                750 mb/s
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Maksimal upload hastighed</div>
+                                750 mb/s
+
+
+                            </div>
+                            </div>
+                        </div>
+
                         <!-- Pie Chart -->
-                        <div class="col-xl-3 col-lg-5 m-auto">
+                        <div class="col-xl-3 col-lg-3 m-auto">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">Bedste fastnet teknologi (% CVR)</h6>
-                                    @*<div class="dropdown no-arrow">
-                                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                                <div class="dropdown-header">Dropdown Header:</div>
-                                                <a class="dropdown-item" href="#">Action</a>
-                                                <a class="dropdown-item" href="#">Another action</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#">Something else here</a>
-                                            </div>
-                                        </div>*@
+                                  
                                 </div>
+
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="chart-pie pt-4 pb-2">
@@ -370,6 +395,9 @@
                                 </div>
                             </div>
                         </div>
+
+
+                    </div>
                     </div>
 
                     <!-- Content Row -->
@@ -515,13 +543,13 @@
             </div>
             <!-- End of Main Content -->
             <!-- Footer -->
-            <footer class="sticky-footer bg-white">
+            @*<footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
                         <span>Copyright &copy; Your Website 2020</span>
                     </div>
                 </div>
-            </footer>
+            </footer>*@
             <!-- End of Footer -->
 
         </div>
