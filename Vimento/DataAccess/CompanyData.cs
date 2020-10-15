@@ -2,6 +2,7 @@
 using Vimento.Model;
 using MySql.Data.MySqlClient;
 using System;
+using System.Threading;
 
 namespace Vimento.DataAccess
 {
@@ -10,7 +11,8 @@ namespace Vimento.DataAccess
         private string _connectionString;
         public CompanyData()
         {
-            _connectionString = "server=127.0.0.1;port=3308;uid=root;pwd=Losninos77;database=datawarehouse";
+            _connectionString = "server=127.0.0.1;port=3306;uid=root;pwd=1234;database=datawarehouse";
+            
         }
 
         public List<Company> GetAllCompanies()
@@ -42,7 +44,7 @@ namespace Vimento.DataAccess
                         company.Coordinates.Long = companyReader.GetDouble(companyReader.GetOrdinal("laengdeGrad"));
                         company.Coordinates.Lat = companyReader.GetDouble(companyReader.GetOrdinal("breddeGrad"));
 
-
+                        Console.WriteLine(company.Coordinates.Lat);
                         //company.Addresses = adData.GetAddressesFromCompanyKey(company.TheKey);
 
                         companies.Add(company);
@@ -50,7 +52,7 @@ namespace Vimento.DataAccess
                     } 
                 }
             }
-            
+         
             return companies;
         }
 

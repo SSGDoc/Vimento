@@ -1,7 +1,8 @@
 ﻿@{
     Layout = null;
-}
 
+}
+@model IEnumerable<Vimento.Model.Company>
 
 
 
@@ -266,17 +267,17 @@
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">Map overview</h6>
                                     @*<div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                            <div class="dropdown-header">Dropdown Header:</div>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>*@
+                                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                                                <div class="dropdown-header">Dropdown Header:</div>
+                                                <a class="dropdown-item" href="#">Action</a>
+                                                <a class="dropdown-item" href="#">Another action</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="#">Something else here</a>
+                                            </div>
+                                        </div>*@
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body" style="height: 100%; padding: 0">
@@ -320,13 +321,44 @@
                                             //}).addTo(mymap);
 
 
+                                            function add2map(i, long, lat) {
+                                                var i = L.marker([lat, long]).addTo(mymap);
+                                            }
+
                                             var marker1 = L.marker([57.060951, 9.922590], { icon: circleIcon }).addTo(mymap).bindPopup("test test");
                                             //var marker2 = L.marker([57.460972, 9.981570]).addTo(mymap);
-                                            var marker3 = L.marker([57.221111, 9.678760], { icon: circleIcon }).addTo(mymap);
-                                            var marker3 = L.marker([57.205720, 9.864940], { icon: circleIcon }).addTo(mymap);
+                                            //var marker3 = L.marker([57.221111, 9.678760], { icon: circleIcon }).addTo(mymap);
+                                            //var marker3 = L.marker([57.205720, 9.864940], { icon: circleIcon }).addTo(mymap);
+
 
                                         </script>
                                         @*<canvas id="myAreaChart"></canvas>*@
+
+                                        @{ int i = 1; }
+                                        @foreach (var item in Model)
+                                        {
+
+                                            //double clat = item.Coordinates.Lat;
+                                            //double clong = item.Coordinates.Long;
+
+                                            //string xddd = clat.ToString();
+                                            //xddd.Replace(',', '.');
+
+
+                                            Console.WriteLine(item.Coordinates.Lat);
+
+                                            <script>
+
+                                                add2map(@i, @item.Coordinates.Lat, @item.Coordinates.Long)
+                                            </script>
+                                            i++;
+
+                                            if(i > 100)
+                                            {
+                                                break;
+                                            }
+                                        }
+
                                     </div>
                                 </div>
                             </div>
@@ -335,7 +367,7 @@
 
                         <div class="col-xl-2 col-lg-2 m-auto">
                             <div class="card shadow mb-4">
-                                 @*Card Header - Dropdown*@ 
+                                @*Card Header - Dropdown*@
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 
                                     <h6 class="m-0 font-weight-bold text-primary">Adresse info</h6>
@@ -345,25 +377,25 @@
 
                                 </div>
 
-                                 @*Card Body*@ 
-                            <div class="card-body">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase">Virksomhed</div>
-                                Jesper Gadgets Aps
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Branche</div>
-                                Adult Entertainment
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Antal ansatte</div>
-                                3
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Adresse</div>
-                                Jespersvej 17
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Bedste fastnet teknologi</div>
-                                Fiber
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Maksimal download hastighed</div>
-                                750 mb/s
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Maksimal upload hastighed</div>
-                                750 mb/s
+                                @*Card Body*@
+                                <div class="card-body">
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase">Virksomhed</div>
+                                    Jesper Gadgets Aps
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Branche</div>
+                                    Adult Entertainment
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Antal ansatte</div>
+                                    3
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Adresse</div>
+                                    Jespersvej 17
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Bedste fastnet teknologi</div>
+                                    Fiber
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Maksimal download hastighed</div>
+                                    750 mb/s
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Maksimal upload hastighed</div>
+                                    750 mb/s
 
 
-                            </div>
+                                </div>
                             </div>
                         </div>
 
@@ -373,7 +405,7 @@
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">Bedste fastnet teknologi (% CVR)</h6>
-                                  
+
                                 </div>
 
                                 <!-- Card Body -->
@@ -398,163 +430,162 @@
 
 
                     </div>
-                    </div>
-
-                    <!-- Content Row -->
-                    <div class="row">
-
-                        <!-- Content Column -->
-                        <div class="col-lg-6 mb-4 ">
-
-                            <!-- Project Card Example -->
-                            <div class="card shadow mb-4 ">
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Antal CVR adresser pr. primære branche</h6>
-                                    <form>
-                                        <input class="form-control" placeholder="Search">
-                                    </form>
-                                </div>
-
-
-                                <div class="card-body">
-                                    <h4 class="small font-weight-bold">Branche 1 <span class="float-right">1987</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Branche 2 <span class="float-right">1329</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 67%" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Branche 3 <span class="float-right">1204</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Branco 4 <span class="float-right">734</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 37%" aria-valuenow="37" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Branche 5 <span class="float-right">629</span></h4>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 31%" aria-valuenow="31" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Color System -->
-                            @*<div class="row">
-                                    <div class="col-lg-6 mb-4">
-                                        <div class="card bg-primary text-white shadow">
-                                            <div class="card-body">
-                                                Primary
-                                                <div class="text-white-50 small">#4e73df</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 mb-4">
-                                        <div class="card bg-success text-white shadow">
-                                            <div class="card-body">
-                                                Success
-                                                <div class="text-white-50 small">#1cc88a</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 mb-4">
-                                        <div class="card bg-info text-white shadow">
-                                            <div class="card-body">
-                                                Info
-                                                <div class="text-white-50 small">#36b9cc</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 mb-4">
-                                        <div class="card bg-warning text-white shadow">
-                                            <div class="card-body">
-                                                Warning
-                                                <div class="text-white-50 small">#f6c23e</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 mb-4">
-                                        <div class="card bg-danger text-white shadow">
-                                            <div class="card-body">
-                                                Danger
-                                                <div class="text-white-50 small">#e74a3b</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 mb-4">
-                                        <div class="card bg-secondary text-white shadow">
-                                            <div class="card-body">
-                                                Secondary
-                                                <div class="text-white-50 small">#858796</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 mb-4">
-                                        <div class="card bg-light text-black shadow">
-                                            <div class="card-body">
-                                                Light
-                                                <div class="text-black-50 small">#f8f9fc</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 mb-4">
-                                        <div class="card bg-dark text-white shadow">
-                                            <div class="card-body">
-                                                Dark
-                                                <div class="text-white-50 small">#5a5c69</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>*@
-
-                        </div>
-
-                        <div class="col-lg-6 mb-4">
-
-                            <!-- Illustrations -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">info 1</h6>
-                                </div>
-                                <div class="card-body">
-
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                </div>
-                            </div>
-
-                            <!-- Approach -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">info 2</h6>
-                                </div>
-                                <div class="card-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-
                 </div>
-                <!-- /.container-fluid -->
+
+                <!-- Content Row -->
+                <div class="row">
+
+                    <!-- Content Column -->
+                    <div class="col-lg-6 mb-4 ">
+
+                        <!-- Project Card Example -->
+                        <div class="card shadow mb-4 ">
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">Antal CVR adresser pr. primære branche</h6>
+                                <form>
+                                    <input class="form-control" placeholder="Search">
+                                </form>
+                            </div>
+
+
+                            <div class="card-body">
+                                <h4 class="small font-weight-bold">Branche 1 <span class="float-right">1987</span></h4>
+                                <div class="progress mb-4">
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <h4 class="small font-weight-bold">Branche 2 <span class="float-right">1329</span></h4>
+                                <div class="progress mb-4">
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: 67%" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <h4 class="small font-weight-bold">Branche 3 <span class="float-right">1204</span></h4>
+                                <div class="progress mb-4">
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <h4 class="small font-weight-bold">Branco 4 <span class="float-right">734</span></h4>
+                                <div class="progress mb-4">
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: 37%" aria-valuenow="37" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <h4 class="small font-weight-bold">Branche 5 <span class="float-right">629</span></h4>
+                                <div class="progress">
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: 31%" aria-valuenow="31" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Color System -->
+                        @*<div class="row">
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card bg-primary text-white shadow">
+                                        <div class="card-body">
+                                            Primary
+                                            <div class="text-white-50 small">#4e73df</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card bg-success text-white shadow">
+                                        <div class="card-body">
+                                            Success
+                                            <div class="text-white-50 small">#1cc88a</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card bg-info text-white shadow">
+                                        <div class="card-body">
+                                            Info
+                                            <div class="text-white-50 small">#36b9cc</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card bg-warning text-white shadow">
+                                        <div class="card-body">
+                                            Warning
+                                            <div class="text-white-50 small">#f6c23e</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card bg-danger text-white shadow">
+                                        <div class="card-body">
+                                            Danger
+                                            <div class="text-white-50 small">#e74a3b</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card bg-secondary text-white shadow">
+                                        <div class="card-body">
+                                            Secondary
+                                            <div class="text-white-50 small">#858796</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card bg-light text-black shadow">
+                                        <div class="card-body">
+                                            Light
+                                            <div class="text-black-50 small">#f8f9fc</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card bg-dark text-white shadow">
+                                        <div class="card-body">
+                                            Dark
+                                            <div class="text-white-50 small">#5a5c69</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>*@
+
+                    </div>
+
+                    <div class="col-lg-6 mb-4">
+
+                        <!-- Illustrations -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">info 1</h6>
+                            </div>
+                            <div class="card-body">
+
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                            </div>
+                        </div>
+
+                        <!-- Approach -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">info 2</h6>
+                            </div>
+                            <div class="card-body">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
 
             </div>
-            <!-- End of Main Content -->
-            <!-- Footer -->
-            @*<footer class="sticky-footer bg-white">
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+        <!-- Footer -->
+        @*<footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
                         <span>Copyright &copy; Your Website 2020</span>
                     </div>
                 </div>
             </footer>*@
-            <!-- End of Footer -->
+        <!-- End of Footer -->
 
-        </div>
-        <!-- End of Content Wrapper -->
-
+    </div>
+    <!-- End of Content Wrapper -->
     </div>
     <!-- End of Page Wrapper -->
     <!-- Scroll to Top Button-->
@@ -583,20 +614,20 @@
 
     <!-- Bootstrap core JavaScript-->
     <script src="~/Content/vendor/jquery/jquery.min.js"></script>
-    <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+                                            <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="~/Content/vendor/jquery-easing/jquery.easing.min.js"></script>
+                                            <!-- Core plugin JavaScript-->
+                                            <script src="~/Content/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="~/Content/js/sb-admin-2.min.js"></script>
+                                            <!-- Custom scripts for all pages-->
+                                            <script src="~/Content/js/sb-admin-2.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="~/Content/vendor/chart.js/Chart.min.js"></script>
+                                            <!-- Page level plugins -->
+                                            <script src="~/Content/vendor/chart.js/Chart.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="~/Content/js/demo/chart-area-demo.js"></script>
-    <script src="~/Content/js/demo/chart-pie-demo.js"></script>
+                                            <!-- Page level custom scripts -->
+                                            <script src="~/Content/js/demo/chart-area-demo.js"></script>
+                                            <script src="~/Content/js/demo/chart-pie-demo.js"></script>
 
 </body>
 
