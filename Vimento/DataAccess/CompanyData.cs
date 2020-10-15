@@ -3,6 +3,7 @@ using Vimento.Model;
 using MySql.Data.MySqlClient;
 using System;
 using System.Threading;
+using System.Globalization;
 
 namespace Vimento.DataAccess
 {
@@ -11,12 +12,13 @@ namespace Vimento.DataAccess
         private string _connectionString;
         public CompanyData()
         {
-            _connectionString = "server=127.0.0.1;port=3306;uid=root;pwd=1234;database=datawarehouse";
+            _connectionString = "server=127.0.0.1;port=3308;uid=root;pwd=Losninos77;database=datawarehouse";
             
         }
 
         public List<Company> GetAllCompanies()
         {
+            CultureInfo.CurrentCulture = CultureInfo.CreateSpecificCulture("en-GB");
             Console.WriteLine("- GetAllCompanies");
             List<Company> companies = new List<Company>();
             AddressData adData = new AddressData();
