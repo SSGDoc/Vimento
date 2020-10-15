@@ -10,7 +10,7 @@ namespace Vimento.DataAccess
         private string _connectionString;
         public CompanyData()
         {
-            _connectionString = "server=127.0.0.1;uid=root;pwd=digital;database=datawarehouse";
+            _connectionString = "server=127.0.0.1;port=3308;uid=root;pwd=Losninos77;database=datawarehouse";
         }
 
         public List<Company> GetAllCompanies()
@@ -24,7 +24,8 @@ namespace Vimento.DataAccess
                 connection.Open();
                 using (MySqlCommand cmdGetAllCompanies = connection.CreateCommand())
                 {
-                    cmdGetAllCompanies.CommandText = "SELECT the_Key, navn, branche, antalAnsatte FROM virksomhed";
+                    //cmdGetAllCompanies.CommandText = "SELECT the_Key, navn, branche, antalAnsatte FROM virksomhed";
+                    cmdGetAllCompanies.CommandText = "SELECT virksomhed.the_Key, virksomhed.navn, branche, antalAnsatte, vejNavn, husNr, postNr, laengdeGrad, breddeGrad FROM virksomhed, adresse, koordinat WHERE virksomhed.the_key = adresse.the_key AND virksomhed.the_key = koordinat.the_key";
                     MySqlDataReader companyReader = cmdGetAllCompanies.ExecuteReader();
 
                     while (companyReader.Read())
@@ -35,8 +36,15 @@ namespace Vimento.DataAccess
                         company.Name = companyReader.GetString(companyReader.GetOrdinal("navn"));
                         company.Business = companyReader.GetString(companyReader.GetOrdinal("branche"));
                         company.AmountOfEmployees = companyReader.GetInt32(companyReader.GetOrdinal("antalAnsatte"));
-                        company.Addresses = adData.GetAddressesFromCompanyKey(company.TheKey);
-                        
+                        company.Street = companyReader.GetString(companyReader.GetOrdinal("vejNavn"));
+                        company.HouseNr = companyReader.GetInt32(companyReader.GetOrdinal("husNr"));
+                        company.ZipCode = companyReader.GetInt32(companyReader.GetOrdinal("postNr"));
+                        company.Coordinates.Long = companyReader.GetDouble(companyReader.GetOrdinal("laengdeGrad"));
+                        company.Coordinates.Lat = companyReader.GetDouble(companyReader.GetOrdinal("breddeGrad"));
+
+
+                        //company.Addresses = adData.GetAddressesFromCompanyKey(company.TheKey);
+
                         companies.Add(company);
                         
                     } 

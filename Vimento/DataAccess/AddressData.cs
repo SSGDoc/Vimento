@@ -11,7 +11,7 @@ namespace Vimento.DataAccess
         private string _connectionString;
         public AddressData()
         {
-            _connectionString = "server=127.0.0.1;uid=root;pwd=digital;database=datawarehouse";
+            _connectionString = "server=127.0.0.1;port=3308;uid=root;pwd=Losninos77;database=datawarehouse";
         }
 
 
@@ -36,8 +36,8 @@ namespace Vimento.DataAccess
                         address.HouseNr = addressReader.GetInt32(addressReader.GetOrdinal("husNr"));
                         address.ZipCode = addressReader.GetInt32(addressReader.GetOrdinal("postNr"));
 
-                        address.Coordinates = GetCoordinatesFromAddressKey(address.TheKey);
-                        address.Technologies = GetTechnologiesFromAddressKey(address.TheKey);
+                        //address.Coordinates = GetCoordinatesFromAddressKey(address.TheKey);
+                        //address.Technologies = GetTechnologiesFromAddressKey(address.TheKey);
                         addresses.Add(address);
                         
                     }
