@@ -300,6 +300,7 @@
                                         <script>
                                             //HER KAN VI TILFØJE MARKERS
 
+                                            var myRenderer = L.canvas({ padding: 0.5 });
 
                                             var circleIcon = L.icon({
                                                 iconUrl: '/Content/icons/MapCircle.png',
@@ -311,18 +312,29 @@
 
 
 
-                                            //var circle = L.circleMarker([57.460972, 9.981570], {
-                                            //    color: '#4e73df',
-                                            //    fillColor: '#36b9cc',
-                                            //    fillOpacity: 0.7,
-                                            //    radius: 5,
-                                            //    weight: 2
+                                            var circle = L.circleMarker([57.460972, 9.981570], {
+                                                color: '#4e73df',
+                                                fillColor: '#36b9cc',
+                                                fillOpacity: 0.7,
+                                                radius: 5,
+                                                weight: 2
 
-                                            //}).addTo(mymap);
+                                            }).addTo(mymap);
 
 
                                             function add2map(i, long, lat) {
-                                                var i = L.marker([lat, long]).addTo(mymap);
+                                                //var i = L.circleMarker([lat, long]).addTo(mymap);
+
+
+                                                var i = L.circleMarker([lat, long], {
+                                                    color: '#4e73df',
+                                                    fillColor: '#36b9cc',
+                                                    fillOpacity: 0.7,
+                                                    radius: 5,
+                                                    weight: 2,
+                                                    renderer: myRenderer
+                                                }).addTo(mymap); 
+
                                             }
 
                                             var marker1 = L.marker([57.060951, 9.922590], { icon: circleIcon }).addTo(mymap).bindPopup("test test");
@@ -353,10 +365,12 @@
                                             </script>
                                             i++;
 
-                                            if(i > 5000)
-                                            {
-                                                break;
-                                            }
+                                            //if (5000 < i)
+                                            //{
+                                            //    break;
+                                            //}
+
+
                                         }
 
                                     </div>
