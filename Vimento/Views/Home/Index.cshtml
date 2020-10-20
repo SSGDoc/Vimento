@@ -34,6 +34,9 @@
             integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
             crossorigin=""></script>
 
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css">
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
 </head>
 
 <body id="page-top">
@@ -285,7 +288,6 @@
                                         <div id="mapid" class="chart-area" style="height: 100%">  </div>
                                         <script>
                                             var mymap = L.map('mapid').setView([57.047218, 9.920100], 8);
-                                            // HER BRUGES DER MAPBOX's KORTSTIL. HVIS MAN IKKE KAN LIDE HVORDAN DET SER UD, KAN MAN SKIFTE TIL STAMEN ELLER THUNDERFOREST MF.
                                             L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
                                                 attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
                                                 maxZoom: 18,
@@ -296,82 +298,31 @@
                                                 // ACCESSTOKEN FÅET FRA MAPBOX
                                                 accessToken: 'pk.eyJ1IjoibXJzYWdneSIsImEiOiJja2ZiamQ4ajYwcXh3MnhvODU4NjZrZ29xIn0.JXSCWFKMGdFElSPErRk-Zg'
                                             }).addTo(mymap);
-                                        </script>
-                                        <script>
-                                            //HER KAN VI TILFØJE MARKERS
 
-                                            var myRenderer = L.canvas({ padding: 0.5 });
-
-                                            var circleIcon = L.icon({
-                                                iconUrl: '/Content/icons/MapCircle.png',
-                                                iconSize: [12, 12],
-                                                iconAnchor: [6, 6],
-                                                popupAnchor: [0, -3],
-
+                                            var markers = L.markerClusterGroup({
+                                                spiderfyOnMaxZoom: false,
+                                                showCoverageOnHover: true,
+                                                zoomToBoundsOnClick: true,
+                                                disableClusteringAtZoom: 18
                                             });
 
-
-
-                                            var circle = L.circleMarker([57.460972, 9.981570], {
-                                                color: '#4e73df',
-                                                fillColor: '#36b9cc',
-                                                fillOpacity: 0.7,
-                                                radius: 5,
-                                                weight: 2
-
-                                            }).addTo(mymap);
-
-
-                                            function add2map(i, long, lat) {
-                                                //var i = L.circleMarker([lat, long]).addTo(mymap);
-
-
-                                                var i = L.circleMarker([lat, long], {
-                                                    color: '#4e73df',
-                                                    fillColor: '#36b9cc',
-                                                    fillOpacity: 0.7,
-                                                    radius: 5,
-                                                    weight: 2,
-                                                    renderer: myRenderer
-                                                }).addTo(mymap); 
-
+                                            function addClusters(lat, long) {
+                                                markers.addLayer(L.marker([lat, long]));
                                             }
-
-                                            var marker1 = L.marker([57.060951, 9.922590], { icon: circleIcon }).addTo(mymap).bindPopup("test test");
-                                            //var marker2 = L.marker([57.460972, 9.981570]).addTo(mymap);
-                                            //var marker3 = L.marker([57.221111, 9.678760], { icon: circleIcon }).addTo(mymap);
-                                            //var marker3 = L.marker([57.205720, 9.864940], { icon: circleIcon }).addTo(mymap);
-
-
                                         </script>
-                                        @*<canvas id="myAreaChart"></canvas>*@
-
-                                        @{ int i = 1; }
-                                        @foreach (var item in Model)
+                                        
+                                        @foreach(var company in Model)
                                         {
-
-                                            //double clat = item.Coordinates.Lat;
-                                            //double clong = item.Coordinates.Long;
-
-                                            //string xddd = clat.ToString();
-                                            //xddd.Replace(',', '.');
-
-
-                                            Console.WriteLine(item.Coordinates.Lat);
-
                                             <script>
-
-                                                add2map(@i, @item.Coordinates.Long, @item.Coordinates.Lat)
+                                                addClusters(@company.Coordinates.Lat, @company.Coordinates.Long);
                                             </script>
-                                            i++;
-
-                                            //if (5000 < i)
-                                            //{
-                                            //    break;
-                                            //}
-
 
                                         }
+                                        <script>
+                                            mymap.addLayer(markers);
+                                        </script>
+                                        
+                                        
 
                                     </div>
                                 </div>
