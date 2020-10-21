@@ -306,23 +306,18 @@
                                                 disableClusteringAtZoom: 18
                                             });
 
-                                            function addClusters(lat, long) {
-                                                markers.addLayer(L.marker([lat, long]));
-                                            }
                                         </script>
-                                        
-                                        @foreach(var company in Model)
+                                        @foreach (var company in Model)
                                         {
                                             <script>
-                                                addClusters(@company.Coordinates.Lat, @company.Coordinates.Long);
+                                                    markers.addLayer(L.marker([@company.Address.Lat, @company.Address.Long]));
                                             </script>
-
                                         }
                                         <script>
                                             mymap.addLayer(markers);
                                         </script>
-                                        
-                                        
+
+
 
                                     </div>
                                 </div>

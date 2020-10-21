@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Vimento.DataAccess;
 using Vimento.Model;
-using Vimento.DataAccess;
 
 namespace Vimento.Controllers
 {
@@ -14,12 +12,12 @@ namespace Vimento.Controllers
         public ActionResult Index()
         {
             CompanyData cd = new CompanyData();
-            List<Company> companies = new List<Company>();
-            companies = cd.GetAllCompanies();
+            List<Company> Companies = new List<Company>();
+            Companies = cd.GetAllCompanies();
 
-            ViewBag.Name = companies;
+            ViewBag.Name = "Companies";
 
-            return View("index", companies);
+            return View("index", Companies);
         }
 
         public ActionResult Design()
@@ -58,7 +56,13 @@ namespace Vimento.Controllers
 
         public ActionResult TestView()
         {
-            return View();
+            CompanyData cd = new CompanyData();
+            List<Company> Companies = new List<Company>();
+            Companies = cd.GetAllCompanies();
+
+            ViewBag.Name = "Companies";
+
+            return View("TestView", Companies);
         }
     }
 }

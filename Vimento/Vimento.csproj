@@ -175,14 +175,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="DataAccess\AddressData.cs" />
     <Compile Include="DataAccess\CompanyData.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Model\Address.cs" />
     <Compile Include="Model\Company.cs" />
-    <Compile Include="Model\Coordinate.cs" />
     <Compile Include="Model\Technology.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -2047,7 +2045,6 @@
     <Content Include="Views\Home\Charts.cshtml" />
     <Content Include="Views\Home\ArcGisMap.cshtml" />
     <Content Include="Views\Home\LeafLet.cshtml" />
-    <Content Include="Views\Home\TestView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

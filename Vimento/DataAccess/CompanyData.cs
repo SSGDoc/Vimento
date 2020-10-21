@@ -19,43 +19,98 @@ namespace Vimento.DataAccess
         public List<Company> GetAllCompanies()
         {
             CultureInfo.CurrentCulture = CultureInfo.CreateSpecificCulture("en-GB");
-            Console.WriteLine("- GetAllCompanies");
             List<Company> companies = new List<Company>();
-            AddressData adData = new AddressData();
 
             using (MySqlConnection connection = new MySqlConnection(_connectionString))
             {
                 connection.Open();
                 using (MySqlCommand cmdGetAllCompanies = connection.CreateCommand())
                 {
-                    //cmdGetAllCompanies.CommandText = "SELECT the_Key, navn, branche, antalAnsatte FROM virksomhed";
-                    cmdGetAllCompanies.CommandText = "SELECT virksomhed.the_Key, virksomhed.navn, branche, antalAnsatte, vejNavn, husNr, postNr, laengdeGrad, breddeGrad FROM virksomhed, adresse, koordinat WHERE virksomhed.the_key = adresse.the_key AND virksomhed.the_key = koordinat.the_key";
+                    
+                    cmdGetAllCompanies.CommandText = "SELECT kundeId, navn, branche, antalAnsatte, adresseId FROM virksomhed";
                     MySqlDataReader companyReader = cmdGetAllCompanies.ExecuteReader();
 
                     while (companyReader.Read())
                     {
-                        Company company = new Company();
+                        Company Company = new Company();
 
-                        company.TheKey = companyReader.GetInt32(companyReader.GetOrdinal("the_Key"));
-                        company.Name = companyReader.GetString(companyReader.GetOrdinal("navn"));
-                        company.Business = companyReader.GetString(companyReader.GetOrdinal("branche"));
-                        company.AmountOfEmployees = companyReader.GetInt32(companyReader.GetOrdinal("antalAnsatte"));
-                        company.Street = companyReader.GetString(companyReader.GetOrdinal("vejNavn"));
-                        company.HouseNr = companyReader.GetInt32(companyReader.GetOrdinal("husNr"));
-                        company.ZipCode = companyReader.GetInt32(companyReader.GetOrdinal("postNr"));
-                        company.Coordinates.Long = companyReader.GetDouble(companyReader.GetOrdinal("laengdeGrad"));
-                        company.Coordinates.Lat = companyReader.GetDouble(companyReader.GetOrdinal("breddeGrad"));
-
-                        Console.WriteLine(company.Coordinates.Lat);
-                        //company.Addresses = adData.GetAddressesFromCompanyKey(company.TheKey);
-
-                        companies.Add(company);
+                        Company.CompanyID = companyReader.GetInt32(companyReader.GetOrdinal("kundeId"));
+                        Company.Name = companyReader.GetString(companyReader.GetOrdinal("navn"));
+                        Company.Business = companyReader.GetString(companyReader.GetOrdinal("branche"));
+                        Company.AmountOfEmployees = companyReader.GetInt32(companyReader.GetOrdinal("antalAnsatte"));
+                        int AddressID = companyReader.GetInt32(companyReader.GetOrdinal("adresseId"));
+                        Company.Address = GetAddressFromAddressID(AddressID);
+                        
+                        companies.Add(Company);
                         
                     } 
                 }
             }
          
             return companies;
+        }
+
+        public Address GetAddressFromAddressID(int id)
+        {
+            Address Address = new Address();
+
+            using (MySqlConnection connection = new MySqlConnection(_connectionString))
+            {
+                connection.Open();
+                using (MySqlCommand cmdGetAddresses = connection.CreateCommand())
+                {
+                    cmdGetAddresses.CommandText = "SELECT adresseId, vejNavn, husNr, postNr, byNavn, breddeGrad, laengdeGrad, tekID FROM adresse WHERE adresseId = @adresseId";
+                    cmdGetAddresses.Parameters.AddWithValue("adresseId", id);
+                    MySqlDataReader addressReader = cmdGetAddresses.ExecuteReader();
+                    if (addressReader.Read())
+                    {
+                        Address address = new Address();
+                        
+                        address.AddressID = addressReader.GetInt32(addressReader.GetOrdinal("adresseId"));
+                        address.StreetName = addressReader.GetString(addressReader.GetOrdinal("vejNavn"));
+                        address.HouseNr = addressReader.GetInt32(addressReader.GetOrdinal("husNr"));
+                        address.ZipCode = addressReader.GetInt32(addressReader.GetOrdinal("postNr"));
+                        address.City = addressReader.GetString(addressReader.GetOrdinal("byNavn"));
+                        address.Lat = addressReader.GetDouble(addressReader.GetOrdinal("breddeGrad"));
+                        address.Long = addressReader.GetDouble(addressReader.GetOrdinal("laengdeGrad"));
+                        int tekID = addressReader.GetInt32(addressReader.GetOrdinal("tekID"));
+                        address.Technology = GetTechnologyFromTekID(tekID);
+
+                    }
+                }
+            }
+            return Address;
+        }
+
+        public Technology GetTechnologyFromTekID(int tekID)
+        {
+            Technology Tech = new Technology();
+
+            using (MySqlConnection connection = new MySqlConnection(_connectionString))
+            {
+                connection.Open();
+                using (MySqlCommand cmdGetTechnologies = connection.CreateCommand())
+                {
+                    cmdGetTechnologies.CommandText = "SELECT downFiber, upFiber, downKabel, upKabel, downDsl, upDsl, mobilDown FROM Teknologi WHERE tekID = @tekID";
+                    cmdGetTechnologies.Parameters.AddWithValue("tekID", tekID);
+                    MySqlDataReader TechReader = cmdGetTechnologies.ExecuteReader();
+
+                    if (TechReader.Read())
+                    {
+                        Tech.DownFiber = TechReader.GetInt32(TechReader.GetOrdinal("downFiber"));
+                        Tech.UpFiber = TechReader.GetInt32(TechReader.GetOrdinal("upFiber"));
+                        Tech.DownCable = TechReader.GetInt32(TechReader.GetOrdinal("downKabel"));
+                        Tech.UpCable = TechReader.GetInt32(TechReader.GetOrdinal("upKabel"));
+                        Tech.DownDSL = TechReader.GetInt32(TechReader.GetOrdinal("downDsl"));
+                        Tech.UpDSL = TechReader.GetInt32(TechReader.GetOrdinal("upDsl"));
+                        Tech.MobileDownRange = TechReader.GetString(TechReader.GetOrdinal("mobilDown"));
+
+                    }
+
+
+                }
+            }
+            return Tech;
         }
 
     } 
