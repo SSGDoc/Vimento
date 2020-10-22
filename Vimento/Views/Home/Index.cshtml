@@ -1,599 +1,690 @@
 ﻿@{
+
     Layout = null;
 
+
 }
+
 @model IEnumerable<Vimento.Model.Company>
 
 
 
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
+    <!DOCTYPE html>
+    <html lang="en">
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <head>
 
-    <title>Dashboard</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
 
-    <!-- Custom fonts for this template-->
-    <link href="~/Content/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+        <title>Dashboard</title>
 
-    <!-- Custom styles for this template-->
-    <link href="~/Content/css/sb-admin-2.min.css" rel="stylesheet">
+        <!-- Custom fonts for this template-->
+        <link href="~/Content/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-          integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-          crossorigin="" />
-    <!--Leaflets API-->
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-            crossorigin=""></script>
+        <!-- Custom styles for this template-->
+        <link href="~/Content/css/sb-admin-2.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css">
-    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
-</head>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+              integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+              crossorigin="" />
+        <!--Leaflets API-->
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+                integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+                crossorigin=""></script>
 
-<body id="page-top">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css">
+        <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    </head>
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
+    <body id="page-top">
 
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <!-- Page Wrapper -->
+        <div id="wrapper">
 
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <!-- Sidebar -->
+            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-                <div class="sidebar-brand-text mx-3">
-                    <img class="mt-3" style="width: 100%;" src="~/Content/icons/vimento2.png" alt="">
-                    <sup>2.0</sup>
-                </div>
-            </a>
+                <!-- Sidebar - Brand -->
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
 
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Interface
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Filtre</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.html">Buttons</a>
-                        <a class="collapse-item" href="cards.html">Cards</a>
+                    <div class="sidebar-brand-text mx-3">
+                        <img class="mt-3" style="width: 100%;" src="~/Content/icons/vimento2.png" alt="">
+                        <sup>2.0</sup>
                     </div>
-                </div>
-            </li>
-
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Adv. Filtre</span>
                 </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="utilities-color.html">Colors</a>
-                        <a class="collapse-item" href="utilities-border.html">Borders</a>
-                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                        <a class="collapse-item" href="utilities-other.html">Other</a>
-                    </div>
-                </div>
-            </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+                <!-- Divider -->
+                <hr class="sidebar-divider my-0">
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Addons
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            @*<li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-                        <i class="fas fa-fw fa-folder"></i>
-                        <span>Pages</span>
+                <!-- Nav Item - Dashboard -->
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
                     </a>
-                    <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                </li>
+
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Interface
+                </div>
+
+                <!-- Nav Item - Pages Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Filtre</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Login Screens:</h6>
-                            <a class="collapse-item" href="login.html">Login</a>
-                            <a class="collapse-item" href="register.html">Register</a>
-                            <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                            <div class="collapse-divider"></div>
-                            <h6 class="collapse-header">Other Pages:</h6>
-                            <a class="collapse-item" href="404.html">404 Page</a>
-                            <a class="collapse-item" href="blank.html">Blank Page</a>
+                            <h6 class="collapse-header">Custom Components:</h6>
+                            <a class="collapse-item" href="buttons.html">Buttons</a>
+                            <a class="collapse-item" href="cards.html">Cards</a>
                         </div>
                     </div>
-                </li>*@
+                </li>
 
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span>
-                </a>
-            </li>
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span>
-                </a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
-        </ul>
-        <!-- End of Sidebar -->
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column" style="margin-top: 20px">
-
-            <!-- Main Content -->
-            <div id="content">
-
-
-                <!-- End of Topbar -->
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-
+                <!-- Nav Item - Utilities Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                        <i class="fas fa-fw fa-wrench"></i>
+                        <span>Adv. Filtre</span>
+                    </a>
+                    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Custom Utilities:</h6>
+                            <a class="collapse-item" href="utilities-color.html">Colors</a>
+                            <a class="collapse-item" href="utilities-border.html">Borders</a>
+                            <a class="collapse-item" href="utilities-animation.html">Animations</a>
+                            <a class="collapse-item" href="utilities-other.html">Other</a>
+                        </div>
                     </div>
+                </li>
 
-                    <!-- Content Row -->
-                    <div class="row">
+                <!-- Divider -->
+                <hr class="sidebar-divider">
 
-                        <!-- Unikker CVR Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4" style=" margin: auto ">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Unikke CVR</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">11904</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-suitcase fa-2x text-gray-300"></i>
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Addons
+                </div>
+
+                <!-- Nav Item - Pages Collapse Menu -->
+                @*<li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+                            <i class="fas fa-fw fa-folder"></i>
+                            <span>Pages</span>
+                        </a>
+                        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Login Screens:</h6>
+                                <a class="collapse-item" href="login.html">Login</a>
+                                <a class="collapse-item" href="register.html">Register</a>
+                                <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+                                <div class="collapse-divider"></div>
+                                <h6 class="collapse-header">Other Pages:</h6>
+                                <a class="collapse-item" href="404.html">404 Page</a>
+                                <a class="collapse-item" href="blank.html">Blank Page</a>
+                            </div>
+                        </div>
+                    </li>*@
+
+                <!-- Nav Item - Charts -->
+                <li class="nav-item">
+                    <a class="nav-link" href="charts.html">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Charts</span>
+                    </a>
+                </li>
+
+                <!-- Nav Item - Tables -->
+                <li class="nav-item">
+                    <a class="nav-link" href="tables.html">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Tables</span>
+                    </a>
+                </li>
+
+                <!-- Divider -->
+                <hr class="sidebar-divider d-none d-md-block">
+
+                <!-- Sidebar Toggler (Sidebar) -->
+                <div class="text-center d-none d-md-inline">
+                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                </div>
+
+            </ul>
+            <!-- End of Sidebar -->
+            <!-- Content Wrapper -->
+            <div id="content-wrapper" class="d-flex flex-column" style="margin-top: 20px">
+
+                <!-- Main Content -->
+                <div id="content">
+
+
+                    <!-- End of Topbar -->
+                    <!-- Begin Page Content -->
+                    <div class="container-fluid">
+
+                        <!-- Page Heading -->
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+
+                        </div>
+
+                        <!-- Content Row -->
+                        <div class="row">
+
+                            <!-- Unikker CVR Card Example -->
+                            <div class="col-xl-3 col-md-6 mb-4" style=" margin: auto ">
+                                <div class="card border-left-success shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Unikke CVR</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">11904</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-suitcase fa-2x text-gray-300"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- Adgansadresser Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4" style=" margin: auto ">
-                            <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Unikke adgansadresser</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">6838</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-home fa-2x text-gray-300"></i>
+                            <!-- Adgansadresser Card Example -->
+                            <div class="col-xl-3 col-md-6 mb-4" style=" margin: auto ">
+                                <div class="card border-left-primary shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Unikke adgansadresser</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">6838</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-home fa-2x text-gray-300"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- Fiber (procent) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-info shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Adresser med adgang til fiber</div>
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">55%</div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="progress progress-sm mr-2">
-                                                        <div class="progress-bar bg-info" role="progressbar" style="width: 55%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            <!-- Fiber (procent) Card Example -->
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card border-left-info shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Adresser med adgang til fiber</div>
+                                                <div class="row no-gutters align-items-center">
+                                                    <div class="col-auto">
+                                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">55%</div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="progress progress-sm mr-2">
+                                                            <div class="progress-bar bg-info" role="progressbar" style="width: 55%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="col-auto">
+                                                <i class="fas fas fa-fighter-jet fa-2x text-gray-300"></i>
+                                            </div>
                                         </div>
-                                        <div class="col-auto">
-                                            <i class="fas fas fa-fighter-jet fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Data Card Example -->
+                            <div class="col-xl-3 col-md-6 mb-4" style=" margin: auto ">
+                                <div class="card border-left-warning shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Data senest opdateret</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">30 - Marts - 2020</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-database fa-2x text-gray-300"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Data Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4" style=" margin: auto ">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Data senest opdateret</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">30 - Marts - 2020</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-database fa-2x text-gray-300"></i>
+                        <!-- Content Row -->
+
+                        <div class="row">
+
+                            <!-- Area Chart -->
+                            <div class="col-lg-7 col-lg-6" style="height: 600px; margin-bottom: 1.5rem!important;">
+                                <div class="card shadow mb-4" style="height: 100%">
+                                    <!-- Card Header - Dropdown -->
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary">Map overview</h6>
+                                        @*<div class="dropdown no-arrow">
+                                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                                                    <div class="dropdown-header">Dropdown Header:</div>
+                                                    <a class="dropdown-item" href="#">Action</a>
+                                                    <a class="dropdown-item" href="#">Another action</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item" href="#">Something else here</a>
+                                                </div>
+                                            </div>*@
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body" style="height: 100%; padding: 0">
+                                        <div class="chart-area" style="height: 100%">
+                                            <div id="mapid" class="chart-area" style="height: 100%">  </div>
+                                            <script>
+                                                var mymap = L.map('mapid').setView([57.047218, 9.920100], 8);
+                                                L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+                                                    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                                                    maxZoom: 18,
+                                                    id: 'mapbox/streets-v11',
+                                                    tileSize: 512,
+                                                    zoomOffset: -1,
+
+                                                    // ACCESSTOKEN FÅET FRA MAPBOX
+                                                    accessToken: 'pk.eyJ1IjoibXJzYWdneSIsImEiOiJja2ZiamQ4ajYwcXh3MnhvODU4NjZrZ29xIn0.JXSCWFKMGdFElSPErRk-Zg'
+                                                }).addTo(mymap);
+
+                                               
+
+                                                var markers = L.markerClusterGroup({
+                                                    spiderfyOnMaxZoom: false,
+                                                    showCoverageOnHover: true,
+                                                    zoomToBoundsOnClick: true,
+                                                    disableClusteringAtZoom: 18,
+                                                    emp: 5,
+                                                    name: 'placeholder name'
+                                                });
+
+
+
+                                              
+
+                                                var marker2 = new L.marker([13.0101, 80.2157]).addTo(mymap).on('click', onClick);
+                                                marker2.name = "Jesper Gadgets", marker2.branche = "Adult Entertainment";
+
+                                                function onClick(e) {
+                                                    document.getElementById('firmanavn').innerHTML
+                                                        = this.name;
+                                                    document.getElementById('branchenavn').innerHTML
+                                                        = this.business;
+                                                    document.getElementById('antalansatte').innerHTML
+                                                        = this.employees;
+                                                    document.getElementById('vejnavn').innerHTML
+                                                        = this.address;
+                                                  /*  alert(this.name); // i can expect my keys her*/
+                                                }
+
+
+                                                //function addClusters(lat, long, name) {
+                                                //    markers.addLayer(L.circleMarker([lat, long])).on('click', onClick);
+                                                //    markers.name = 'xdddd';
+
+                                                //}
+
+
+                                                function addClusters(lat, long, name, business, employees, address) {
+                                                    var companyMarker = new L.circleMarker([lat, long]).on('click', onClick);
+                                                    companyMarker.name = name, companyMarker.business = business,
+                                                    companyMarker.employees = employees, companyMarker.address = address ;
+
+                                                    markers.addLayer(companyMarker);
+                                                    //markers.name = 'xdddd';
+
+                                                }
+                                             
+
+
+
+                                            </script>
+
+
+
+                                            @foreach (var company in Model)
+                                            {
+
+                                               
+
+
+                                                <script>
+                                                addClusters(@company.Coordinates.Lat, @company.Coordinates.Long, "@company.Name", "@company.Business", "@company.AmountOfEmployees", "@company.Street" + " @company.HouseNr");
+
+                                                </script>
+
+                                            }
+                                            <script>
+                                                mymap.addLayer(markers);
+
+                                                mymap.on('click', function (ev) {
+                                                    /* alert(ev.latlng.lat);*/ // ev is an event object (MouseEvent in this case)
+
+                                                
+                                                    var lat = (ev.latlng.lat);
+                                                    var lng = (ev.latlng.lng);
+                                                   
+
+
+
+
+                                                });
+
+                                            </script>
+
+
+                                            @*@foreach (var company in Model)
+                                            {
+
+                                                if (57.047988 == 57.047988 && 9.914545 == 9.914545)
+                                                {
+                                                    <script>
+
+                                                             var jscompany = {
+                                                             name: '@company.Name', business: '@company.Business',
+                                                             amountofemployees: @company.AmountOfEmployees, adresse: '@company.Street' };
+
+                                                        companyList.push(jscompany);
+
+                                                        console.log(@company.Coordinates.Lat);
+                                                        console.log(@company.Coordinates.Long);
+                                                        console.log(companyList[0]);
+
+                                                    </script>
+                                                }
+                                            }*@
+
+                                           
+
+
+
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+
+                            <div class="col-xl-2 col-lg-2 m-auto">
+                                <div class="card shadow mb-4">
+                                    @*Card Header - Dropdown*@
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+
+                                        <h6 class="m-0 font-weight-bold text-primary">Adresse info</h6>
+                                        <div class="col-auto">
+                                            <i class="fas fa-map-marker-alt fa-2x text-danger"></i>
+                                        </div>
+
+                                    </div>
+
+                                    @*Card Body*@
+                                <div class="card-body">
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase">Virksomhed</div>
+                                    <h6 id="firmanavn"> Jesper Gadgets Aps </h6>
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Branche</div>
+                                    <h6 id="branchenavn"> Adult Entertainment </h6> 
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Antal ansatte</div>
+                                    <h6 id="antalansatte"> 3 </h6>
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Adresse</div>
+                                    <h6 id="vejnavn"> Jespersvej 17 </h6>
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Bedste fastnet teknologi</div>
+                                    <h6 id="bedstfastnet"> fiber </h6>
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Maksimal download hastighed</div>
+                                    <h6 id="maxhastned"> 750 mb/s </h6>
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Maksimal upload hastighed</div>
+                                    <h6 id="maxhastup"> 750 mb/s </h6>
+
+
+                                </div>
+                                </div>
+                            </div>
+
+                            <!-- Pie Chart -->
+                            <div class="col-xl-3 col-lg-3 m-auto">
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary">Bedste fastnet teknologi (% CVR)</h6>
+
+                                    </div>
+
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        <div class="chart-pie pt-4 pb-2">
+                                            <canvas id="myPieChart"></canvas>
+                                        </div>
+                                        <div class="mt-4 text-center small">
+                                            <span class="mr-2">
+                                                <i class="fas fa-circle text-primary"></i> Fiber
+                                            </span>
+                                            <span class="mr-2">
+                                                <i class="fas fa-circle text-success"></i> Fiber KabelTV-Net
+                                            </span>
+                                            <span class="mr-2">
+                                                <i class="fas fa-circle text-info"></i> KabelTV-Net
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
 
                     <!-- Content Row -->
-
                     <div class="row">
 
-                        <!-- Area Chart -->
-                        <div class="col-lg-7 col-lg-6" style="height: 600px; margin-bottom: 1.5rem!important;">
-                            <div class="card shadow mb-4" style="height: 100%">
-                                <!-- Card Header - Dropdown -->
+                        <!-- Content Column -->
+                        <div class="col-lg-6 mb-4 ">
+
+                            <!-- Project Card Example -->
+                            <div class="card shadow mb-4 ">
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Map overview</h6>
-                                    @*<div class="dropdown no-arrow">
-                                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                                <div class="dropdown-header">Dropdown Header:</div>
-                                                <a class="dropdown-item" href="#">Action</a>
-                                                <a class="dropdown-item" href="#">Another action</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#">Something else here</a>
+                                    <h6 class="m-0 font-weight-bold text-primary">Antal CVR adresser pr. primære branche</h6>
+                                    <form>
+                                        <input class="form-control" placeholder="Search">
+                                    </form>
+                                </div>
+
+
+                                <div class="card-body">
+                                    <h4 class="small font-weight-bold">Branche 1 <span class="float-right">1987</span></h4>
+                                    <div class="progress mb-4">
+                                        <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <h4 class="small font-weight-bold">Branche 2 <span class="float-right">1329</span></h4>
+                                    <div class="progress mb-4">
+                                        <div class="progress-bar bg-info" role="progressbar" style="width: 67%" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <h4 class="small font-weight-bold">Branche 3 <span class="float-right">1204</span></h4>
+                                    <div class="progress mb-4">
+                                        <div class="progress-bar bg-info" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <h4 class="small font-weight-bold">Branco 4 <span class="float-right">734</span></h4>
+                                    <div class="progress mb-4">
+                                        <div class="progress-bar bg-info" role="progressbar" style="width: 37%" aria-valuenow="37" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <h4 class="small font-weight-bold">Branche 5 <span class="float-right">629</span></h4>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-info" role="progressbar" style="width: 31%" aria-valuenow="31" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Color System -->
+                            @*<div class="row">
+                                    <div class="col-lg-6 mb-4">
+                                        <div class="card bg-primary text-white shadow">
+                                            <div class="card-body">
+                                                Primary
+                                                <div class="text-white-50 small">#4e73df</div>
                                             </div>
-                                        </div>*@
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body" style="height: 100%; padding: 0">
-                                    <div class="chart-area" style="height: 100%">
-                                        <div id="mapid" class="chart-area" style="height: 100%">  </div>
-                                        <script>
-                                            var mymap = L.map('mapid').setView([57.047218, 9.920100], 8);
-                                            L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-                                                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-                                                maxZoom: 18,
-                                                id: 'mapbox/streets-v11',
-                                                tileSize: 512,
-                                                zoomOffset: -1,
-
-                                                // ACCESSTOKEN FÅET FRA MAPBOX
-                                                accessToken: 'pk.eyJ1IjoibXJzYWdneSIsImEiOiJja2ZiamQ4ajYwcXh3MnhvODU4NjZrZ29xIn0.JXSCWFKMGdFElSPErRk-Zg'
-                                            }).addTo(mymap);
-
-                                            var markers = L.markerClusterGroup({
-                                                spiderfyOnMaxZoom: false,
-                                                showCoverageOnHover: true,
-                                                zoomToBoundsOnClick: true,
-                                                disableClusteringAtZoom: 18
-                                            });
-
-                                            function addClusters(lat, long) {
-                                                markers.addLayer(L.marker([lat, long]));
-                                            }
-                                        </script>
-                                        
-                                        @foreach(var company in Model)
-                                        {
-                                            <script>
-                                                addClusters(@company.Coordinates.Lat, @company.Coordinates.Long);
-                                            </script>
-
-                                        }
-                                        <script>
-                                            mymap.addLayer(markers);
-                                        </script>
-                                        
-                                        
-
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
+                                    <div class="col-lg-6 mb-4">
+                                        <div class="card bg-success text-white shadow">
+                                            <div class="card-body">
+                                                Success
+                                                <div class="text-white-50 small">#1cc88a</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 mb-4">
+                                        <div class="card bg-info text-white shadow">
+                                            <div class="card-body">
+                                                Info
+                                                <div class="text-white-50 small">#36b9cc</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 mb-4">
+                                        <div class="card bg-warning text-white shadow">
+                                            <div class="card-body">
+                                                Warning
+                                                <div class="text-white-50 small">#f6c23e</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 mb-4">
+                                        <div class="card bg-danger text-white shadow">
+                                            <div class="card-body">
+                                                Danger
+                                                <div class="text-white-50 small">#e74a3b</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 mb-4">
+                                        <div class="card bg-secondary text-white shadow">
+                                            <div class="card-body">
+                                                Secondary
+                                                <div class="text-white-50 small">#858796</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 mb-4">
+                                        <div class="card bg-light text-black shadow">
+                                            <div class="card-body">
+                                                Light
+                                                <div class="text-black-50 small">#f8f9fc</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 mb-4">
+                                        <div class="card bg-dark text-white shadow">
+                                            <div class="card-body">
+                                                Dark
+                                                <div class="text-white-50 small">#5a5c69</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>*@
+
                         </div>
 
+                        <div class="col-lg-6 mb-4">
 
-                        <div class="col-xl-2 col-lg-2 m-auto">
+                            <!-- Illustrations -->
                             <div class="card shadow mb-4">
-                                @*Card Header - Dropdown*@
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-
-                                    <h6 class="m-0 font-weight-bold text-primary">Adresse info</h6>
-                                    <div class="col-auto">
-                                        <i class="fas fa-map-marker-alt fa-2x text-danger"></i>
-                                    </div>
-
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">info 1</h6>
                                 </div>
-
-                                @*Card Body*@
                                 <div class="card-body">
-                                    <div class="text-xs font-weight-bold text-primary text-uppercase">Virksomhed</div>
-                                    Jesper Gadgets Aps
-                                    <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Branche</div>
-                                    Adult Entertainment
-                                    <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Antal ansatte</div>
-                                    3
-                                    <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Adresse</div>
-                                    Jespersvej 17
-                                    <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Bedste fastnet teknologi</div>
-                                    Fiber
-                                    <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Maksimal download hastighed</div>
-                                    750 mb/s
-                                    <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Maksimal upload hastighed</div>
-                                    750 mb/s
 
-
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- Pie Chart -->
-                        <div class="col-xl-3 col-lg-3 m-auto">
+                            <!-- Approach -->
                             <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Bedste fastnet teknologi (% CVR)</h6>
-
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">info 2</h6>
                                 </div>
-
-                                <!-- Card Body -->
                                 <div class="card-body">
-                                    <div class="chart-pie pt-4 pb-2">
-                                        <canvas id="myPieChart"></canvas>
-                                    </div>
-                                    <div class="mt-4 text-center small">
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-primary"></i> Fiber
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-success"></i> Fiber KabelTV-Net
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-info"></i> KabelTV-Net
-                                        </span>
-                                    </div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                                 </div>
                             </div>
+
                         </div>
-
-
                     </div>
+
+
                 </div>
-
-                <!-- Content Row -->
-                <div class="row">
-
-                    <!-- Content Column -->
-                    <div class="col-lg-6 mb-4 ">
-
-                        <!-- Project Card Example -->
-                        <div class="card shadow mb-4 ">
-                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">Antal CVR adresser pr. primære branche</h6>
-                                <form>
-                                    <input class="form-control" placeholder="Search">
-                                </form>
-                            </div>
-
-
-                            <div class="card-body">
-                                <h4 class="small font-weight-bold">Branche 1 <span class="float-right">1987</span></h4>
-                                <div class="progress mb-4">
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <h4 class="small font-weight-bold">Branche 2 <span class="float-right">1329</span></h4>
-                                <div class="progress mb-4">
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: 67%" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <h4 class="small font-weight-bold">Branche 3 <span class="float-right">1204</span></h4>
-                                <div class="progress mb-4">
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <h4 class="small font-weight-bold">Branco 4 <span class="float-right">734</span></h4>
-                                <div class="progress mb-4">
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: 37%" aria-valuenow="37" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <h4 class="small font-weight-bold">Branche 5 <span class="float-right">629</span></h4>
-                                <div class="progress">
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: 31%" aria-valuenow="31" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Color System -->
-                        @*<div class="row">
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-primary text-white shadow">
-                                        <div class="card-body">
-                                            Primary
-                                            <div class="text-white-50 small">#4e73df</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-success text-white shadow">
-                                        <div class="card-body">
-                                            Success
-                                            <div class="text-white-50 small">#1cc88a</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-info text-white shadow">
-                                        <div class="card-body">
-                                            Info
-                                            <div class="text-white-50 small">#36b9cc</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-warning text-white shadow">
-                                        <div class="card-body">
-                                            Warning
-                                            <div class="text-white-50 small">#f6c23e</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-danger text-white shadow">
-                                        <div class="card-body">
-                                            Danger
-                                            <div class="text-white-50 small">#e74a3b</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-secondary text-white shadow">
-                                        <div class="card-body">
-                                            Secondary
-                                            <div class="text-white-50 small">#858796</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-light text-black shadow">
-                                        <div class="card-body">
-                                            Light
-                                            <div class="text-black-50 small">#f8f9fc</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-dark text-white shadow">
-                                        <div class="card-body">
-                                            Dark
-                                            <div class="text-white-50 small">#5a5c69</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>*@
-
-                    </div>
-
-                    <div class="col-lg-6 mb-4">
-
-                        <!-- Illustrations -->
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">info 1</h6>
-                            </div>
-                            <div class="card-body">
-
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                            </div>
-                        </div>
-
-                        <!-- Approach -->
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">info 2</h6>
-                            </div>
-                            <div class="card-body">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
+                <!-- /.container-fluid -->
 
             </div>
-            <!-- /.container-fluid -->
+            <!-- End of Main Content -->
+            <!-- Footer -->
+            @*<footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright &copy; Your Website 2020</span>
+                        </div>
+                    </div>
+                </footer>*@
+            <!-- End of Footer -->
 
         </div>
-        <!-- End of Main Content -->
-        <!-- Footer -->
-        @*<footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+        <!-- End of Content Wrapper -->
+        </div>
+        <!-- End of Page Wrapper -->
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
                     </div>
-                </div>
-            </footer>*@
-        <!-- End of Footer -->
-
-    </div>
-    <!-- End of Content Wrapper -->
-    </div>
-    <!-- End of Page Wrapper -->
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="login.html">Logout</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
-                                            <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Bootstrap core JavaScript-->
+        <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+        <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-                                            <!-- Core plugin JavaScript-->
-                                            <script src="~/Content/vendor/jquery-easing/jquery.easing.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="~/Content/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-                                            <!-- Custom scripts for all pages-->
-                                            <script src="~/Content/js/sb-admin-2.min.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="~/Content/js/sb-admin-2.min.js"></script>
 
-                                            <!-- Page level plugins -->
-                                            <script src="~/Content/vendor/chart.js/Chart.min.js"></script>
+        <!-- Page level plugins -->
+        <script src="~/Content/vendor/chart.js/Chart.min.js"></script>
 
-                                            <!-- Page level custom scripts -->
-                                            <script src="~/Content/js/demo/chart-area-demo.js"></script>
-                                            <script src="~/Content/js/demo/chart-pie-demo.js"></script>
+        <!-- Page level custom scripts -->
+        <script src="~/Content/js/demo/chart-area-demo.js"></script>
+        <script src="~/Content/js/demo/chart-pie-demo.js"></script>
 
-</body>
+    </body>
 
 </html>

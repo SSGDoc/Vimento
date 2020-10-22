@@ -12,7 +12,7 @@ namespace Vimento.DataAccess
         private string _connectionString;
         public CompanyData()
         {
-            _connectionString = "server=127.0.0.1;port=3306;uid=root;pwd=digital;database=datawarehouse";
+            _connectionString = "server=127.0.0.1;port=3306;uid=root;pwd=1234;database=datawarehouse";
             
         }
 

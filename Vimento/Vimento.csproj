@@ -175,8 +175,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="DataAccess\AddressData.cs" />
-    <Compile Include="DataAccess\CompanyData.cs" />
+    <Compile Include="..\..\..\..\Desktop\AddressData.cs">
+      <Link>DataAccess\AddressData.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\Desktop\CompanyData.cs">
+      <Link>DataAccess\CompanyData.cs</Link>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
