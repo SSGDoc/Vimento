@@ -7,9 +7,13 @@ namespace Vimento.Model
 {
     public class Technology
     {
-        public String Name { get; set; }
-        public decimal MaxUp { get; set; }
-        public decimal MaxDown { get; set; }
+
+        public int DownFiber { get; set; }
+        public int UpFiber { get; set; }
+        public int DownCable { get; set; }
+        public int UpCable { get; set; }
+        public int DownDSL { get; set; }
+        public int UpDSL { get; set; }
         public string MobileDownRange { get; set; }
 
         public Technology()
