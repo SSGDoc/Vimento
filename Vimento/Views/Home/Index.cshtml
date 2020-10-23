@@ -344,7 +344,7 @@
                                                 function addClusters(lat, long, name, business, employees, address) {
                                                     var companyMarker = new L.circleMarker([lat, long]).on('click', onClick);
                                                     companyMarker.name = name, companyMarker.business = business,
-                                                    companyMarker.employees = employees, companyMarker.address = address ;
+                                                    companyMarker.employees = employees, companyMarker.address = address;
 
                                                     markers.addLayer(companyMarker);
                                                     //markers.name = 'xdddd';
@@ -365,7 +365,7 @@
 
 
                                                 <script>
-                                                addClusters(@company.Coordinates.Lat, @company.Coordinates.Long, "@company.Name", "@company.Business", "@company.AmountOfEmployees", "@company.Street" + " @company.HouseNr");
+                                                addClusters(@company.Address.Long, @company.Address.Lat, "@company.Name", "@company.Business", "@company.AmountOfEmployees", "@company.Address.StreetName" + " @company.Address.HouseNr");
 
                                                 </script>
 

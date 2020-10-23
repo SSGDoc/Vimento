@@ -14,7 +14,7 @@ namespace Vimento.Model
         public Address Address { get; set; }
         public Company()
         {
-            
+            Address = new Address();
         }
 
     }

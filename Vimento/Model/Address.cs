@@ -19,7 +19,7 @@ namespace Vimento.Model
 
         public Address()
         {
-
+            Technology = new Technology();
         }
 
     }
