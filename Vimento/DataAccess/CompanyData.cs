@@ -37,7 +37,6 @@ namespace Vimento.DataAccess
                         Company.Name = companyReader.GetString(companyReader.GetOrdinal("navn"));
                         Company.Business = companyReader.GetString(companyReader.GetOrdinal("branche"));
                         Company.AmountOfEmployees = companyReader.GetInt32(companyReader.GetOrdinal("antalAnsatte"));
-                        int AddressID = companyReader.GetInt32(companyReader.GetOrdinal("adresseId"));
 
                         Company.Address.StreetName = companyReader.GetString(companyReader.GetOrdinal("vejNavn"));
                         Company.Address.HouseNr = companyReader.GetInt32(companyReader.GetOrdinal("husNr"));
