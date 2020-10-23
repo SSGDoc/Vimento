@@ -301,7 +301,9 @@
 
                                                     // ACCESSTOKEN FÅET FRA MAPBOX
                                                     accessToken: 'pk.eyJ1IjoibXJzYWdneSIsImEiOiJja2ZiamQ4ajYwcXh3MnhvODU4NjZrZ29xIn0.JXSCWFKMGdFElSPErRk-Zg'
-                                                }).addTo(mymap);                             
+                                                }).addTo(mymap);
+
+                                               
 
                                                 var markers = L.markerClusterGroup({
                                                     spiderfyOnMaxZoom: false,
@@ -312,6 +314,10 @@
                                                     name: 'placeholder name'
                                                 });
 
+
+                                                var marker2 = new L.marker([13.0101, 80.2157]).addTo(mymap).on('click', onClick);
+                                                marker2.name = "Jesper Gadgets", marker2.branche = "Adult Entertainment";
+
                                                 function onClick(e) {
                                                     document.getElementById('firmanavn').innerHTML
                                                         = this.name;
@@ -321,20 +327,9 @@
                                                         = this.employees;
                                                     document.getElementById('vejnavn').innerHTML
                                                         = this.address;
-                                                  // on click function til visning af firma info
+                                                  // onclick function til at vise given data fra et firma
                                                 }
 
-                                                function locationList(marker) {
-                                                    // function til at vise flere firmaer på samme koordinat
-                                                    @foreach (var company in Model)
-                                                    {
-
-
-
-                                                    }
-
-
-                                                }
 
                                                 function addClusters(lat, long, name, business, employees, address) {
                                                     var companyMarker = new L.circleMarker([lat, long]).on('click', onClick);
@@ -342,19 +337,25 @@
                                                     companyMarker.employees = employees, companyMarker.address = address;
 
                                                     markers.addLayer(companyMarker);
-                                                   //laver markers og inputter information i markers, og tilføjer dem til layer
 
+                                                    //laver markes med given data
                                                 }
                                             </script>
 
+
+
                                             @foreach (var company in Model)
                                             {
+                                                //køre igennem alle firmaer i databasen og tilføjer dem som marker
                                                 <script>
                                                 addClusters(@company.Address.Long, @company.Address.Lat, "@company.Name", "@company.Business", "@company.AmountOfEmployees", "@company.Address.StreetName" + " @company.Address.HouseNr");
 
                                                 </script>
-                                             //køre igennem vores viewbag af firmaer for at fylde map
                                             }
+                                            <script>
+                                                mymap.addLayer(markers);          
+                                                //tilføjer alle lavede markers til map
+                                            </script>
 
                                         </div>
                                     </div>
@@ -571,7 +572,15 @@
 
             </div>
             <!-- End of Main Content -->
-          
+            <!-- Footer -->
+            @*<footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright &copy; Your Website 2020</span>
+                        </div>
+                    </div>
+                </footer>*@
+            <!-- End of Footer -->
 
         </div>
         <!-- End of Content Wrapper -->
