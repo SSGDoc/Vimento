@@ -304,7 +304,7 @@
                                                     accessToken: 'pk.eyJ1IjoibXJzYWdneSIsImEiOiJja2ZiamQ4ajYwcXh3MnhvODU4NjZrZ29xIn0.JXSCWFKMGdFElSPErRk-Zg'
                                                 }).addTo(mymap);
 
-                                                var array = [];
+                                                var markerArray = new Array();
                                                
 
                                                 var markers = L.markerClusterGroup({
@@ -351,20 +351,31 @@
 
                                                     //Opdaterer chart'en efter der er indsat data.
                                                     myChart.update()
+
+
+
+                                                    cordCheck(this.getLatLng().lat, this.getLatLng().lng);
                                                     
                                                   
                                                 }
 
                                                
 
-                                                function cordCheck() {
-                                                    
-                                                    for (var i = 0; i < myItems.length; i++) {
-                                                        var item = myItems[i];
+                                                function cordCheck(clickLat, clicklng) {
 
-                                                        marker = new L.marker([item[2], item[3]], {
-                                                            icon: mapOpts.myIcon
-                                                        }).bindPopup(item[1]);
+                                                    for (var i = 10; i < (markerArray.length); i++) {
+                                                        var item = markerArray[i];
+
+                                                        var lat = item.employees;
+                                                        var lng = item.name;
+
+                                                        //console.log(item.getLatLng().lat)
+
+                                                        if (item.getLatLng().lng == clicklng && item.getLatLng().lat == clickLat) {
+                                                            console.log(item.name);
+                                                        }
+                                                         
+                                                        
 
                                                         
                                                     }
@@ -380,12 +391,16 @@
                                                         companyMarker.mobil = mobil;
 
                                                     markers.addLayer(companyMarker);
-                                                    array.push(companyMarker);
-                                                    console.log(array.length)
-                                                    var found = array.pop();
-                                                    var test2 = found.employees;
 
-                                                    console.log(found);
+                                                    markerArray.push(companyMarker);
+
+
+                                                      var i = (markerArray.length - 1);
+                                                      console.log(i);
+                                                    var found = markerArray[i];
+                                                    
+                                                    
+                                                   
                                                     //laver markes med given data
                                                 }
                                             </script>
@@ -403,6 +418,7 @@
                                         </script>
                                             }
                                             <script>
+                                               
                                                 mymap.addLayer(markers);          
                                                 //tilføjer alle lavede markers til map
                                             </script>
@@ -568,10 +584,10 @@
                     </div>
 
                     <!-- Content Row -->
-                    <div class="row">
+                    <div class="row container-fluid">
 
                         <!-- Content Column -->
-                        <div class="col-lg-6 mb-4 ">
+                        <div class="col-lg-6  m-auto">
 
                             <!-- Project Card Example -->
                             <div class="card shadow mb-4 ">
@@ -653,7 +669,7 @@
 
                         </div>
 
-                        <div class="col-lg-6 mb-4">
+                        <div class="col-lg-6  m-auto">
 
                             <!-- Illustrations -->
                             <div class="card shadow mb-4">
