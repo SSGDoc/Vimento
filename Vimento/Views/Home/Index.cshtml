@@ -47,7 +47,7 @@
 
         <!-- Page Wrapper -->
         <div id="wrapper">
-
+            
             <!-- Sidebar -->
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -316,8 +316,11 @@
 
 
                                                 var marker2 = new L.marker([13.0101, 80.2157]).addTo(mymap).on('click', onClick);
-                                                marker2.name = "Jesper Gadgets", marker2.branche = "Adult Entertainment";
+                                                    marker2.name = "Jesper Gadgets", marker2.branche = "Adult Entertainment";
 
+                                               
+
+                                                
                                                 function onClick(e) {
                                                     document.getElementById('firmanavn').innerHTML
                                                         = this.name;
@@ -327,16 +330,42 @@
                                                         = this.employees;
                                                     document.getElementById('vejnavn').innerHTML
                                                         = this.address;
-                                                  // onclick function til at vise given data fra et firma
+                                                    // onclick function til at vise given data fra et firma
+
+                                                    
+                                                    document.getElementById('maxDown').innerHTML
+                                                       = this.downFiber;
+                                                   
+                                                    //Tilføjer data til chart.
+                                                    addDataDownFiber(parseInt(this.downFiber))
+                                                    addDataUpFiber(parseInt(this.upFiber))
+                                                    addDataDownKabel(parseInt(this.downkabel))
+                                                    addDataUpKabel(parseInt(this.upKabel))
+                                                    addDataDownDsl(parseInt(this.downDsl))
+                                                    addDataUpDsl(parseInt(this.upDsl))
+                                                    addDataMobil(parseInt(this.mobil))
+
+                                                    //addDataAll(parseInt(downFiber, this.UpFiber, this.DownKabel, this.upKabel, this,downDsl, this.upDsl, this.mobil))
+
+                                                    //Opdaterer chart'en efter der er indsat data.
+                                                    myChart.update()
+                                                    
+                                                  
                                                 }
 
+                                                 
 
-                                                function addClusters(lat, long, name, business, employees, address) {
+                                                function addClusters(lat, long, name, business, employees, address, downFiber, upFiber, downKabel, upKabel, downDsl, upDsl, mobil) {
                                                     var companyMarker = new L.circleMarker([lat, long]).on('click', onClick);
                                                     companyMarker.name = name, companyMarker.business = business,
-                                                    companyMarker.employees = employees, companyMarker.address = address;
+                                                        companyMarker.employees = employees, companyMarker.address = address,
+                                                        companyMarker.downFiber = downFiber, companyMarker.upFiber = upFiber,
+                                                        companyMarker.downkabel = downKabel, companyMarker.upKabel = upKabel,
+                                                        companyMarker.downDsl = downDsl, companyMarker.upDsl = upDsl,
+                                                        companyMarker.mobil = mobil;
 
                                                     markers.addLayer(companyMarker);
+                                                   
 
                                                     //laver markes med given data
                                                 }
@@ -347,10 +376,12 @@
                                             @foreach (var company in Model)
                                             {
                                                 //køre igennem alle firmaer i databasen og tilføjer dem som marker
-                                                <script>
-                                                addClusters(@company.Address.Long, @company.Address.Lat, "@company.Name", "@company.Business", "@company.AmountOfEmployees", "@company.Address.StreetName" + " @company.Address.HouseNr");
+                                        <script>
+                                            addClusters(@company.Address.Long, @company.Address.Lat, "@company.Name", "@company.Business", "@company.AmountOfEmployees", "@company.Address.StreetName" +
+                                                " @company.Address.HouseNr", + " @company.Address.Technology.DownFiber", + "@company.Address.Technology.UpFiber", + "@company.Address.Technology.DownCable", +
+                                            "@company.Address.Technology.UpCable", + "@company.Address.Technology.DownDSL", + "@company.Address.Technology.UpDSL", + "@company.Address.Technology.MobileDownRange");
 
-                                                </script>
+                                        </script>
                                             }
                                             <script>
                                                 mymap.addLayer(markers);          
@@ -388,7 +419,7 @@
                                     <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Bedste fastnet teknologi</div>
                                     <h6 id="bedstfastnet"> fiber </h6>
                                     <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Maksimal download hastighed</div>
-                                    <h6 id="maxhastned"> 750 mb/s </h6>
+                                    <h6 id="maxhastned"> 750 </h6>
                                     <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Maksimal upload hastighed</div>
                                     <h6 id="maxhastup"> 750 mb/s </h6>
 
@@ -402,25 +433,108 @@
                                 <div class="card shadow mb-4">
                                     <!-- Card Header - Dropdown -->
                                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                        <h6 class="m-0 font-weight-bold text-primary">Bedste fastnet teknologi (% CVR)</h6>
+                                        <h6 class="m-0 font-weight-bold text-primary">Hastighed fordelt på teknologi.</h6>
 
                                     </div>
 
                                     <!-- Card Body -->
                                     <div class="card-body">
-                                        <div class="chart-pie pt-4 pb-2">
-                                            <canvas id="myPieChart"></canvas>
-                                        </div>
+                                        
                                         <div class="mt-4 text-center small">
-                                            <span class="mr-2">
-                                                <i class="fas fa-circle text-primary"></i> Fiber
-                                            </span>
-                                            <span class="mr-2">
-                                                <i class="fas fa-circle text-success"></i> Fiber KabelTV-Net
-                                            </span>
-                                            <span class="mr-2">
-                                                <i class="fas fa-circle text-info"></i> KabelTV-Net
-                                            </span>
+                                            <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js'></script>
+                                            <canvas id="bar" height: 100%></canvas>
+                                            <script>
+
+                                             
+
+                                                
+                                                var ctx = document.getElementById('bar');
+                                                var myChart = new Chart(ctx, {
+                                                    type: 'bar',
+                                                    data: {
+                                                        labels: ['Fiber', 'Kabel', 'Dsl', 'Mobil'],
+                                                        datasets: [{
+                                                            label: 'Max Download Hastighed (Mbit)',
+                                                            data: [],
+                                                            backgroundColor: [
+                                                                'rgba(78, 115, 223, 1)',
+                                                                'rgba(78, 115, 223, 1)',
+                                                                'rgba(78, 115, 223, 1)',
+                                                                'rgba(78, 115, 223, 1)'
+
+                                                            ],
+                                                            borderColor: [
+                                                                'rgba(189, 180, 180, 0.8)',
+                                                                'rgba(189, 180, 180, 0.8)',
+                                                                'rgba(189, 180, 180, 0.8)',
+                                                                'rgba(189, 180, 180, 0.8)'
+
+                                                            ],
+                                                            borderWidth: 1
+                                                        }, {
+
+                                                            label: 'Max Upload Hastighed (Mbit)',
+                                                            data: [],
+                                                            backgroundColor: [
+                                                                'rgba(28, 200, 138, 1)',
+                                                                'rgba(28, 200, 138, 1)',
+                                                                'rgba(28, 200, 138, 1)',
+                                                                'rgba(28, 200, 138, 1)'
+                                                            ],
+                                                            borderColor: [
+                                                                'rgba(189, 180, 180, 0.8)',
+                                                                'rgba(189, 180, 180, 0.8)',
+                                                                'rgba(189, 180, 180, 0.8)',
+                                                                'rgba(189, 180, 180, 0.8)'
+                                                            ],
+                                                            borderWidth: 1
+                                                        }]
+                                                    },
+                                                    options: {
+                                                        scales: {
+                                                            yAxes: [{
+                                                                ticks: {
+                                                                    beginAtZero: true
+                                                                }
+                                                            }]
+                                                        }
+                                                    }
+                                                });
+
+                                                //function addDataAll(downFiber, upFiber, downKabel, upKabel, downDsl, upDsl, mobil) {
+                                                //    myChart.data.datasets[0].data[0] = downFiber,
+                                                //    myChart.data.datasets[1].data[0] = upFiber;
+                                                //    myChart.data.datasets[0].data[1] = downKabel;
+                                                //    myChart.data.datasets[1].data[1] = upKabel;
+                                                //    myChart.data.datasets[0].data[2] = downDsl;
+                                                //    myChart.data.datasets[1].data[2] = upDsl;
+                                                //    myChart.data.datasets[0].data[3] = mobil;
+                                                //}
+
+
+                                                function addDataDownFiber(data) {
+                                                    myChart.data.datasets[0].data[0] = data;
+                                                }
+                                                function addDataUpFiber(data) {
+                                                    myChart.data.datasets[1].data[0] = data;
+                                                }
+                                                function addDataDownKabel(data) {
+                                                    myChart.data.datasets[0].data[1] = data;
+                                                }
+                                                function addDataUpKabel(data) {
+                                                    myChart.data.datasets[1].data[1] = data;
+                                                }
+                                                function addDataDownDsl(data) {
+                                                    myChart.data.datasets[0].data[2] = data;
+                                                }
+                                                function addDataUpDsl(data) {
+                                                    myChart.data.datasets[1].data[2] = data;
+                                                }
+                                                function addDataMobil(data) {
+                                                    myChart.data.datasets[0].data[3] = data;
+                                                }
+
+                                            </script>
                                         </div>
                                     </div>
                                 </div>
@@ -439,35 +553,11 @@
                             <!-- Project Card Example -->
                             <div class="card shadow mb-4 ">
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Antal CVR adresser pr. primære branche</h6>
-                                    <form>
-                                        <input class="form-control" placeholder="Search">
-                                    </form>
+                                    <h6 class="m-0 font-weight-bold text-primary">Filtrer på teknologi</h6>
+                                    
                                 </div>
-
-
-                                <div class="card-body">
-                                    <h4 class="small font-weight-bold">Branche 1 <span class="float-right">1987</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Branche 2 <span class="float-right">1329</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 67%" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Branche 3 <span class="float-right">1204</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Branco 4 <span class="float-right">734</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 37%" aria-valuenow="37" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Branche 5 <span class="float-right">629</span></h4>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 31%" aria-valuenow="31" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
+                                
+                                
                             </div>
 
                             <!-- Color System -->
@@ -546,6 +636,8 @@
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">info 1</h6>
+                                    
+                                    <h6 id="maxDown"> TEST TEST </h6>
                                 </div>
                                 <div class="card-body">
 
