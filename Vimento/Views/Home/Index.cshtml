@@ -305,6 +305,8 @@
                                                 }).addTo(mymap);
 
                                                 var markerArray = new Array();
+                                                var selectedArray = new Array();
+                                                var index = 0;
                                                
 
                                                 var markers = L.markerClusterGroup({
@@ -324,61 +326,95 @@
 
                                                 
                                                 function onClick(e) {
-                                                    document.getElementById('firmanavn').innerHTML
-                                                        = this.name;
-                                                    document.getElementById('branchenavn').innerHTML
-                                                        = this.business;
-                                                    document.getElementById('antalansatte').innerHTML
-                                                        = this.employees;
-                                                    document.getElementById('vejnavn').innerHTML
-                                                        = this.address;
-                                                    // onclick function til at vise given data fra et firma
-
-                                                    
-                                                    document.getElementById('maxDown').innerHTML
-                                                       = this.downFiber;
-                                                   
-                                                    //Tilføjer data til chart.
-                                                    addDataDownFiber(parseInt(this.downFiber))
-                                                    addDataUpFiber(parseInt(this.upFiber))
-                                                    addDataDownKabel(parseInt(this.downkabel))
-                                                    addDataUpKabel(parseInt(this.upKabel))
-                                                    addDataDownDsl(parseInt(this.downDsl))
-                                                    addDataUpDsl(parseInt(this.upDsl))
-                                                    addDataMobil(parseInt(this.mobil))
-
-                                                    //addDataAll(parseInt(downFiber, this.UpFiber, this.DownKabel, this.upKabel, this,downDsl, this.upDsl, this.mobil))
-
-                                                    //Opdaterer chart'en efter der er indsat data.
-                                                    myChart.update()
-
-
 
                                                     cordCheck(this.getLatLng().lat, this.getLatLng().lng);
-                                                    
+                                                    displayInfo(this)  //kalder function for fremvisning af data i informations panel
+                                                    myChart.update()  //updatere charts
+
+
                                                   
+                                                }
+
+                                                function nextInfo(sum) {
+
+                                                    index = (index + sum);
+                                                    
+                                                    if (index <= 0) {
+
+                                                        index = 0;
+                                                        
+                                                    }
+                                                    else if (index > (selectedArray.length) - 1)
+                                                    {
+                                                        index = ((selectedArray.length - 1));
+                                                        alert("ERDUDUMELLERHVAD");
+                                                    }
+                                                    
+                                                       
+                                                        console.log(selectedArray[index]);
+                                                        displayInfo(selectedArray[index]);
+                                                        document.getElementById('side').innerHTML
+                                                            = ((index + 1) + " / " + selectedArray.length);
+                                                    
+
                                                 }
 
                                                
 
                                                 function cordCheck(clickLat, clicklng) {
+                                                    selectedArray = [];
+                                                    index = 0;
+                                                    for (var i = 0; i < (markerArray.length); i++) {
+                                                        var marker = markerArray[i];
 
-                                                    for (var i = 10; i < (markerArray.length); i++) {
-                                                        var item = markerArray[i];
+                                                        var lat = marker.employees;
+                                                        var lng = marker.name;
 
-                                                        var lat = item.employees;
-                                                        var lng = item.name;
+
+                                                        marker.downkabel > 200
 
                                                         //console.log(item.getLatLng().lat)
 
-                                                        if (item.getLatLng().lng == clicklng && item.getLatLng().lat == clickLat) {
-                                                            console.log(item.name);
-                                                        }
-                                                         
-                                                        
+                                                        if (marker.getLatLng().lng == clicklng && marker.getLatLng().lat == clickLat) {
+                                                            //console.log(marker.name);
+                                                            selectedArray.push(marker);
+                                                            
 
-                                                        
+                                                        }
                                                     }
+                                                    console.log(selectedArray);
+                                                    document.getElementById('side').innerHTML
+                                                        = (selectedArray.length);
+                                                    
+                                                }
+
+                                                function displayInfo(marker) {
+                                                    document.getElementById('firmanavn').innerHTML
+                                                        = marker.name;
+                                                    document.getElementById('branchenavn').innerHTML
+                                                        = marker.business;
+                                                    document.getElementById('antalansatte').innerHTML
+                                                        = marker.employees;
+                                                    document.getElementById('vejnavn').innerHTML
+                                                        = marker.address;
+                                                    // onclick function til at vise given data fra et firma
+
+
+                                                    document.getElementById('maxDown').innerHTML
+                                                        = marker.downFiber;
+
+                                                    //Tilføjer data til chart.
+                                                    addDataDownFiber(parseInt(marker.downFiber))
+                                                    addDataUpFiber(parseInt(marker.upFiber))
+                                                    addDataDownKabel(parseInt(marker.downkabel))
+                                                    addDataUpKabel(parseInt(marker.upKabel))
+                                                    addDataDownDsl(parseInt(marker.downDsl))
+                                                    addDataUpDsl(parseInt(marker.upDsl))
+                                                    addDataMobil(parseInt(marker.mobil))
+
+                                                    //addDataAll(parseInt(downFiber, this.UpFiber, this.DownKabel, this.upKabel, this,downDsl, this.upDsl, this.mobil))
+
+                                                    //Opdaterer chart'en efter der er indsat data.
                                                 }
 
                                                   function addClusters(lat, long, name, business, employees, address, downFiber, upFiber, downKabel, upKabel, downDsl, upDsl, mobil) {
@@ -397,7 +433,7 @@
 
                                                       var i = (markerArray.length - 1);
                                                       console.log(i);
-                                                    var found = markerArray[i];
+                                                      var found = markerArray[i];
                                                     
                                                     
                                                    
@@ -436,9 +472,9 @@
 
                                         <h6 class="m-0 font-weight-bold text-primary">Adresse info</h6>
                                         @*<INPUT TYPE="NUMBER" MIN="1" MAX="10" STEP="1" VALUE="1" SIZE="6">*@
-                                        <a href="#" > <i class="fas fa-arrow-alt-circle-left fa-2x text-primary"></i></a>
-                                        <h6 class="m-0  ">1 / 9</h6>
-                                        <a href="#" > <i class="fas fa-arrow-alt-circle-right fa-2x text-primary"></i></a>
+                                        <a onclick="nextInfo(-1)" href="#" > <i class="fas fa-arrow-alt-circle-left fa-2x text-primary"></i></a>
+                                        <h6 id="side" class="m-0  ">1 / 9</h6>
+                                        <a onclick="nextInfo(1)"  href="#" > <i class="fas fa-arrow-alt-circle-right fa-2x text-primary"></i></a>
                                         <div class="col-auto">
                                             <i class="fas fa-map-marker-alt fa-2x text-danger"></i>
                                         </div>
