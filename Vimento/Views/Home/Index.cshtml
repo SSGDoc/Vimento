@@ -29,6 +29,7 @@
 
         <!-- Custom styles for this template-->
         <link href="~/Content/css/sb-admin-2.min.css" rel="stylesheet">
+        <link href="~/Content/css/indexstyle.css" rel="stylesheet">
 
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
               integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
@@ -47,7 +48,7 @@
 
         <!-- Page Wrapper -->
         <div id="wrapper">
-
+            
             <!-- Sidebar -->
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -303,6 +304,9 @@
                                                     accessToken: 'pk.eyJ1IjoibXJzYWdneSIsImEiOiJja2ZiamQ4ajYwcXh3MnhvODU4NjZrZ29xIn0.JXSCWFKMGdFElSPErRk-Zg'
                                                 }).addTo(mymap);
 
+                                                var markerArray = new Array();
+                                                var selectedArray = new Array();
+                                                var index = 0;
                                                
 
                                                 var markers = L.markerClusterGroup({
@@ -316,28 +320,123 @@
 
 
                                                 var marker2 = new L.marker([13.0101, 80.2157]).addTo(mymap).on('click', onClick);
-                                                marker2.name = "Jesper Gadgets", marker2.branche = "Adult Entertainment";
+                                                    marker2.name = "Jesper Gadgets", marker2.branche = "Adult Entertainment";
 
+                                               
+
+                                                
                                                 function onClick(e) {
-                                                    document.getElementById('firmanavn').innerHTML
-                                                        = this.name;
-                                                    document.getElementById('branchenavn').innerHTML
-                                                        = this.business;
-                                                    document.getElementById('antalansatte').innerHTML
-                                                        = this.employees;
-                                                    document.getElementById('vejnavn').innerHTML
-                                                        = this.address;
-                                                  // onclick function til at vise given data fra et firma
+
+                                                    cordCheck(this.getLatLng().lat, this.getLatLng().lng);
+                                                    displayInfo(this)  //kalder function for fremvisning af data i informations panel
+                                                    myChart.update()  //updatere charts
+
+
+                                                  
                                                 }
 
+                                                function nextInfo(sum) {
 
-                                                function addClusters(lat, long, name, business, employees, address) {
+                                                    index = (index + sum);
+                                                    
+                                                    if (index <= 0) {
+
+                                                        index = 0;
+                                                        
+                                                    }
+                                                    else if (index > (selectedArray.length) - 1)
+                                                    {
+                                                        index = ((selectedArray.length - 1));
+                                                        alert("ERDUDUMELLERHVAD");
+                                                    }
+                                                    
+                                                       
+                                                        console.log(selectedArray[index]);
+                                                        displayInfo(selectedArray[index]);
+                                                        document.getElementById('side').innerHTML
+                                                            = ((index + 1) + " / " + selectedArray.length);
+                                                    
+
+                                                }
+
+                                               
+
+                                                function cordCheck(clickLat, clicklng) {
+                                                    selectedArray = [];
+                                                    index = 0;
+                                                    for (var i = 0; i < (markerArray.length); i++) {
+                                                        var marker = markerArray[i];
+
+                                                        var lat = marker.employees;
+                                                        var lng = marker.name;
+
+
+                                                        marker.downkabel > 200
+
+                                                        //console.log(item.getLatLng().lat)
+
+                                                        if (marker.getLatLng().lng == clicklng && marker.getLatLng().lat == clickLat) {
+                                                            //console.log(marker.name);
+                                                            selectedArray.push(marker);
+                                                            
+
+                                                        }
+                                                    }
+                                                    console.log(selectedArray);
+                                                    document.getElementById('side').innerHTML
+                                                        = (selectedArray.length);
+                                                    
+                                                }
+
+                                                function displayInfo(marker) {
+                                                    document.getElementById('firmanavn').innerHTML
+                                                        = marker.name;
+                                                    document.getElementById('branchenavn').innerHTML
+                                                        = marker.business;
+                                                    document.getElementById('antalansatte').innerHTML
+                                                        = marker.employees;
+                                                    document.getElementById('vejnavn').innerHTML
+                                                        = marker.address;
+                                                    // onclick function til at vise given data fra et firma
+
+
+                                                    document.getElementById('maxDown').innerHTML
+                                                        = marker.downFiber;
+
+                                                    //Tilføjer data til chart.
+                                                    addDataDownFiber(parseInt(marker.downFiber))
+                                                    addDataUpFiber(parseInt(marker.upFiber))
+                                                    addDataDownKabel(parseInt(marker.downkabel))
+                                                    addDataUpKabel(parseInt(marker.upKabel))
+                                                    addDataDownDsl(parseInt(marker.downDsl))
+                                                    addDataUpDsl(parseInt(marker.upDsl))
+                                                    addDataMobil(parseInt(marker.mobil))
+
+                                                    //addDataAll(parseInt(downFiber, this.UpFiber, this.DownKabel, this.upKabel, this,downDsl, this.upDsl, this.mobil))
+
+                                                    //Opdaterer chart'en efter der er indsat data.
+                                                }
+
+                                                  function addClusters(lat, long, name, business, employees, address, downFiber, upFiber, downKabel, upKabel, downDsl, upDsl, mobil) {
                                                     var companyMarker = new L.circleMarker([lat, long]).on('click', onClick);
                                                     companyMarker.name = name, companyMarker.business = business,
-                                                    companyMarker.employees = employees, companyMarker.address = address;
+                                                        companyMarker.employees = employees, companyMarker.address = address,
+                                                        companyMarker.downFiber = downFiber, companyMarker.upFiber = upFiber,
+                                                        companyMarker.downkabel = downKabel, companyMarker.upKabel = upKabel,
+                                                        companyMarker.downDsl = downDsl, companyMarker.upDsl = upDsl,
+                                                        companyMarker.mobil = mobil;
 
                                                     markers.addLayer(companyMarker);
 
+                                                    markerArray.push(companyMarker);
+
+
+                                                      var i = (markerArray.length - 1);
+                                                      console.log(i);
+                                                      var found = markerArray[i];
+                                                    
+                                                    
+                                                   
                                                     //laver markes med given data
                                                 }
                                             </script>
@@ -347,12 +446,15 @@
                                             @foreach (var company in Model)
                                             {
                                                 //køre igennem alle firmaer i databasen og tilføjer dem som marker
-                                                <script>
-                                                addClusters(@company.Address.Long, @company.Address.Lat, "@company.Name", "@company.Business", "@company.AmountOfEmployees", "@company.Address.StreetName" + " @company.Address.HouseNr");
+                                        <script>
+                                            addClusters(@company.Address.Long, @company.Address.Lat, "@company.Name", "@company.Business", "@company.AmountOfEmployees", "@company.Address.StreetName" +
+                                                " @company.Address.HouseNr", + " @company.Address.Technology.DownFiber", + "@company.Address.Technology.UpFiber", + "@company.Address.Technology.DownCable", +
+                                            "@company.Address.Technology.UpCable", + "@company.Address.Technology.DownDSL", + "@company.Address.Technology.UpDSL", + "@company.Address.Technology.MobileDownRange");
 
-                                                </script>
+                                        </script>
                                             }
                                             <script>
+                                               
                                                 mymap.addLayer(markers);          
                                                 //tilføjer alle lavede markers til map
                                             </script>
@@ -369,6 +471,10 @@
                                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 
                                         <h6 class="m-0 font-weight-bold text-primary">Adresse info</h6>
+                                        @*<INPUT TYPE="NUMBER" MIN="1" MAX="10" STEP="1" VALUE="1" SIZE="6">*@
+                                        <a onclick="nextInfo(-1)" href="#" > <i class="fas fa-arrow-alt-circle-left fa-2x text-primary"></i></a>
+                                        <h6 id="side" class="m-0  ">1 / 9</h6>
+                                        <a onclick="nextInfo(1)"  href="#" > <i class="fas fa-arrow-alt-circle-right fa-2x text-primary"></i></a>
                                         <div class="col-auto">
                                             <i class="fas fa-map-marker-alt fa-2x text-danger"></i>
                                         </div>
@@ -388,7 +494,7 @@
                                     <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Bedste fastnet teknologi</div>
                                     <h6 id="bedstfastnet"> fiber </h6>
                                     <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Maksimal download hastighed</div>
-                                    <h6 id="maxhastned"> 750 mb/s </h6>
+                                    <h6 id="maxhastned"> 750 </h6>
                                     <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Maksimal upload hastighed</div>
                                     <h6 id="maxhastup"> 750 mb/s </h6>
 
@@ -402,25 +508,108 @@
                                 <div class="card shadow mb-4">
                                     <!-- Card Header - Dropdown -->
                                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                        <h6 class="m-0 font-weight-bold text-primary">Bedste fastnet teknologi (% CVR)</h6>
+                                        <h6 class="m-0 font-weight-bold text-primary">Hastighed fordelt på teknologi.</h6>
 
                                     </div>
 
                                     <!-- Card Body -->
                                     <div class="card-body">
-                                        <div class="chart-pie pt-4 pb-2">
-                                            <canvas id="myPieChart"></canvas>
-                                        </div>
+                                        
                                         <div class="mt-4 text-center small">
-                                            <span class="mr-2">
-                                                <i class="fas fa-circle text-primary"></i> Fiber
-                                            </span>
-                                            <span class="mr-2">
-                                                <i class="fas fa-circle text-success"></i> Fiber KabelTV-Net
-                                            </span>
-                                            <span class="mr-2">
-                                                <i class="fas fa-circle text-info"></i> KabelTV-Net
-                                            </span>
+                                            <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js'></script>
+                                            <canvas id="bar" height: 100%></canvas>
+                                            <script>
+
+                                             
+
+                                                
+                                                var ctx = document.getElementById('bar');
+                                                var myChart = new Chart(ctx, {
+                                                    type: 'bar',
+                                                    data: {
+                                                        labels: ['Fiber', 'Kabel', 'Dsl', 'Mobil'],
+                                                        datasets: [{
+                                                            label: 'Max Download Hastighed (Mbit)',
+                                                            data: [],
+                                                            backgroundColor: [
+                                                                'rgba(78, 115, 223, 1)',
+                                                                'rgba(78, 115, 223, 1)',
+                                                                'rgba(78, 115, 223, 1)',
+                                                                'rgba(78, 115, 223, 1)'
+
+                                                            ],
+                                                            borderColor: [
+                                                                'rgba(189, 180, 180, 0.8)',
+                                                                'rgba(189, 180, 180, 0.8)',
+                                                                'rgba(189, 180, 180, 0.8)',
+                                                                'rgba(189, 180, 180, 0.8)'
+
+                                                            ],
+                                                            borderWidth: 1
+                                                        }, {
+
+                                                            label: 'Max Upload Hastighed (Mbit)',
+                                                            data: [],
+                                                            backgroundColor: [
+                                                                'rgba(28, 200, 138, 1)',
+                                                                'rgba(28, 200, 138, 1)',
+                                                                'rgba(28, 200, 138, 1)',
+                                                                'rgba(28, 200, 138, 1)'
+                                                            ],
+                                                            borderColor: [
+                                                                'rgba(189, 180, 180, 0.8)',
+                                                                'rgba(189, 180, 180, 0.8)',
+                                                                'rgba(189, 180, 180, 0.8)',
+                                                                'rgba(189, 180, 180, 0.8)'
+                                                            ],
+                                                            borderWidth: 1
+                                                        }]
+                                                    },
+                                                    options: {
+                                                        scales: {
+                                                            yAxes: [{
+                                                                ticks: {
+                                                                    beginAtZero: true
+                                                                }
+                                                            }]
+                                                        }
+                                                    }
+                                                });
+
+                                                //function addDataAll(downFiber, upFiber, downKabel, upKabel, downDsl, upDsl, mobil) {
+                                                //    myChart.data.datasets[0].data[0] = downFiber,
+                                                //    myChart.data.datasets[1].data[0] = upFiber;
+                                                //    myChart.data.datasets[0].data[1] = downKabel;
+                                                //    myChart.data.datasets[1].data[1] = upKabel;
+                                                //    myChart.data.datasets[0].data[2] = downDsl;
+                                                //    myChart.data.datasets[1].data[2] = upDsl;
+                                                //    myChart.data.datasets[0].data[3] = mobil;
+                                                //}
+
+
+                                                function addDataDownFiber(data) {
+                                                    myChart.data.datasets[0].data[0] = data;
+                                                }
+                                                function addDataUpFiber(data) {
+                                                    myChart.data.datasets[1].data[0] = data;
+                                                }
+                                                function addDataDownKabel(data) {
+                                                    myChart.data.datasets[0].data[1] = data;
+                                                }
+                                                function addDataUpKabel(data) {
+                                                    myChart.data.datasets[1].data[1] = data;
+                                                }
+                                                function addDataDownDsl(data) {
+                                                    myChart.data.datasets[0].data[2] = data;
+                                                }
+                                                function addDataUpDsl(data) {
+                                                    myChart.data.datasets[1].data[2] = data;
+                                                }
+                                                function addDataMobil(data) {
+                                                    myChart.data.datasets[0].data[3] = data;
+                                                }
+
+                                            </script>
                                         </div>
                                     </div>
                                 </div>
@@ -434,40 +623,16 @@
                     <div class="row container-fluid">
 
                         <!-- Content Column -->
-                        <div class="col-lg-6 mb-4 ">
+                        <div class="col-lg-6  m-auto">
 
                             <!-- Project Card Example -->
                             <div class="card shadow mb-4 ">
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Antal CVR adresser pr. primære branche</h6>
-                                    <form>
-                                        <input class="form-control" placeholder="Search">
-                                    </form>
+                                    <h6 class="m-0 font-weight-bold text-primary">Filtrer på teknologi</h6>
+                                    
                                 </div>
-
-
-                                <div class="card-body">
-                                    <h4 class="small font-weight-bold">Branche 1 <span class="float-right">1987</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Branche 2 <span class="float-right">1329</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 67%" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Branche 3 <span class="float-right">1204</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Branco 4 <span class="float-right">734</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 37%" aria-valuenow="37" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Branche 5 <span class="float-right">629</span></h4>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 31%" aria-valuenow="31" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
+                                
+                                
                             </div>
 
                             <!-- Color System -->
@@ -539,8 +704,8 @@
                                 </div>*@
 
                         </div>
-
                         <div class="col-lg-6">
+
 
                             <div class="card shadow mb-3">
                                 <div class="card-header py-3">
