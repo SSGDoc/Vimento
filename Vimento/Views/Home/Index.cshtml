@@ -29,6 +29,7 @@
 
         <!-- Custom styles for this template-->
         <link href="~/Content/css/sb-admin-2.min.css" rel="stylesheet">
+        <link href="~/Content/css/indexstyle.css" rel="stylesheet">
 
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
               integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
@@ -303,6 +304,7 @@
                                                     accessToken: 'pk.eyJ1IjoibXJzYWdneSIsImEiOiJja2ZiamQ4ajYwcXh3MnhvODU4NjZrZ29xIn0.JXSCWFKMGdFElSPErRk-Zg'
                                                 }).addTo(mymap);
 
+                                                var array = [];
                                                
 
                                                 var markers = L.markerClusterGroup({
@@ -330,6 +332,20 @@
                                                   // onclick function til at vise given data fra et firma
                                                 }
 
+                                               
+
+                                                function cordCheck() {
+                                                    
+                                                    for (var i = 0; i < myItems.length; i++) {
+                                                        var item = myItems[i];
+
+                                                        marker = new L.marker([item[2], item[3]], {
+                                                            icon: mapOpts.myIcon
+                                                        }).bindPopup(item[1]);
+
+                                                        
+                                                    }
+                                                }
 
                                                 function addClusters(lat, long, name, business, employees, address) {
                                                     var companyMarker = new L.circleMarker([lat, long]).on('click', onClick);
@@ -337,7 +353,12 @@
                                                     companyMarker.employees = employees, companyMarker.address = address;
 
                                                     markers.addLayer(companyMarker);
+                                                    array.push(companyMarker);
+                                                    console.log(array.length)
+                                                    var found = array.pop();
+                                                    var test2 = found.employees;
 
+                                                    console.log(found);
                                                     //laver markes med given data
                                                 }
                                             </script>
@@ -369,6 +390,10 @@
                                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 
                                         <h6 class="m-0 font-weight-bold text-primary">Adresse info</h6>
+                                        @*<INPUT TYPE="NUMBER" MIN="1" MAX="10" STEP="1" VALUE="1" SIZE="6">*@
+                                        <a href="#" > <i class="fas fa-arrow-alt-circle-left fa-2x text-primary"></i></a>
+                                        <h6 class="m-0  ">1 / 9</h6>
+                                        <a href="#" > <i class="fas fa-arrow-alt-circle-right fa-2x text-primary"></i></a>
                                         <div class="col-auto">
                                             <i class="fas fa-map-marker-alt fa-2x text-danger"></i>
                                         </div>
