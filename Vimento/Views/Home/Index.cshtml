@@ -369,11 +369,7 @@
                                                     for (var i = 0; i < (markerArray.length); i++) {
                                                         var marker = markerArray[i];
 
-                                                        var lat = marker.employees;
-                                                        var lng = marker.name;
-
-
-                                                        marker.downkabel > 200
+                                                        
 
                                                         //console.log(item.getLatLng().lat)
 
@@ -384,7 +380,7 @@
 
                                                         }
                                                     }
-                                                    console.log(selectedArray);
+                                                    //console.log(selectedArray);
                                                     document.getElementById('side').innerHTML
                                                         = ((index + 1) + " / " + selectedArray.length);
                                                     
@@ -396,38 +392,47 @@
                                                     kabelArray = [];
                                                     dslArray = [];
                                                     mobilArray = [];
+                                                    markers.clearLayers();
+
+                                                    var counter = markerArray.length;
+
                                                     
-                                                    for (var i = 0; i < (markerArray.length); i++) {
-                                                        var marker = markerArray[i];
+                                                    for (var i = 0; i < (counter); i++) {
+                                                        var companymarker = markerArray[i];
 
                                                         switch (selectSwitch) {
                                                             case 0:
-                                                                if (marker.downFiber > 0) {
-                                                                    console.log(marker.downFiber);  
-                                                                    fiberArray.push(marker);
-                                                                    markers.clearLayers();
-                                                                    addClusters(marker.getLatLng().lng , marker.getLatLng().lat)
+                                                                if (companymarker.downFiber > 0) {
+                                                                    //console.log(companymarker.downFiber);  
+                                                                    //fiberArray.push(companymarker);
+                                                                   
+
+                                                                    addClusters(fiberArray, companymarker.getLatLng().lat, companymarker.getLatLng().lng, companymarker.name, companymarker.business, companymarker.employees, companymarker.address,
+                                                                        companymarker.downFiber, companymarker.upFiber, companymarker.downKabel, companymarker.upKabel, companymarker.downDsl, companymarker.upDsl, companymarker.mobil)
+                                                                    
                                                                 }
-                                                            case 1:
-                                                                if (marker.downKabel > 0) {
-                                                                    console.log(marker.downkabel);
-                                                                    kabelArray.push(marker);
-                                                                }
-                                                            case 2:
-                                                                if (marker.downDsl > 0) {
-                                                                    console.log(marker.downDsl);
-                                                                    dslArray.push(marker);
-                                                                }
-                                                            case 3:
-                                                                if (marker.mobil > 0) {
-                                                                    console.log(marker.mobil);
-                                                                    mobilArray.push(marker);
-                                                                }   
+                                                            //case 1:
+                                                            //    if (companymarker.downKabel > 0) {
+                                                            //        //console.log(companymarker.downkabel);
+                                                            //        kabelArray.push(companymarker);
+                                                            //    }
+                                                            //case 2:
+                                                            //    if (companymarker.downDsl > 0) {
+                                                            //        //console.log(companymarker.downDsl);
+                                                            //        dslArray.push(companymarker);
+                                                            //    }
+                                                            //case 3:
+                                                            //    if (companymarker.mobil > 0) {
+                                                            //        //console.log(companymarker.mobil);
+                                                            //        mobilArray.push(companymarker);
+                                                            //    }   
 
                                                         }
-
+                                                        
+                                                       
                                                         
                                                     }
+                                                    console.log(markerArray.length)
                                                 }
 
 
@@ -462,7 +467,7 @@
                                                     //Opdaterer chart'en efter der er indsat data.
                                                 }
 
-                                                  function addClusters(lat, long, name, business, employees, address, downFiber, upFiber, downKabel, upKabel, downDsl, upDsl, mobil) {
+                                                  function addClusters(localarray, lat, long, name, business, employees, address, downFiber, upFiber, downKabel, upKabel, downDsl, upDsl, mobil) {
                                                     var companyMarker = new L.circleMarker([lat, long]).on('click', onClick);
                                                     companyMarker.name = name, companyMarker.business = business,
                                                         companyMarker.employees = employees, companyMarker.address = address,
@@ -471,14 +476,15 @@
                                                         companyMarker.downDsl = downDsl, companyMarker.upDsl = upDsl,
                                                         companyMarker.mobil = mobil;
 
-                                                    markers.addLayer(companyMarker);
+                                                      markers.addLayer(companyMarker);
+                                                      //companyMarker.addTo(markers);
 
-                                                    markerArray.push(companyMarker);
+                                                    localarray.push(companyMarker);
 
 
-                                                      var i = (markerArray.length - 1);
+                                                      var i = (localarray.length - 1);
                                                       console.log(i);
-                                                      var found = markerArray[i];
+                                                      
                                                     
                                                     
                                                    
@@ -492,7 +498,7 @@
                                             {
                                                 //køre igennem alle firmaer i databasen og tilføjer dem som marker
                                         <script>
-                                            addClusters(@company.Address.Long, @company.Address.Lat, "@company.Name", "@company.Business", "@company.AmountOfEmployees", "@company.Address.StreetName" +
+                                            addClusters(markerArray, @company.Address.Long, @company.Address.Lat, "@company.Name", "@company.Business", "@company.AmountOfEmployees", "@company.Address.StreetName" +
                                                 " @company.Address.HouseNr", + " @company.Address.Technology.DownFiber", + "@company.Address.Technology.UpFiber", + "@company.Address.Technology.DownCable", +
                                             "@company.Address.Technology.UpCable", + "@company.Address.Technology.DownDSL", + "@company.Address.Technology.UpDSL", + "@company.Address.Technology.MobileDownRange");
 
