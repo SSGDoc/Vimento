@@ -307,6 +307,10 @@
                                                 var markerArray = new Array();
                                                 var selectedArray = new Array();
                                                 var index = 0;
+                                                var fiberArray = new Array();
+                                                var kabelArray = new Array();
+                                                var dslArray = new Array();
+                                                var mobilArray = new Array();
                                                
 
                                                 var markers = L.markerClusterGroup({
@@ -322,9 +326,7 @@
                                                 var marker2 = new L.marker([13.0101, 80.2157]).addTo(mymap).on('click', onClick);
                                                     marker2.name = "Jesper Gadgets", marker2.branche = "Adult Entertainment";
 
-                                               
-
-                                                
+                                                                                                
                                                 function onClick(e) {
 
                                                     cordCheck(this.getLatLng().lat, this.getLatLng().lng);
@@ -387,6 +389,47 @@
                                                         = (selectedArray.length);
                                                     
                                                 }
+
+
+                                                function tekFilter(selectSwitch) {
+                                                    fiberArray = [];
+                                                    kabelArray = [];
+                                                    dslArray = [];
+                                                    mobilArray = [];
+                                                    
+                                                    for (var i = 0; i < (markerArray.length); i++) {
+                                                        var marker = markerArray[i];
+
+                                                        switch (selectSwitch) {
+                                                            case 0:
+                                                                if (marker.downFiber > 0) {
+                                                                    console.log(marker.downFiber);  
+                                                                    fiberArray.push(marker);
+                                                                    markers.clearLayers();
+                                                                    addClusters(marker.getLatLng().lng , marker.getLatLng().lat)
+                                                                }
+                                                            case 1:
+                                                                if (marker.downKabel > 0) {
+                                                                    console.log(marker.downkabel);
+                                                                    kabelArray.push(marker);
+                                                                }
+                                                            case 2:
+                                                                if (marker.downDsl > 0) {
+                                                                    console.log(marker.downDsl);
+                                                                    dslArray.push(marker);
+                                                                }
+                                                            case 3:
+                                                                if (marker.mobil > 0) {
+                                                                    console.log(marker.mobil);
+                                                                    mobilArray.push(marker);
+                                                                }   
+
+                                                        }
+
+                                                        
+                                                    }
+                                                }
+
 
                                                 function displayInfo(marker) {
                                                     document.getElementById('firmanavn').innerHTML
@@ -629,10 +672,17 @@
                             <div class="card shadow mb-4 ">
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">Filtrer på teknologi</h6>
-                                    
+
                                 </div>
-                                
-                                
+                                <div class="card-body">
+                                    <label class="checkbox-inline"><input type="checkbox" onclick="tekFilter(0)" value="">Fiber </label>
+                                    <label class="checkbox-inline"><input type="checkbox" onclick="tekFilter(1)" value="">Kabel </label>
+                                    <label class="checkbox-inline"><input type="checkbox" onclick="tekFilter(2)" value="">Dsl </label>
+                                    <label class="checkbox-inline"><input type="checkbox" onclick="tekFilter(3)" value="">Mobil </label>
+                                    <label class="checkbox-inline"><input type="checkbox" onclick="tekFilter(4)" value="">Alle </label>
+                                    <h6 id="test" class="m-0  ">Test</h6>
+                                </div>
+
                             </div>
 
                             <!-- Color System -->
