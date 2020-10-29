@@ -42,7 +42,6 @@
         <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css">
         <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css">
         <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
-        <reference path="typings/index.d.ts"/>
     </head>
 
     <body id="page-top">
@@ -388,6 +387,7 @@
                                                 }
 
 
+
                                                 function tekFilter(selectSwitch) {
                                                     fiberArray = [];
                                                     kabelArray = [];
@@ -397,42 +397,59 @@
 
                                                     var counter = markerArray.length;
 
-                                                    
-                                                    for (var i = 0; i < (counter); i++) {
-                                                        var companymarker = markerArray[i];
-
-                                                        switch (selectSwitch) {
-                                                            case 0:
-                                                                if (companymarker.downFiber > 0) {
-                                                                    //console.log(companymarker.downFiber);  
-                                                                    //fiberArray.push(companymarker);
-                                                                   
-
-                                                                    addClusters(fiberArray, companymarker.getLatLng().lat, companymarker.getLatLng().lng, companymarker.name, companymarker.business, companymarker.employees, companymarker.address,
-                                                                        companymarker.downFiber, companymarker.upFiber, companymarker.downKabel, companymarker.upKabel, companymarker.downDsl, companymarker.upDsl, companymarker.mobil);
-                                                                }
-                                                            //case 1:
-                                                            //    if (companymarker.downKabel > 0) {
-                                                            //        //console.log(companymarker.downkabel);
-                                                            //        kabelArray.push(companymarker);
-                                                            //    }
-                                                            //case 2:
-                                                            //    if (companymarker.downDsl > 0) {
-                                                            //        //console.log(companymarker.downDsl);
-                                                            //        dslArray.push(companymarker);
-                                                            //    }
-                                                            //case 3:
-                                                            //    if (companymarker.mobil > 0) {
-                                                            //        //console.log(companymarker.mobil);
-                                                            //        mobilArray.push(companymarker);
-                                                            //    }   
-
-                                                        }
-                                                        
-                                                       
-                                                        
+                                                    switch (selectSwitch) {
+                                                        case 0:
+                                                            var result = markerArray.filter(checkFiber);
+                                                            console.log(result);
+                                                            var counter = (result.length - 1);
+                                                            console.log(counter)
+                                                            break;
+                                                        case 1:
+                                                            var result = markerArray.filter(checkKabel);
+                                                            console.log(result);
+                                                            var counter = (result.length - 1);
+                                                            console.log(counter)
+                                                            break;
+                                                        case 2:
+                                                            var result = markerArray.filter(checkDsl);
+                                                            console.log(result);
+                                                            var counter = (result.length - 1);
+                                                            console.log(counter)
+                                                            break;
+                                                        case 3:
+                                                            var result = markerArray.filter(checkMobil);
+                                                            console.log(result);
+                                                            var counter = (result.length - 1);
+                                                            console.log(counter)
+                                                            break;
+                                                        case 4:
+                                                            var result = markerArray.filter(checkAll);
+                                                            console.log(result);
+                                                            var counter = (result.length - 1);
+                                                            console.log(counter)
+                                                            break;
                                                     }
+
+
+                                                    result.forEach(m => markers.addLayer(m));
+                                                    mymap.addLayer(markers);
                                                     console.log(markerArray.length)
+                                                }
+
+                                                function checkFiber(speed) {
+                                                    return speed.downFiber > 0;
+                                                }
+                                                function checkKabel(speed) {
+                                                    return speed.downKabel > 0;
+                                                }
+                                                function checkDsl(speed) {
+                                                    return speed.downDsl > 0;
+                                                }
+                                                function checkMobil(speed) {
+                                                    return speed.mobil > 0;
+                                                }
+                                                function checkAll(speed) {
+                                                    return speed.downFiber > 0, speed.downKabel > 0, speed.downDsl > 0, speed.mobil > 0;
                                                 }
 
 
@@ -682,92 +699,119 @@
                                     <h6 class="m-0 font-weight-bold text-primary">Filtrer på teknologi</h6>
 
                                 </div>
-                                <div class="card-body">
+                                @*<div class="card-body">
                                     <label class="checkbox-inline"><input type="checkbox" onclick="tekFilter(0)" value="">Fiber </label>
                                     <label class="checkbox-inline"><input type="checkbox" onclick="tekFilter(1)" value="">Kabel </label>
                                     <label class="checkbox-inline"><input type="checkbox" onclick="tekFilter(2)" value="">Dsl </label>
                                     <label class="checkbox-inline"><input type="checkbox" onclick="tekFilter(3)" value="">Mobil </label>
                                     <label class="checkbox-inline"><input type="checkbox" onclick="tekFilter(4)" value="">Alle </label>
                                     <h6 id="test" class="m-0  ">Test</h6>
+                                </div>*@
+
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" onclick="tekFilter(0)" name="optradio">Fiber
+                                    </label>
                                 </div>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" onclick="tekFilter(1)" name="optradio">Kabel
+                                    </label>
+                                </div>
+                                <div class="form-check-inline disabled">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" onclick="tekFilter(2)" name="optradio">Dsl
+                                    </label>
+                                </div>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" onclick="tekFilter(3)" name="optradio">Mobil
+                                    </label>
+                                </div>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" onclick="tekFilter(4)" name="optradio">Alle
+                                    </label>
+                                </div>
+
 
                             </div>
 
-                            <!-- Color System -->
-                            @*<div class="row">
-                                    <div class="col-lg-6 mb-4">
-                                        <div class="card bg-primary text-white shadow">
-                                            <div class="card-body">
-                                                Primary
-                                                <div class="text-white-50 small">#4e73df</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 mb-4">
-                                        <div class="card bg-success text-white shadow">
-                                            <div class="card-body">
-                                                Success
-                                                <div class="text-white-50 small">#1cc88a</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 mb-4">
-                                        <div class="card bg-info text-white shadow">
-                                            <div class="card-body">
-                                                Info
-                                                <div class="text-white-50 small">#36b9cc</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 mb-4">
-                                        <div class="card bg-warning text-white shadow">
-                                            <div class="card-body">
-                                                Warning
-                                                <div class="text-white-50 small">#f6c23e</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 mb-4">
-                                        <div class="card bg-danger text-white shadow">
-                                            <div class="card-body">
-                                                Danger
-                                                <div class="text-white-50 small">#e74a3b</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 mb-4">
-                                        <div class="card bg-secondary text-white shadow">
-                                            <div class="card-body">
-                                                Secondary
-                                                <div class="text-white-50 small">#858796</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 mb-4">
-                                        <div class="card bg-light text-black shadow">
-                                            <div class="card-body">
-                                                Light
-                                                <div class="text-black-50 small">#f8f9fc</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 mb-4">
-                                        <div class="card bg-dark text-white shadow">
-                                            <div class="card-body">
-                                                Dark
-                                                <div class="text-white-50 small">#5a5c69</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>*@
+                                <!-- Color System -->
+                                @*<div class="row">
+            <div class="col-lg-6 mb-4">
+                <div class="card bg-primary text-white shadow">
+                    <div class="card-body">
+                        Primary
+                        <div class="text-white-50 small">#4e73df</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="card bg-success text-white shadow">
+                    <div class="card-body">
+                        Success
+                        <div class="text-white-50 small">#1cc88a</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="card bg-info text-white shadow">
+                    <div class="card-body">
+                        Info
+                        <div class="text-white-50 small">#36b9cc</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="card bg-warning text-white shadow">
+                    <div class="card-body">
+                        Warning
+                        <div class="text-white-50 small">#f6c23e</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="card bg-danger text-white shadow">
+                    <div class="card-body">
+                        Danger
+                        <div class="text-white-50 small">#e74a3b</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="card bg-secondary text-white shadow">
+                    <div class="card-body">
+                        Secondary
+                        <div class="text-white-50 small">#858796</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="card bg-light text-black shadow">
+                    <div class="card-body">
+                        Light
+                        <div class="text-black-50 small">#f8f9fc</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="card bg-dark text-white shadow">
+                    <div class="card-body">
+                        Dark
+                        <div class="text-white-50 small">#5a5c69</div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
 
-                        </div>
+                            </div>
                         <div class="col-lg-6">
 
 
                             <div class="card shadow mb-3">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Vis adresser med minimum hastighed (Fiber)</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Vis for hastighed</h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="form-group">
@@ -776,33 +820,17 @@
                                                 <input class="form-control-plaintext " placeholder="Mbit/s" id="txtMbits">
                                             </div>
                                         </div>
-                                        <h4 class="small font-weight-bold">Min<span class="float-right">Max</span></h4>
+                                        <h4 class="small font-weight-bold">0 Mbit/s <span class="float-right">1000+ Mbit/s</span></h4>
                                         <script>
                                             function updateTextInput(val) {
-                                                document.getElementById('txtMbits').value ='Min '+ val + ' Mbit/s';
+                                                document.getElementById('txtMbits').value = val + ' Mbit/s';
                                             }
 
-                                            function updateMapByFiberSpeed(downSpeed) {
+                                            function updateMapBySpeed(downSpeed) {
                                                 markers.clearLayers();
-                                                var markersToAdd = [];
-
-                                                for (let i = 0; i < fiberArray.length; i++) {
-                                                    if (fiberArray[i].downFiber >= downSpeed) {
-                                                        markersToAdd.push(fiberArray[i]);
-
-                                                    }
-                                                }
-
-                                                for (let i = 0; i < markersToAdd.length; i++) {
-                                                    markers.addLayer(markersToAdd[i]);
-                                                }
-
-                                                mymap.addLayer(markers);
                                             }
-
                                         </script>
-                                        <input type="range" min="0" max="1000" value="0"class="form-control-range" step="50" id="formControlRange" onmousemove="updateTextInput(this.value);" onchange="updateMapByFiberSpeed(this.value)">
-                                        
+                                        <input type="range" min="0" max="1000" value="1000"class="form-control-range" step="100" id="formControlRange" onmousemove="updateTextInput(this.value);" onchange="updateMapBySpeed(this.value)">
                                     </div>
                                     </div>
                                 
