@@ -329,6 +329,8 @@
                                                 var selectedArray = new Array();
                                                 var index = 0;
                                                 var filterArray = new Array();
+                                                var filterString = "downFiber";
+                                                var speedFilter;
 
                                                
 
@@ -407,19 +409,24 @@
                                                     switch (selectSwitch) {
                                                         case 0:
                                                             var result = markerArray.filter(checkFiber);
+                                                            speedFilter = 0;
 
                                                             break;
                                                         case 1:
                                                             var result = markerArray.filter(checkKabel);
+                                                            speedFilter = 1;
                                                             break;
                                                         case 2:
                                                             var result = markerArray.filter(checkDsl);
+                                                            speedFilter = 2;
                                                             break;
                                                         case 3:
                                                             var result = markerArray.filter(checkMobil);
+                                                            speedFilter = 3;
                                                             break;
                                                         case 4:
                                                             var result = markerArray;
+                                                            speedFilter = 4;
                                                             break;
                                                     }
 
@@ -444,9 +451,9 @@
                                                 function checkMobil(speed) {
                                                     return speed.mobil > 0;
                                                 }
-                                                function checkAll(speed) {
-                                                    return speed.downFiber > 0, speed.downKabel > 0, speed.downDsl > 0, speed.mobil > 0;
-                                                }
+                                            
+
+
 
 
                                                 function displayInfo(marker) {
@@ -463,7 +470,7 @@
                                                     //Tilføjer data til chart.
                                                     addDataDownFiber(parseInt(marker.downFiber))
                                                     addDataUpFiber(parseInt(marker.upFiber))
-                                                    addDataDownKabel(parseInt(marker.downkabel))
+                                                    addDataDownKabel(parseInt(marker.downKabel))
                                                     addDataUpKabel(parseInt(marker.upKabel))
                                                     addDataDownDsl(parseInt(marker.downDsl))
                                                     addDataUpDsl(parseInt(marker.upDsl))
@@ -481,7 +488,7 @@
                                                     companyMarker.name = name, companyMarker.business = business,
                                                         companyMarker.employees = employees, companyMarker.address = address,
                                                         companyMarker.downFiber = downFiber, companyMarker.upFiber = upFiber,
-                                                        companyMarker.downkabel = downKabel, companyMarker.upKabel = upKabel,
+                                                        companyMarker.downKabel = downKabel, companyMarker.upKabel = upKabel,
                                                         companyMarker.downDsl = downDsl, companyMarker.upDsl = upDsl,
                                                         companyMarker.mobil = mobil;
 
@@ -740,13 +747,43 @@
                                             function updateMapByFiberSpeed(downSpeed) {
                                                 markers.clearLayers();
                                                 var markersToAdd = [];
+                                                
 
                                                 for (let i = 0; i < filterArray.length; i++) {
-                                                    if (filterArray[i].downFiber >= downSpeed) {
-                                                        markersToAdd.push(filterArray[i]);
 
+                                                    
+                                                    switch (speedFilter) {
+                                                        case 0:
+
+                                                            if (filterArray[i].downFiber >= downSpeed) {
+                                                                markersToAdd.push(filterArray[i]);
+                                                            }
+                                                            break;
+                                                        case 1:
+                                                            if (filterArray[i].downKabel >= downSpeed) {
+                                                                markersToAdd.push(filterArray[i]);
+                                                            }
+                                                            break;
+                                                        case 2:
+                                                            if (filterArray[i].downDsl >= downSpeed) {
+                                                                markersToAdd.push(filterArray[i]);
+                                                            }
+                                                            break;
+                                                        case 3:
+                                                            if (filterArray[i].mobil >= downSpeed) {
+                                                                markersToAdd.push(filterArray[i]);
+                                                            }
+                                                            break;
+                                                        case 4:
+                                                            if (filterArray[i].downFiber >= downSpeed || filterArray[i].downKabel >= downSpeed || filterArray[i].downDsl >= downSpeed || filterArray[i].mobil >= downSpeed) {
+                                                                markersToAdd.push(filterArray[i]);
+                                                            }
+
+                                                            break;
                                                     }
+
                                                 }
+
 
                                                 for (let i = 0; i < markersToAdd.length; i++) {
                                                     markers.addLayer(markersToAdd[i]);
