@@ -403,7 +403,7 @@
 
 
                                                     result.forEach(m => markers.addLayer(m));
-                                                    fiberArray = result;
+                                                    filterArray = result;
                                                     mymap.addLayer(markers);
                                                 }
 
@@ -411,6 +411,7 @@
                                                     return speed.downFiber > 0;
                                                 }
                                                 function checkKabel(speed) {
+                                                    
                                                     return speed.downKabel > 0;
                                                 }
                                                 function checkDsl(speed) {
@@ -716,9 +717,9 @@
                                                 markers.clearLayers();
                                                 var markersToAdd = [];
 
-                                                for (let i = 0; i < fiberArray.length; i++) {
-                                                    if (fiberArray[i].downFiber >= downSpeed) {
-                                                        markersToAdd.push(fiberArray[i]);
+                                                for (let i = 0; i < filterArray.length; i++) {
+                                                    if (filterArray[i].downFiber >= downSpeed) {
+                                                        markersToAdd.push(filterArray[i]);
 
                                                     }
                                                 }
