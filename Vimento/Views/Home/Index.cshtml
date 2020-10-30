@@ -410,23 +410,28 @@
                                                         case 0:
                                                             var result = markerArray.filter(checkFiber);
                                                             speedFilter = 0;
+                                                            document.getElementById("formControlRange").value = "0";
 
                                                             break;
                                                         case 1:
                                                             var result = markerArray.filter(checkKabel);
                                                             speedFilter = 1;
+                                                            document.getElementById("formControlRange").value = "0";
                                                             break;
                                                         case 2:
                                                             var result = markerArray.filter(checkDsl);
                                                             speedFilter = 2;
+                                                            document.getElementById("formControlRange").value = "0";
                                                             break;
                                                         case 3:
                                                             var result = markerArray.filter(checkMobil);
                                                             speedFilter = 3;
+                                                            document.getElementById("formControlRange").value = "0";
                                                             break;
                                                         case 4:
                                                             var result = markerArray;
                                                             speedFilter = 4;
+                                                            document.getElementById("formControlRange").value = "0";
                                                             break;
                                                     }
 
@@ -434,6 +439,7 @@
                                                     result.forEach(m => markers.addLayer(m));
                                                     filterArray = result;
                                                     mymap.addLayer(markers);
+                                                    updateTextInput(0);
                                                     document.getElementById('unikCVR').innerHTML
                                                         = (result.length);
                                                 }
@@ -790,6 +796,8 @@
                                                 }
 
                                                 mymap.addLayer(markers);
+                                                document.getElementById('unikCVR').innerHTML
+                                                    = (markersToAdd.length);
                                             }
 
                                         </script>
