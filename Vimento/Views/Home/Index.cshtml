@@ -117,44 +117,65 @@
 
                 <!-- Heading -->
                 <div class="sidebar-heading">
-                    Addons
+                    Brugerroller
                 </div>
 
                 <!-- Nav Item - Pages Collapse Menu -->
                 @*<li class="nav-item">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-                            <i class="fas fa-fw fa-folder"></i>
-                            <span>Pages</span>
-                        </a>
-                        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                            <div class="bg-white py-2 collapse-inner rounded">
-                                <h6 class="collapse-header">Login Screens:</h6>
-                                <a class="collapse-item" href="login.html">Login</a>
-                                <a class="collapse-item" href="register.html">Register</a>
-                                <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                                <div class="collapse-divider"></div>
-                                <h6 class="collapse-header">Other Pages:</h6>
-                                <a class="collapse-item" href="404.html">404 Page</a>
-                                <a class="collapse-item" href="blank.html">Blank Page</a>
-                            </div>
-                        </div>
-                    </li>*@
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Pages</span>
+            </a>
+            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Login Screens:</h6>
+                    <a class="collapse-item" href="login.html">Login</a>
+                    <a class="collapse-item" href="register.html">Register</a>
+                    <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+                    <div class="collapse-divider"></div>
+                    <h6 class="collapse-header">Other Pages:</h6>
+                    <a class="collapse-item" href="404.html">404 Page</a>
+                    <a class="collapse-item" href="blank.html">Blank Page</a>
+                </div>
+            </div>
+        </li>*@
 
                 <!-- Nav Item - Charts -->
-                <li class="nav-item">
+                @*<li class="nav-item">
                     <a class="nav-link" href="charts.html">
                         <i class="fas fa-fw fa-chart-area"></i>
                         <span>Charts</span>
                     </a>
+                </li>*@
+
+                <li class="nav-item">
+                    <a class="nav-link" href="charts.html">
+                        <i class="fas fa-fw fa-user-tie"></i>
+                        <span>Sælger</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="charts.html">
+                        <i class="fas fa-fw fa-user-cog"></i>
+                        <span>Netværksingeniør</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="charts.html">
+                        <i class="fas fa-fw fa-user-astronaut"></i>
+                        <span>Marketingsansvarlig</span>
+                    </a>
                 </li>
 
                 <!-- Nav Item - Tables -->
-                <li class="nav-item">
+                @*<li class="nav-item">
                     <a class="nav-link" href="tables.html">
                         <i class="fas fa-fw fa-table"></i>
                         <span>Tables</span>
                     </a>
-                </li>
+                </li>*@
 
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
@@ -193,7 +214,7 @@
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Unikke CVR</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">28916</div>
+                                                <div id="unikCVR" class="h5 mb-0 font-weight-bold text-gray-800">28916</div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-suitcase fa-2x text-gray-300"></i>
@@ -386,6 +407,7 @@
                                                     switch (selectSwitch) {
                                                         case 0:
                                                             var result = markerArray.filter(checkFiber);
+
                                                             break;
                                                         case 1:
                                                             var result = markerArray.filter(checkKabel);
@@ -397,7 +419,7 @@
                                                             var result = markerArray.filter(checkMobil);
                                                             break;
                                                         case 4:
-                                                            var result = markerArray.filter(checkAll);
+                                                            var result = markerArray;
                                                             break;
                                                     }
 
@@ -405,6 +427,8 @@
                                                     result.forEach(m => markers.addLayer(m));
                                                     fiberArray = result;
                                                     mymap.addLayer(markers);
+                                                    document.getElementById('unikCVR').innerHTML
+                                                        = (result.length);
                                                 }
 
                                                 function checkFiber(speed) {
