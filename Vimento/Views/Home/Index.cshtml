@@ -290,7 +290,7 @@
                         <div class="row">
 
                             <!-- Area Chart -->
-                            <div class="col-lg-7 col-lg-6" style="height: 600px; margin-bottom: 1.5rem!important;">
+                            <div class="col-lg-9" style=" height: 600px; margin-bottom: 1.5rem!important;">
                                 <div class="card shadow mb-4" style="height: 100%">
                                     <!-- Card Header - Dropdown -->
                                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -538,16 +538,16 @@
                             </div>
 
 
-                            <div class="col-xl-2 col-lg-2 m-auto">
+                            <div class="col-xl-3 col-lg-2 m-auto">
                                 <div class="card shadow mb-4">
                                     @*Card Header - Dropdown*@
                                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 
                                         <h6 class="m-0 font-weight-bold text-primary">Adresse info</h6>
                                         @*<INPUT TYPE="NUMBER" MIN="1" MAX="10" STEP="1" VALUE="1" SIZE="6">*@
-                                        <a onclick="nextInfo(-1)" href="#" > <i class="fas fa-arrow-alt-circle-left fa-2x text-primary"></i></a>
+                                        <a onclick="nextInfo(-1)" href="#"> <i class="fas fa-arrow-alt-circle-left fa-2x text-primary"></i></a>
                                         <h6 id="side" class="m-0  ">1 / 9</h6>
-                                        <a onclick="nextInfo(1)"  href="#" > <i class="fas fa-arrow-alt-circle-right fa-2x text-primary"></i></a>
+                                        <a onclick="nextInfo(1)" href="#"> <i class="fas fa-arrow-alt-circle-right fa-2x text-primary"></i></a>
                                         <div class="col-auto">
                                             <i class="fas fa-map-marker-alt fa-2x text-danger"></i>
                                         </div>
@@ -555,24 +555,22 @@
                                     </div>
 
                                     @*Card Body*@
-                                <div class="card-body">
-                                    <div class="text-xs font-weight-bold text-primary text-uppercase">Virksomhed</div>
-                                    <h6 id="firmanavn"> ... </h6>
-                                    <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Branche</div>
-                                    <h6 id="branchenavn"> ... </h6> 
-                                    <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Antal ansatte</div>
-                                    <h6 id="antalansatte"> ... </h6>
-                                    <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Adresse</div>
-                                    <h6 id="vejnavn"> ... </h6>
+                                    <div class="card-body">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase">Virksomhed</div>
+                                        <h6 id="firmanavn"> ... </h6>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Branche</div>
+                                        <h6 id="branchenavn"> ... </h6>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Antal ansatte</div>
+                                        <h6 id="antalansatte"> ... </h6>
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Adresse</div>
+                                        <h6 id="vejnavn"> ... </h6>
 
 
 
+                                    </div>
                                 </div>
-                                </div>
-                            </div>
 
-                            <!-- Pie Chart -->
-                            <div class="col-xl-3 col-lg-3 m-auto">
+
                                 <div class="card shadow mb-4">
                                     <!-- Card Header - Dropdown -->
                                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -582,15 +580,15 @@
 
                                     <!-- Card Body -->
                                     <div class="card-body">
-                                        
+
                                         <div class="mt-4 text-center small">
                                             <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js'></script>
                                             <canvas id="bar" height: 100%></canvas>
                                             <script>
 
-                                             
 
-                                                
+
+
                                                 var ctx = document.getElementById('bar');
                                                 var myChart = new Chart(ctx, {
                                                     type: 'bar',
@@ -681,63 +679,102 @@
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
+
+                          
 
 
                         </div>
+
                     </div>
 
                     <!-- Content Row -->
-                    <div class="row container-fluid">
+                    <div class="row container-fluid m-0" style="margin-left: 0px; margin-right: 0px;">
 
                         <!-- Content Column -->
-                        <div class="col-lg-6  m-auto">
+                        <div class="col-lg-4 ">
 
                             <!-- Project Card Example -->
-                            <div class="card shadow mb-4 ">
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <div class="card shadow">
+                                <div class="card-header py-3 ">
                                     <h6 class="m-0 font-weight-bold text-primary">Filtrer på teknologi</h6>
 
                                 </div>
 
-                                <div class="form-check-inline">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" onclick="tekFilter(0)" name="optradio">Fiber
-                                    </label>
+                                <div class="m-auto">
+                                    <div class="form-check-inline">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" onclick="tekFilter(0)" name="optradio">Fiber
+                                        </label>
+                                    </div>
+                                    <div class="form-check-inline">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" onclick="tekFilter(1)" name="optradio">Kabel
+                                        </label>
+                                    </div>
+                                    <div class="form-check-inline disabled">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" onclick="tekFilter(2)" name="optradio">Dsl
+                                        </label>
+                                    </div>
+                                    <div class="form-check-inline">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" onclick="tekFilter(3)" name="optradio">Mobil
+                                        </label>
+                                    </div>
+                                    <div class="form-check-inline">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" onclick="tekFilter(4)" name="optradio">Alle
+                                        </label>
+                                    </div>
                                 </div>
-                                <div class="form-check-inline">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" onclick="tekFilter(1)" name="optradio">Kabel
-                                    </label>
-                                </div>
-                                <div class="form-check-inline disabled">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" onclick="tekFilter(2)" name="optradio">Dsl
-                                    </label>
-                                </div>
-                                <div class="form-check-inline">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" onclick="tekFilter(3)" name="optradio">Mobil
-                                    </label>
-                                </div>
-                                <div class="form-check-inline">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" onclick="tekFilter(4)" name="optradio">Alle
-                                    </label>
-                                </div>
-
 
                             </div>
 
                             </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-4">
 
 
-                            <div class="card shadow mb-3">
+                            <div class="card shadow">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Vis for hastighed</h6>
                                 </div>
                                 <div class="card-body">
+
+                                    @*<label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+        </label>*@
+
+                                    <div class="m-auto">
+                                        <div class="form-check-inline">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" onclick="tekFilter(0)" name="optradio">Fiber
+                                            </label>
+                                        </div>
+                                        <div class="form-check-inline">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" onclick="tekFilter(1)" name="optradio">Kabel
+                                            </label>
+                                        </div>
+                                        <div class="form-check-inline disabled">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" onclick="tekFilter(2)" name="optradio">Dsl
+                                            </label>
+                                        </div>
+                                        <div class="form-check-inline">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" onclick="tekFilter(3)" name="optradio">Mobil
+                                            </label>
+                                        </div>
+                                        <div class="form-check-inline">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" onclick="tekFilter(4)" name="optradio">Alle
+                                            </label>
+                                        </div>
+                                    </div>
+
                                     <div class="form-group">
                                         <div class="form-group row">
                                             <div class="col-lg-3">
@@ -753,11 +790,11 @@
                                             function updateMapByFiberSpeed(downSpeed) {
                                                 markers.clearLayers();
                                                 var markersToAdd = [];
-                                                
+
 
                                                 for (let i = 0; i < filterArray.length; i++) {
 
-                                                    
+
                                                     switch (speedFilter) {
                                                         case 0:
 
@@ -803,7 +840,7 @@
                                         </script>
                                         <input type="range" min="0" max="1000" value="0" class="form-control-range" step="50" id="formControlRange" onmousemove="updateTextInput(this.value);" onchange="updateMapByFiberSpeed(this.value)">
                                     </div>
-                                    </div>
+                                </div>
                                 
                             </div>
 
