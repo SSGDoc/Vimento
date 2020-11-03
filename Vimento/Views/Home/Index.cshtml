@@ -15,7 +15,7 @@
 
     <head>
 
-        <meta charset="utf-8">
+        <meta charset="utf8_danish_ci">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
@@ -42,6 +42,10 @@
         <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css">
         <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css">
         <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+        <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js" 
+                integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ==" 
+                crossorigin="anonymous"></script>
     </head>
 
     <body id="page-top">
@@ -311,7 +315,54 @@
                                     <!-- Card Body -->
                                     <div class="card-body" style="height: 100%; padding: 0">
                                         <div class="chart-area" style="height: 100%">
-                                            <div id="mapid" class="chart-area" style="height: 100%">  </div>
+                                            <div id="mapid" class="chart-area" style="height: 100%">
+                                                <div class="leaflet-bottom leaflet-left">
+                                                    <div id="marker-legend">
+                                                        <script>
+                                                            function s2ab(s) {
+
+                                                                var buf = new ArrayBuffer(s.length);
+                                                                var view = new Uint8Array(buf);
+                                                                for (var i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
+                                                                return buf;
+
+                                                            }
+                                                            function generateLeadList() {
+                                                                var wb = XLSX.utils.book_new();
+                                                                wb.Props = {
+                                                                    Title: "Lead Liste",
+                                                                    Subject: "Liste over brancher med ønskede specifikationer",
+                                                                    Author: "Vimento"
+                                                                };
+
+                                                                wb.SheetNames.push("Leads");
+                                                                var ws_data = [['Navn','Branche', 'Adresse', 'Ansatte','Fiber ned','Fiber op', 'Kabel ned','Kabel op','Dsl ned', 'Dsl op', 'Mobil', 'Tlf. nr.', 'E-mail']];
+                                                                for (var i = 0; i < filterArray.length; i++) {
+                                                                    ws_data.push([
+                                                                        filterArray[i].name,
+                                                                        filterArray[i].business,
+                                                                        filterArray[i].address,
+                                                                        filterArray[i].employees,
+                                                                        filterArray[i].downFiber,
+                                                                        filterArray[i].upFiber,
+                                                                        filterArray[i].downKabel,
+                                                                        filterArray[i].upKabel,
+                                                                        filterArray[i].downDsl,
+                                                                        filterArray[i].upDsl,
+                                                                        filterArray[i].mobil
+                                                                    ]);
+                                                                }
+                                                                var ws = XLSX.utils.aoa_to_sheet(ws_data);
+                                                                wb.Sheets["Leads"] = ws;
+                                                                var wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
+                                                                
+                                                                saveAs(new Blob([s2ab(wbout)], { type: "application/octet-stream" }), 'Lead_list.xlsx');
+                                                            }
+                                                        </script>
+                                                        <button id="button-a" style="pointer-events: auto" onclick="generateLeadList();">Opret lead-liste</button>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <script>
                                                 var mymap = L.map('mapid').setView([57.047218, 9.920100], 8);
                                                 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -320,6 +371,7 @@
                                                     id: 'mapbox/streets-v11',
                                                     tileSize: 512,
                                                     zoomOffset: -1,
+
 
                                                     // ACCESSTOKEN FÅET FRA MAPBOX
                                                     accessToken: 'pk.eyJ1IjoibXJzYWdneSIsImEiOiJja2ZiamQ4ajYwcXh3MnhvODU4NjZrZ29xIn0.JXSCWFKMGdFElSPErRk-Zg'
@@ -331,8 +383,11 @@
                                                 var filterArray = new Array();
                                                 var filterString = "downFiber";
                                                 var speedFilter;
+                                                var searchArray = new Array();
+                                                var tempSearch = new Array();
+                                                
 
-                                               
+
 
                                                 var markers = L.markerClusterGroup({
                                                     spiderfyOnMaxZoom: false,
@@ -342,7 +397,7 @@
                                                     emp: 5,
                                                     name: 'placeholder name'
                                                 });
-                                                                                                
+
                                                 function onClick(e) {
 
                                                     cordCheck(this.getLatLng().lat, this.getLatLng().lng);
@@ -350,34 +405,33 @@
                                                     myChart.update()  //updatere charts
 
 
-                                                  
+
                                                 }
 
                                                 function nextInfo(sum) {
 
                                                     index = (index + sum);
-                                                    
+
                                                     if (index <= 0) {
 
                                                         index = 0;
-                                                        
+
                                                     }
-                                                    else if (index > (selectedArray.length) - 1)
-                                                    {
+                                                    else if (index > (selectedArray.length) - 1) {
                                                         index = ((selectedArray.length - 1));
 
                                                     }
-                                                    
-                                                       
-                                                        console.log(selectedArray[index]);
-                                                        displayInfo(selectedArray[index]);
-                                                        document.getElementById('side').innerHTML
-                                                            = ((index + 1) + " / " + selectedArray.length);
-                                                    
+
+
+                                                    console.log(selectedArray[index]);
+                                                    displayInfo(selectedArray[index]);
+                                                    document.getElementById('side').innerHTML
+                                                        = ((index + 1) + " / " + selectedArray.length);
+
 
                                                 }
 
-                                               
+
 
                                                 function cordCheck(clickLat, clicklng) {
                                                     selectedArray = [];
@@ -385,33 +439,52 @@
                                                     for (var i = 0; i < (markerArray.length); i++) {
                                                         var marker = markerArray[i];
 
-                                                        
-
-
                                                         if (marker.getLatLng().lng == clicklng && marker.getLatLng().lat == clickLat) {
                                                             selectedArray.push(marker);
-                                                            
-
                                                         }
                                                     }
                                                     document.getElementById('side').innerHTML
                                                         = ((index + 1) + " / " + selectedArray.length);
-                                                    
+
                                                 }
 
+                                                //Filtrer searchArray ud fra input i søgefeltet og tilføjer dem på kortet
+                                                function searchFilter(search) {
+                                                    searchArray = [];
+                                                    markers.clearLayers();
 
+                                                    for (var i = 0; i < (markerArray.length); i++) {
+                                                        var marker = markerArray[i];
+
+                                                        if (marker.business == search) {
+                                                            searchArray.push(marker);
+                                                            tempSearch.push(marker);
+                                                         }
+                                                    }
+                                                    searchArray.forEach(m => markers.addLayer(m));
+                                                    mymap.addLayer(markers);
+                                                    document.getElementById('unikCVR').innerHTML
+                                                        = (searchArray.length);
+                                                }
+
+                                                function clearFilters() {
+                                                    speedFilter = 0;
+                                                    document.getElementById("formControlRange").value = "0";
+                                                    document.getElementById('myInput').value = '';
+                                                    tekFilter(4);
+                                                    document.getElementById("radioAllButton").checked = true;
+                                                }
 
                                                 function tekFilter(selectSwitch) {
                                                     filterArray = [];
                                                     markers.clearLayers();
-
+                                                    
 
                                                     switch (selectSwitch) {
                                                         case 0:
                                                             var result = markerArray.filter(checkFiber);
                                                             speedFilter = 0;
                                                             document.getElementById("formControlRange").value = "0";
-
                                                             break;
                                                         case 1:
                                                             var result = markerArray.filter(checkKabel);
@@ -437,7 +510,12 @@
 
 
                                                     result.forEach(m => markers.addLayer(m));
-                                                    filterArray = result;
+                                                    if (document.getElementById('myInput').value != '') {
+                                                        filterArray = tempSearch;
+                                                    }
+                                                    else {
+                                                        filterArray = result;
+                                                    }
                                                     mymap.addLayer(markers);
                                                     updateTextInput(0);
                                                     document.getElementById('unikCVR').innerHTML
@@ -448,7 +526,6 @@
                                                     return speed.downFiber > 0;
                                                 }
                                                 function checkKabel(speed) {
-                                                    
                                                     return speed.downKabel > 0;
                                                 }
                                                 function checkDsl(speed) {
@@ -457,7 +534,7 @@
                                                 function checkMobil(speed) {
                                                     return speed.mobil > 0;
                                                 }
-                                            
+
 
 
 
@@ -489,7 +566,7 @@
                                                     //Opdaterer chart'en efter der er indsat data.
                                                 }
 
-                                                  function addClusters(localarray, lat, long, name, business, employees, address, downFiber, upFiber, downKabel, upKabel, downDsl, upDsl, mobil) {
+                                                function addClusters(localarray, lat, long, name, business, employees, address, downFiber, upFiber, downKabel, upKabel, downDsl, upDsl, mobil) {
                                                     var companyMarker = new L.circleMarker([lat, long]).on('click', onClick);
                                                     companyMarker.name = name, companyMarker.business = business,
                                                         companyMarker.employees = employees, companyMarker.address = address,
@@ -498,20 +575,27 @@
                                                         companyMarker.downDsl = downDsl, companyMarker.upDsl = upDsl,
                                                         companyMarker.mobil = mobil;
 
-                                                      markers.addLayer(companyMarker);
-                                                      //companyMarker.addTo(markers);
+                                                    markers.addLayer(companyMarker);
+
+                                                    //Laver et array med Branche navne til vores tekst søgning.
+                                                    searchArray.push(companyMarker.business);
+                                                   
+
+                                                    //companyMarker.addTo(markers);
 
                                                     localarray.push(companyMarker);
 
 
-                                                      var i = (localarray.length - 1);
-                                                      console.log(i);
-                                                      
-                                                    
-                                                    
-                                                   
+                                                    var i = (localarray.length - 1);
+                                                    console.log(i);
+
+
+
+
                                                     //laver markes med given data
                                                 }
+
+                                                
                                             </script>
 
 
@@ -702,32 +786,30 @@
 
                                 </div>
 
-                                <div class="m-auto">
-                                    <div class="form-check-inline">
-                                        <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" onclick="tekFilter(0)" name="optradio">Fiber
-                                        </label>
-                                    </div>
-                                    <div class="form-check-inline">
-                                        <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" onclick="tekFilter(1)" name="optradio">Kabel
-                                        </label>
-                                    </div>
-                                    <div class="form-check-inline disabled">
-                                        <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" onclick="tekFilter(2)" name="optradio">Dsl
-                                        </label>
-                                    </div>
-                                    <div class="form-check-inline">
-                                        <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" onclick="tekFilter(3)" name="optradio">Mobil
-                                        </label>
-                                    </div>
-                                    <div class="form-check-inline">
-                                        <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" onclick="tekFilter(4)" name="optradio">Alle
-                                        </label>
-                                    </div>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" onclick="tekFilter(0)" checked="" name="optradio">Fiber
+                                    </label>
+                                </div>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" onclick="tekFilter(1)" checked="" name="optradio">Kabel
+                                    </label>
+                                </div>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" onclick="tekFilter(2)" checked="" name="optradio">Dsl
+                                    </label>
+                                </div>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" onclick="tekFilter(3)" checked="" name="optradio">Mobil
+                                    </label>
+                                </div>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" id="radioAllButton" onclick="tekFilter(4)" checked="checked" name="optradio">Alle
+                                    </label>
                                 </div>
 
                             </div>
@@ -845,9 +927,194 @@
                             </div>
 
                         </div>
+                        <div>
+                            <body>
+                                <style>
+                                    * {
+                                        box-sizing: border-box;
+                                    }
+
+                                    body {
+                                        font: 16px Arial;
+                                    }
+
+                                    /*the container must be positioned relative:*/
+                                    .autocomplete {
+                                        position: relative;
+                                        display: inline-block;
+                                    }
+
+                                    input {
+                                        border: 1px solid transparent;
+                                        background-color: #f1f1f1;
+                                        padding: 10px;
+                                        font-size: 16px;
+                                    }
+
+                                        input[type=text] {
+                                            background-color: #f1f1f1;
+                                            width: 100%;
+                                        }
+
+                                        input[type=submit] {
+                                            background-color: DodgerBlue;
+                                            color: #fff;
+                                            cursor: pointer;
+                                        }
+
+                                    .autocomplete-items {
+                                        position: absolute;
+                                        border: 1px solid #d4d4d4;
+                                        border-bottom: none;
+                                        border-top: none;
+                                        z-index: 99;
+                                        /*position the autocomplete items to be the same width as the container:*/
+                                        top: 100%;
+                                        left: 0;
+                                        right: 0;
+                                    }
+
+                                        .autocomplete-items div {
+                                            padding: 10px;
+                                            cursor: pointer;
+                                            background-color: #fff;
+                                            border-bottom: 1px solid #d4d4d4;
+                                        }
+
+                                            /*when hovering an item:*/
+                                            .autocomplete-items div:hover {
+                                                background-color: #e9e9e9;
+                                            }
+
+                                    /*when navigating through the items using the arrow keys:*/
+                                    .autocomplete-active {
+                                        background-color: DodgerBlue !important;
+                                        color: #ffffff;
+                                    }
+                                </style>
+                                <form autocomplete="off" class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+                                    <div class="input-group">
+                                        <input class="form-control" input id="myInput" type="text" name="branche" placeholder="Søg efter branche" aria-label="Search" aria-describedby="basic-addon2">
+                                        <a class="btn btn-primary" onclick="searchFilter(document.getElementById('myInput').value);" , myInput=" ">Søg</a>
+                                        <a class="btn btn-primary" onclick="clearFilters()" , myInput=" ">Ryd filter</a>
+                                    </div>
+                                </form>
+                                    <script charset="utf8_danish_ci">
+                                        function autocomplete(inp, arr) {
+                                            /*the autocomplete function takes two arguments,
+                                            the text field element and an array of possible autocompleted values:*/
+                                            var currentFocus;
+                                            /*execute a function when someone writes in the text field:*/
+                                            inp.addEventListener("input", function (e) {
+                                                var a, b, i, val = this.value;
+                                                /*close any already open lists of autocompleted values*/
+                                                closeAllLists();
+                                                if (!val) { return false; }
+                                                currentFocus = -1;
+                                                /*create a DIV element that will contain the items (values):*/
+                                                a = document.createElement("DIV");
+                                                a.setAttribute("id", this.id + "autocomplete-list");
+                                                a.setAttribute("class", "autocomplete-items");
+                                                /*append the DIV element as a child of the autocomplete container:*/
+                                                this.parentNode.appendChild(a);
+                                                /*for each item in the array...*/
+                                                for (i = 0; i < arr.length; i++) {
+                                                    /*check if the item starts with the same letters as the text field value:*/
+                                                    if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                                                        /*create a DIV element for each matching element:*/
+                                                        b = document.createElement("DIV");
+                                                        /*make the matching letters bold:*/
+                                                        b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                                                        b.innerHTML += arr[i].substr(val.length);
+                                                        /*insert a input field that will hold the current array item's value:*/
+                                                        b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                                                        /*execute a function when someone clicks on the item value (DIV element):*/
+                                                        b.addEventListener("click", function (e) {
+                                                            /*insert the value for the autocomplete text field:*/
+                                                            inp.value = this.getElementsByTagName("input")[0].value;
+                                                            /*close the list of autocompleted values,
+                                                            (or any other open lists of autocompleted values:*/
+                                                            closeAllLists();
+                                                        });
+                                                        a.appendChild(b);
+                                                    }
+                                                }
+                                            });
+                                            /*execute a function presses a key on the keyboard:*/
+                                            inp.addEventListener("keydown", function (e) {
+                                                var x = document.getElementById(this.id + "autocomplete-list");
+                                                if (x) x = x.getElementsByTagName("div");
+                                                if (e.keyCode == 40) {
+                                                    /*If the arrow DOWN key is pressed,
+                                                    increase the currentFocus variable:*/
+                                                    currentFocus++;
+                                                    /*and and make the current item more visible:*/
+                                                    addActive(x);
+                                                } else if (e.keyCode == 38) { //up
+                                                    /*If the arrow UP key is pressed,
+                                                    decrease the currentFocus variable:*/
+                                                    currentFocus--;
+                                                    /*and and make the current item more visible:*/
+                                                    addActive(x);
+                                                } else if (e.keyCode == 13) {
+                                                    console.log(inp)
+                                                    
+                                                    /*If the ENTER key is pressed, prevent the form from being submitted,*/
+                                                    e.preventDefault();
+                                                    
+                                                    if (currentFocus > -1) {
+                                                        //    /*and simulate a click on the "active" item:*/
+                                                        if (x) x[currentFocus].click();
+                                                    }
+                                                }
+                                            });
+                                            function addActive(x) {
+                                                /*a function to classify an item as "active":*/
+                                                if (!x) return false;
+                                                /*start by removing the "active" class on all items:*/
+                                                removeActive(x);
+                                                if (currentFocus >= x.length) currentFocus = 0;
+                                                if (currentFocus < 0) currentFocus = (x.length - 1);
+                                                /*add class "autocomplete-active":*/
+                                                x[currentFocus].classList.add("autocomplete-active");
+                                            }
+                                            function removeActive(x) {
+                                                /*a function to remove the "active" class from all autocomplete items:*/
+                                                for (var i = 0; i < x.length; i++) {
+                                                    x[i].classList.remove("autocomplete-active");
+                                                }
+                                            }
+                                            function closeAllLists(elmnt) {
+                                                /*close all autocomplete lists in the document,
+                                                except the one passed as an argument:*/
+                                                var x = document.getElementsByClassName("autocomplete-items");
+                                                for (var i = 0; i < x.length; i++) {
+                                                    if (elmnt != x[i] && elmnt != inp) {
+                                                        x[i].parentNode.removeChild(x[i]);
+                                                    }
+                                                }
+                                            }
+                                            ///*execute a function when someone clicks in the document:*/
+                                            document.addEventListener("click", function (e) {
+                                                closeAllLists(e.target);
+                                                //console.log(document.getElementById('myInput').value)
+
+                                                //if (document.getElementById('myInput').value != '')
+                                                //    searchFilter(document.getElementById('myInput').value);
+                                            });
+                                        }
+
+                                        /*An array containing all the country names in the world:*/
+                                        var branche = searchArray;
+                                        let unique = [...new Set(branche)]
+
+                                        /*initiate the autocomplete function on the "myInput" element, and pass along the branche array as possible autocomplete values:*/
+                                        autocomplete(document.getElementById("myInput"), unique);
+                                    </script>
+
+                             </body>
+                        </div>
                     </div>
-
-
                 </div>
                 <!-- /.container-fluid -->
 
