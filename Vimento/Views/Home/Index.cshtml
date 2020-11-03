@@ -458,7 +458,7 @@
 
                                                         if (marker.business == search) {
                                                             searchArray.push(marker);
-                                                            tempSearch.push(marker);
+                                                            filterArray.push(marker);
                                                          }
                                                     }
                                                     searchArray.forEach(m => markers.addLayer(m));
@@ -476,33 +476,33 @@
                                                 }
 
                                                 function tekFilter(selectSwitch) {
-                                                    filterArray = [];
+                                                    //filterArray = [];
                                                     markers.clearLayers();
                                                     
 
                                                     switch (selectSwitch) {
                                                         case 0:
-                                                            var result = markerArray.filter(checkFiber);
+                                                            var result = searchArray.filter(checkFiber);
                                                             speedFilter = 0;
                                                             document.getElementById("formControlRange").value = "0";
                                                             break;
                                                         case 1:
-                                                            var result = markerArray.filter(checkKabel);
+                                                            var result = searchArray.filter(checkKabel);
                                                             speedFilter = 1;
                                                             document.getElementById("formControlRange").value = "0";
                                                             break;
                                                         case 2:
-                                                            var result = markerArray.filter(checkDsl);
+                                                            var result = searchArray.filter(checkDsl);
                                                             speedFilter = 2;
                                                             document.getElementById("formControlRange").value = "0";
                                                             break;
                                                         case 3:
-                                                            var result = markerArray.filter(checkMobil);
+                                                            var result = searchArray.filter(checkMobil);
                                                             speedFilter = 3;
                                                             document.getElementById("formControlRange").value = "0";
                                                             break;
                                                         case 4:
-                                                            var result = markerArray;
+                                                            var result = searchArray;
                                                             speedFilter = 4;
                                                             document.getElementById("formControlRange").value = "0";
                                                             break;
@@ -510,12 +510,13 @@
 
 
                                                     result.forEach(m => markers.addLayer(m));
-                                                    if (document.getElementById('myInput').value != '') {
-                                                        filterArray = tempSearch;
-                                                    }
-                                                    else {
-                                                        filterArray = result;
-                                                    }
+                                                    //if (document.getElementById('myInput').value != '') {
+                                                    //    filterArray = tempSearch;
+                                                    //}
+                                                    //else {
+                                                    //    filterArray = result;
+                                                    //}
+                                                    filterArray = result;
                                                     mymap.addLayer(markers);
                                                     updateTextInput(0);
                                                     document.getElementById('unikCVR').innerHTML
