@@ -42,6 +42,10 @@
         <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css">
         <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css">
         <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+        <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js" 
+                integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ==" 
+                crossorigin="anonymous"></script>
     </head>
 
     <body id="page-top">
@@ -311,7 +315,54 @@
                                     <!-- Card Body -->
                                     <div class="card-body" style="height: 100%; padding: 0">
                                         <div class="chart-area" style="height: 100%">
-                                            <div id="mapid" class="chart-area" style="height: 100%">  </div>
+                                            <div id="mapid" class="chart-area" style="height: 100%">
+                                                <div class="leaflet-bottom leaflet-left">
+                                                    <div id="marker-legend">
+                                                        <script>
+                                                            function s2ab(s) {
+
+                                                                var buf = new ArrayBuffer(s.length);
+                                                                var view = new Uint8Array(buf);
+                                                                for (var i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
+                                                                return buf;
+
+                                                            }
+                                                            function generateLeadList() {
+                                                                var wb = XLSX.utils.book_new();
+                                                                wb.Props = {
+                                                                    Title: "Lead Liste",
+                                                                    Subject: "Liste over brancher med ønskede specifikationer",
+                                                                    Author: "Vimento"
+                                                                };
+
+                                                                wb.SheetNames.push("Leads");
+                                                                var ws_data = [['Navn','Branche', 'Adresse', 'Ansatte','Fiber ned','Fiber op', 'Kabel ned','Kabel op','Dsl ned', 'Dsl op', 'Mobil', 'Tlf. nr.', 'E-mail']];
+                                                                for (var i = 0; i < filterArray.length; i++) {
+                                                                    ws_data.push([
+                                                                        filterArray[i].name,
+                                                                        filterArray[i].business,
+                                                                        filterArray[i].address,
+                                                                        filterArray[i].employees,
+                                                                        filterArray[i].downFiber,
+                                                                        filterArray[i].upFiber,
+                                                                        filterArray[i].downKabel,
+                                                                        filterArray[i].upKabel,
+                                                                        filterArray[i].downDsl,
+                                                                        filterArray[i].upDsl,
+                                                                        filterArray[i].mobil
+                                                                    ]);
+                                                                }
+                                                                var ws = XLSX.utils.aoa_to_sheet(ws_data);
+                                                                wb.Sheets["Leads"] = ws;
+                                                                var wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
+                                                                
+                                                                saveAs(new Blob([s2ab(wbout)], { type: "application/octet-stream" }), 'Lead_list.xlsx');
+                                                            }
+                                                        </script>
+                                                        <button id="button-a" style="pointer-events: auto" onclick="generateLeadList();">Opret lead-liste</button>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <script>
                                                 var mymap = L.map('mapid').setView([57.047218, 9.920100], 8);
                                                 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -512,6 +563,8 @@
                                                    
                                                     //laver markes med given data
                                                 }
+
+                                                
                                             </script>
 
 
