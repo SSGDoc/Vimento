@@ -459,6 +459,7 @@
                                                         if (marker.business == search) {
                                                             searchArray.push(marker);
                                                             filterArray.push(marker);
+                                                            tempSearch.push(markers);
                                                          }
                                                     }
                                                     searchArray.forEach(m => markers.addLayer(m));
@@ -473,6 +474,7 @@
                                                     document.getElementById('myInput').value = '';
                                                     tekFilter(4);
                                                     document.getElementById("radioAllButton").checked = true;
+                                                    
                                                 }
 
                                                 function tekFilter(selectSwitch) {
@@ -482,30 +484,85 @@
 
                                                     switch (selectSwitch) {
                                                         case 0:
-                                                            var result = searchArray.filter(checkFiber);
-                                                            speedFilter = 0;
-                                                            document.getElementById("formControlRange").value = "0";
-                                                            break;
+                                                            //var result = markerArray.filter(checkFiber);
+                                                            //speedFilter = 0;
+                                                            //document.getElementById("formControlRange").value = "0";
+                                                            //break;
+                                                            if (document.getElementById('myInput').value != '') {
+                                                                var result = searchArray.filter(checkFiber);
+                                                                speedFilter = 0;
+                                                                document.getElementById("formControlRange").value = "0";
+                                                                break;
+                                                            } else {
+                                                                var result = markerArray.filter(checkFiber);
+                                                                speedFilter = 0;
+                                                                document.getElementById("formControlRange").value = "0";
+                                                                break;
+                                                            }
                                                         case 1:
-                                                            var result = searchArray.filter(checkKabel);
-                                                            speedFilter = 1;
-                                                            document.getElementById("formControlRange").value = "0";
-                                                            break;
+                                                            //var result = searchArray.filter(checkKabel);
+                                                            //speedFilter = 1;
+                                                            //document.getElementById("formControlRange").value = "0";
+                                                            //break;
+                                                            if (document.getElementById('myInput').value != '') {
+                                                                var result = searchArray.filter(checkKabel);
+                                                                speedFilter = 1;
+                                                                document.getElementById("formControlRange").value = "0";
+                                                                break;
+                                                            } else {
+                                                                var result = markerArray.filter(checkKabel);
+                                                                speedFilter = 1;
+                                                                document.getElementById("formControlRange").value = "0";
+                                                                break;
+                                                            }
                                                         case 2:
-                                                            var result = searchArray.filter(checkDsl);
-                                                            speedFilter = 2;
-                                                            document.getElementById("formControlRange").value = "0";
-                                                            break;
+                                                            //var result = searchArray.filter(checkDsl);
+                                                            //speedFilter = 2;
+                                                            //document.getElementById("formControlRange").value = "0";
+                                                            //break;
+                                                            if (document.getElementById('myInput').value != '') {
+                                                                var result = searchArray.filter(checkDsl);
+                                                                speedFilter = 2;
+                                                                document.getElementById("formControlRange").value = "0";
+                                                                break;
+                                                            } else {
+                                                                var result = markerArray.filter(checkDsl);
+                                                                speedFilter = 2;
+                                                                document.getElementById("formControlRange").value = "0";
+                                                                break;
+                                                            }
                                                         case 3:
-                                                            var result = searchArray.filter(checkMobil);
-                                                            speedFilter = 3;
-                                                            document.getElementById("formControlRange").value = "0";
-                                                            break;
+                                                            //var result = searchArray.filter(checkMobil);
+                                                            //speedFilter = 3;
+                                                            //document.getElementById("formControlRange").value = "0";
+                                                            //break;
+                                                            if (document.getElementById('myInput').value != '') {
+                                                                var result = searchArray.filter(checkMobil);
+                                                                speedFilter = 3;
+                                                                document.getElementById("formControlRange").value = "0";
+                                                                break;
+                                                            } else {
+                                                                var result = markerArray.filter(checkMobil);
+                                                                speedFilter = 3;
+                                                                document.getElementById("formControlRange").value = "0";
+                                                                break;
+                                                            }
                                                         case 4:
-                                                            var result = searchArray;
-                                                            speedFilter = 4;
-                                                            document.getElementById("formControlRange").value = "0";
-                                                            break;
+                                                            //var result = searchArray;
+                                                            //speedFilter = 4;
+                                                            //document.getElementById("formControlRange").value = "0";
+                                                            //break;
+                                                            if (document.getElementById('myInput').value != '') {
+                                                                var result = searchArray;
+                                                                speedFilter = 4;
+                                                                document.getElementById("formControlRange").value = "0";
+                                                                break;
+                                                            } else {
+                                                                var result = markerArray;
+                                                                speedFilter = 4;
+                                                                document.getElementById("formControlRange").value = "0";
+                                                                break;
+                                                            }
                                                     }
 
 
