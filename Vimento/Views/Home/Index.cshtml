@@ -622,7 +622,7 @@
                             </div>
 
 
-                            <div class="col-xl-3 col-lg-2 ">
+                            <div class="col-xl-3 col-lg-2 m-auto">
                                 <div class="card shadow mb-4">
                                     @*Card Header - Dropdown*@
                                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -766,131 +766,167 @@
 
                             </div>
 
-                            <div class="col-lg-6">
-
-
-                                <div class="card shadow">
-                                    <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">Vis for hastighed</h6>
-                                    </div>
-                                    <div class="card-body">
-
-                                        @*<label class="switch">
-                    <input type="checkbox">
-                    <span class="slider round"></span>
-                </label>*@
-
-                                        <div class="m-auto">
-                                            <div class="form-check-inline">
-                                                <label class="form-check-label">
-                                                    <input type="radio" class="form-check-input" onclick="tekFilter(0)" checked="" name="optradio">Fiber
-                                                </label>
-                                            </div>
-                                            <div class="form-check-inline">
-                                                <label class="form-check-label">
-                                                    <input type="radio" class="form-check-input" onclick="tekFilter(1)" checked="" name="optradio">Kabel
-                                                </label>
-                                            </div>
-                                            <div class="form-check-inline">
-                                                <label class="form-check-label">
-                                                    <input type="radio" class="form-check-input" onclick="tekFilter(2)" checked="" name="optradio">Dsl
-                                                </label>
-                                            </div>
-                                            <div class="form-check-inline">
-                                                <label class="form-check-label">
-                                                    <input type="radio" class="form-check-input" onclick="tekFilter(3)" checked="" name="optradio">Mobil
-                                                </label>
-                                            </div>
-                                            <div class="form-check-inline">
-                                                <label class="form-check-label">
-                                                    <input type="radio" class="form-check-input" id="radioAllButton" onclick="tekFilter(4)" checked="checked" name="optradio">Alle
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="form-group row">
-                                                <div class="col-lg-3">
-                                                    <input class="form-control-plaintext " placeholder="Mbit/s" id="txtMbits">
-                                                </div>
-                                            </div>
-                                            <h4 class="small font-weight-bold">0 Mbit/s <span class="float-right">1000+ Mbit/s</span></h4>
-                                            <script>
-                                                function updateTextInput(val) {
-                                                    document.getElementById('txtMbits').value = 'Min ' + val + ' Mbit/s';
-                                                }
-
-                                                function updateMapByFiberSpeed(downSpeed) {
-                                                    markers.clearLayers();
-                                                    var markersToAdd = [];
-
-
-                                                    for (let i = 0; i < filterArray.length; i++) {
-
-
-                                                        switch (speedFilter) {
-                                                            case 0:
-
-                                                                if (filterArray[i].downFiber >= downSpeed) {
-                                                                    markersToAdd.push(filterArray[i]);
-                                                                }
-                                                                break;
-                                                            case 1:
-                                                                if (filterArray[i].downKabel >= downSpeed) {
-                                                                    markersToAdd.push(filterArray[i]);
-                                                                }
-                                                                break;
-                                                            case 2:
-                                                                if (filterArray[i].downDsl >= downSpeed) {
-                                                                    markersToAdd.push(filterArray[i]);
-                                                                }
-                                                                break;
-                                                            case 3:
-                                                                if (filterArray[i].mobil >= downSpeed) {
-                                                                    markersToAdd.push(filterArray[i]);
-                                                                }
-                                                                break;
-                                                            case 4:
-                                                                if (filterArray[i].downFiber >= downSpeed || filterArray[i].downKabel >= downSpeed || filterArray[i].downDsl >= downSpeed || filterArray[i].mobil >= downSpeed) {
-                                                                    markersToAdd.push(filterArray[i]);
-                                                                }
-
-                                                                break;
-                                                        }
-
-                                                    }
-
-
-                                                    for (let i = 0; i < markersToAdd.length; i++) {
-                                                        markers.addLayer(markersToAdd[i]);
-                                                    }
-
-                                                    mymap.addLayer(markers);
-                                                    document.getElementById('unikCVR').innerHTML
-                                                        = (markersToAdd.length);
-                                                }
-
-                                            </script>
-                                            <input type="range" min="0" max="1000" value="0" class="form-control-range" step="50" id="formControlRange" onmousemove="updateTextInput(this.value);" onchange="updateMapByFiberSpeed(this.value)">
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                            </div>
+                          
 
 
                         </div>
-
-
 
                     </div>
 
                     <!-- Content Row -->
                     <div class="row container-fluid m-0" style="margin-left: 0px; margin-right: 0px;">
 
-                      
-                        
+                        <!-- Content Column -->
+                        <div class="col-lg-4 ">
+
+                            <!-- Project Card Example -->
+                            <div class="card shadow">
+                                <div class="card-header py-3 ">
+                                    <h6 class="m-0 font-weight-bold text-primary">Filtrer på teknologi</h6>
+
+                                </div>
+
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" onclick="tekFilter(0)" checked="" name="optradio">Fiber
+                                    </label>
+                                </div>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" onclick="tekFilter(1)" checked="" name="optradio">Kabel
+                                    </label>
+                                </div>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" onclick="tekFilter(2)" checked="" name="optradio">Dsl
+                                    </label>
+                                </div>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" onclick="tekFilter(3)" checked="" name="optradio">Mobil
+                                    </label>
+                                </div>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" id="radioAllButton" onclick="tekFilter(4)" checked="checked" name="optradio">Alle
+                                    </label>
+                                </div>
+
+                            </div>
+
+                            </div>
+                        <div class="col-lg-4">
+
+
+                            <div class="card shadow">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Vis for hastighed</h6>
+                                </div>
+                                <div class="card-body">
+
+                                    @*<label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+        </label>*@
+
+                                    <div class="m-auto">
+                                        <div class="form-check-inline">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" onclick="tekFilter(0)" name="optradio">Fiber
+                                            </label>
+                                        </div>
+                                        <div class="form-check-inline">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" onclick="tekFilter(1)" name="optradio">Kabel
+                                            </label>
+                                        </div>
+                                        <div class="form-check-inline disabled">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" onclick="tekFilter(2)" name="optradio">Dsl
+                                            </label>
+                                        </div>
+                                        <div class="form-check-inline">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" onclick="tekFilter(3)" name="optradio">Mobil
+                                            </label>
+                                        </div>
+                                        <div class="form-check-inline">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" onclick="tekFilter(4)" name="optradio">Alle
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="form-group row">
+                                            <div class="col-lg-3">
+                                                <input class="form-control-plaintext " placeholder="Mbit/s" id="txtMbits">
+                                            </div>
+                                        </div>
+                                        <h4 class="small font-weight-bold">0 Mbit/s <span class="float-right">1000+ Mbit/s</span></h4>
+                                        <script>
+                                            function updateTextInput(val) {
+                                                document.getElementById('txtMbits').value = 'Min ' + val + ' Mbit/s';
+                                            }
+
+                                            function updateMapByFiberSpeed(downSpeed) {
+                                                markers.clearLayers();
+                                                var markersToAdd = [];
+
+
+                                                for (let i = 0; i < filterArray.length; i++) {
+
+
+                                                    switch (speedFilter) {
+                                                        case 0:
+
+                                                            if (filterArray[i].downFiber >= downSpeed) {
+                                                                markersToAdd.push(filterArray[i]);
+                                                            }
+                                                            break;
+                                                        case 1:
+                                                            if (filterArray[i].downKabel >= downSpeed) {
+                                                                markersToAdd.push(filterArray[i]);
+                                                            }
+                                                            break;
+                                                        case 2:
+                                                            if (filterArray[i].downDsl >= downSpeed) {
+                                                                markersToAdd.push(filterArray[i]);
+                                                            }
+                                                            break;
+                                                        case 3:
+                                                            if (filterArray[i].mobil >= downSpeed) {
+                                                                markersToAdd.push(filterArray[i]);
+                                                            }
+                                                            break;
+                                                        case 4:
+                                                            if (filterArray[i].downFiber >= downSpeed || filterArray[i].downKabel >= downSpeed || filterArray[i].downDsl >= downSpeed || filterArray[i].mobil >= downSpeed) {
+                                                                markersToAdd.push(filterArray[i]);
+                                                            }
+
+                                                            break;
+                                                    }
+
+                                                }
+
+
+                                                for (let i = 0; i < markersToAdd.length; i++) {
+                                                    markers.addLayer(markersToAdd[i]);
+                                                }
+
+                                                mymap.addLayer(markers);
+                                                document.getElementById('unikCVR').innerHTML
+                                                    = (markersToAdd.length);
+                                            }
+
+                                        </script>
+                                        <input type="range" min="0" max="1000" value="0" class="form-control-range" step="50" id="formControlRange" onmousemove="updateTextInput(this.value);" onchange="updateMapByFiberSpeed(this.value)">
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                        </div>
                         <div>
                             <body>
                                 <style>
