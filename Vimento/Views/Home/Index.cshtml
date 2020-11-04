@@ -327,21 +327,41 @@
 
                                                                 wb.SheetNames.push("Leads");
                                                                 var ws_data = [['Navn','Branche', 'Adresse', 'Ansatte','Fiber ned','Fiber op', 'Kabel ned','Kabel op','Dsl ned', 'Dsl op', 'Mobil', 'Tlf. nr.', 'E-mail']];
-                                                                for (var i = 0; i < filterArray.length; i++) {
-                                                                    ws_data.push([
-                                                                        filterArray[i].name,
-                                                                        filterArray[i].business,
-                                                                        filterArray[i].address,
-                                                                        filterArray[i].employees,
-                                                                        filterArray[i].downFiber,
-                                                                        filterArray[i].upFiber,
-                                                                        filterArray[i].downKabel,
-                                                                        filterArray[i].upKabel,
-                                                                        filterArray[i].downDsl,
-                                                                        filterArray[i].upDsl,
-                                                                        filterArray[i].mobil
-                                                                    ]);
+                                                                if (markersToAdd == 0) {
+                                                                    for (var i = 0; i < filterArray.length; i++) {
+                                                                        ws_data.push([
+                                                                            filterArray[i].name,
+                                                                            filterArray[i].business,
+                                                                            filterArray[i].address,
+                                                                            filterArray[i].employees,
+                                                                            filterArray[i].downFiber,
+                                                                            filterArray[i].upFiber,
+                                                                            filterArray[i].downKabel,
+                                                                            filterArray[i].upKabel,
+                                                                            filterArray[i].downDsl,
+                                                                            filterArray[i].upDsl,
+                                                                            filterArray[i].mobil
+                                                                        ]);
+                                                                    }
                                                                 }
+                                                                else {
+                                                                    for (var i = 0; i < markersToAdd.length; i++) {
+                                                                        ws_data.push([
+                                                                            markersToAdd[i].name,
+                                                                            markersToAdd[i].business,
+                                                                            markersToAdd[i].address,
+                                                                            markersToAdd[i].employees,
+                                                                            markersToAdd[i].downFiber,
+                                                                            markersToAdd[i].upFiber,
+                                                                            markersToAdd[i].downKabel,
+                                                                            markersToAdd[i].upKabel,
+                                                                            markersToAdd[i].downDsl,
+                                                                            markersToAdd[i].upDsl,
+                                                                            markersToAdd[i].mobil
+                                                                        ]);
+                                                                    }
+                                                                }
+                                                                
                                                                 var ws = XLSX.utils.aoa_to_sheet(ws_data);
                                                                 wb.Sheets["Leads"] = ws;
                                                                 var wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
@@ -349,7 +369,7 @@
                                                                 saveAs(new Blob([s2ab(wbout)], { type: "application/octet-stream" }), 'Lead_list.xlsx');
                                                             }
                                                         </script>
-                                                        <button id="button-a" style="pointer-events: auto" onclick="generateLeadList();">Opret lead-liste</button>
+                                                        <button id="button-a" style="pointer-events: auto" onclick="generateLeadList();" disabled>Opret lead-liste</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -435,16 +455,19 @@
                                                         if (marker.business == search) {
                                                             searchArray.push(marker);
                                                             filterArray.push(marker);
+                                                            document.getElementById('button-a').disabled = false;
                                                          }
                                                     }
                                                     searchArray.forEach(m => markers.addLayer(m));
                                                     mymap.addLayer(markers);
                                                     document.getElementById('unikCVR').innerHTML
                                                         = (searchArray.length);
+
                                                 }
 
                                                 function clearFilters() {
                                                     document.getElementById("formControlRange").disabled = true;
+                                                    document.getElementById('button-a').disabled = true;
                                                     document.getElementById("formControlRange").value = "0";
                                                     document.getElementById('myInput').value = '';
                                                     addAllMarkers();
@@ -461,16 +484,10 @@
                                                 }
 
                                                 function tekFilter(selectSwitch) {
-                                                    //filterArray = [];
                                                     markers.clearLayers();
-                                                    
-
                                                     switch (selectSwitch) {
                                                         case 0:
-                                                            //var result = allMarkersArray.filter(checkFiber);
-                                                            //speedSwitchValue = 0;
-                                                            //document.getElementById("formControlRange").value = "0";
-                                                            //break;
+                                                            document.getElementById('button-a').disabled = false;
                                                             document.getElementById("formControlRange").disabled = false;
                                                             if (document.getElementById('myInput').value != '') {
                                                                 var result = searchArray.filter(checkFiber);
@@ -484,10 +501,7 @@
                                                                 break;
                                                             }
                                                         case 1:
-                                                            //var result = searchArray.filter(checkKabel);
-                                                            //speedSwitchValue = 1;
-                                                            //document.getElementById("formControlRange").value = "0";
-                                                            //break;
+                                                            document.getElementById('button-a').disabled = false;
                                                             document.getElementById("formControlRange").disabled = false;
                                                             if (document.getElementById('myInput').value != '') {
                                                                 var result = searchArray.filter(checkKabel);
@@ -501,10 +515,7 @@
                                                                 break;
                                                             }
                                                         case 2:
-                                                            //var result = searchArray.filter(checkDsl);
-                                                            //speedSwitchValue = 2;
-                                                            //document.getElementById("formControlRange").value = "0";
-                                                            //break;
+                                                            document.getElementById('button-a').disabled = false;
                                                             document.getElementById("formControlRange").disabled = false;
                                                             if (document.getElementById('myInput').value != '') {
                                                                 var result = searchArray.filter(checkDsl);
@@ -518,10 +529,7 @@
                                                                 break;
                                                             }
                                                         case 3:
-                                                            //var result = searchArray.filter(checkMobil);
-                                                            //speedSwitchValue = 3;
-                                                            //document.getElementById("formControlRange").value = "0";
-                                                            //break;
+                                                            document.getElementById('button-a').disabled = false;
                                                             document.getElementById("formControlRange").disabled = false;
                                                             if (document.getElementById('myInput').value != '') {
                                                                 var result = searchArray.filter(checkMobil);
@@ -535,10 +543,7 @@
                                                                 break;
                                                             }
                                                         case 4:
-                                                            //var result = searchArray;
-                                                            //speedSwitchValue = 4;
-                                                            //document.getElementById("formControlRange").value = "0";
-                                                            //break;
+                                                            document.getElementById('button-a').disabled = false;
                                                             document.getElementById("formControlRange").disabled = false;
                                                             if (document.getElementById('myInput').value != '') {
                                                                 var result = searchArray;
@@ -875,15 +880,11 @@
                                             function updateTextInput(val) {
                                                 document.getElementById('txtMbits').value = 'Min ' + val + ' Mbit/s';
                                             }
-
+                                            var markersToAdd = [];
                                             function updateMapBySpeed(downSpeed) {
                                                 markers.clearLayers();
-                                                var markersToAdd = [];
-
-
+                                                
                                                 for (let i = 0; i < filterArray.length; i++) {
-
-
                                                     switch (speedSwitchValue) {
                                                         case 0:
 
@@ -924,10 +925,11 @@
                                                 mymap.addLayer(markers);
                                                 document.getElementById('unikCVR').innerHTML
                                                     = (markersToAdd.length);
+                                                document.getElementById('button-a').disabled = false;
                                             }
 
                                         </script>
-                                        <input type="range" min="0" max="1000" value="0" class="form-control-range" step="10" id="formControlRange" onmousemove="updateTextInput(this.value);" onchange="updateMapBySpeed(this.value)" , disabled>
+                                        <input type="range" min="0" max="1000" value="0" class="form-control-range" step="10" id="formControlRange" onmousemove="updateTextInput(this.value);" onchange="markersToAdd = []; updateMapBySpeed(this.value);" , disabled>
                                     </div>
                                 </div>
 
