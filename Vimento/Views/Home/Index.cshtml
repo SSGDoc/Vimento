@@ -373,6 +373,23 @@
                                             </div>
                                             <button id="button-a" style="pointer-events: auto" onclick="generateLeadList();" disabled>Opret lead-liste</button>
                                             <script>
+                                                function fixFormat(array) {
+                                                    for (var i = 0; i < array.length; i++) {
+                                                        if (array[i].business.includes("&#230;") || array[i].business.includes("&#248;") || array[i].business.includes("&#229;")) {
+                                                            var dirtyStr = array[i].business;
+                                                            var cleanStr = dirtyStr.replace(/&#230;/g, "æ");
+                                                            var shinyStr = cleanStr.replace(/&#233;/g, "é");
+                                                            var cleanerStr = shinyStr.replace(/&#248;/g, "ø");
+                                                            var cleanestStr = cleanerStr.replace(/&#229;/g, "å");
+                                                            array[i].business = cleanestStr;
+                                                        }
+                                                        searchArray.push(array[i].business);
+                                                    }
+                                                }
+                                            </script>
+                                            
+                                            
+                                            <script>
                                                 var mymap = L.map('mapid').setView([57.047218, 9.920100], 8);
                                                 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
                                                     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -383,7 +400,7 @@
                                                     accessToken: 'pk.eyJ1IjoibXJzYWdneSIsImEiOiJja2ZiamQ4ajYwcXh3MnhvODU4NjZrZ29xIn0.JXSCWFKMGdFElSPErRk-Zg'
                                                 }).addTo(mymap);
 
-                                                const allMarkersArray = new Array();
+                                                var allMarkersArray = new Array();
                                                 var filterArray = new Array();
                                                 //var filterString = "downFiber";
                                                 var speedSwitchValue;
@@ -449,15 +466,15 @@
                                                     searchArray = [];
                                                     markers.clearLayers();
 
-                                                    let ser = search;
-                                                    let newSearch = ser.replace(/[æ]/g, "&#230;");
-                                                    let newSearch2 = newSearch.replace(/[ø]/g, "&#248;");
-                                                    let newSearch3 = newSearch2.replace(/[å]/g, "&#229;");
+                                                    //let ser = search;
+                                                    //let newSearch = ser.replace(/[æ]/g, "&#230;");
+                                                    //let newSearch2 = newSearch.replace(/[ø]/g, "&#248;");
+                                                    //let newSearch3 = newSearch2.replace(/[å]/g, "&#229;");
 
                                                     for (var i = 0; i < (allMarkersArray.length); i++) {
                                                         var marker = allMarkersArray[i];
 
-                                                        if (marker.business == newSearch3) {
+                                                        if (marker.business == search) {
                                                             searchArray.push(marker);
                                                             filterArray.push(marker);
                                                             document.getElementById('button-a').disabled = false;
@@ -636,7 +653,7 @@
                                                     markers.addLayer(companyMarker);
 
                                                     //Laver et array med Branche navne til vores tekst søgning.
-                                                    searchArray.push(companyMarker.business);
+                                                    //searchArray.push(companyMarker.business);
                                                     
                                                     
 
@@ -668,6 +685,9 @@
                                                 mymap.addLayer(markers);
                                                 //tilføjer alle lavede markers til map
                                                 document.getElementById("spinner").hidden = true;
+                                                fixFormat(allMarkersArray);
+                                                //fixFormat(searchArray);
+                                                //fixFormat(filterArray);
                                             </script>
 
                                         </div>
