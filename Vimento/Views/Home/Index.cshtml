@@ -33,8 +33,8 @@
         <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css">
         <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
         <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js" 
-                integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ==" 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"
+                integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ=="
                 crossorigin="anonymous"></script>
     </head>
 
@@ -289,90 +289,89 @@
                                     <!-- Card Header - Dropdown -->
                                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                         <h6 class="m-0 font-weight-bold text-primary">Map overview</h6>
+                                        <!--SPINNER-->
+                                        <div class="spinner-border" id="spinner" role="status"></div>
                                         @*<div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                            <div class="dropdown-header">Dropdown Header:</div>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>*@
+            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                <div class="dropdown-header">Dropdown Header:</div>
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+        </div>*@
                                     </div>
                                     <!-- Card Body -->
                                     <div class="card-body" style="height: 100%; padding: 0">
                                         <div class="chart-area" style="height: 100%">
                                             <div id="mapid" class="chart-area" style="height: 100%">
-                                                <div class="leaflet-bottom leaflet-left">
-                                                    <div id="marker-legend">
-                                                        <script>
-                                                            function s2ab(s) {
+                                                <script>
+                                                    function s2ab(s) {
+                                                        
+                                                        var buf = new ArrayBuffer(s.length);
+                                                        var view = new Uint8Array(buf);
+                                                        for (var i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
+                                                        return buf;
 
-                                                                var buf = new ArrayBuffer(s.length);
-                                                                var view = new Uint8Array(buf);
-                                                                for (var i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
-                                                                return buf;
+                                                    }
+                                                    function generateLeadList() {
+                                                        var wb = XLSX.utils.book_new();
+                                                        wb.Props = {
+                                                            Title: "Lead Liste",
+                                                            Subject: "Liste over brancher med ønskede specifikationer",
+                                                            Author: "Vimento"
+                                                        };
 
+                                                        wb.SheetNames.push("Leads");
+                                                        var ws_data = [['Navn', 'Branche', 'Adresse', 'Ansatte', 'Fiber ned', 'Fiber op', 'Kabel ned', 'Kabel op', 'Dsl ned', 'Dsl op', 'Mobil', 'Tlf. nr.', 'E-mail']];
+                                                        if (markersToAdd == 0) {
+                                                            for (var i = 0; i < filterArray.length; i++) {
+                                                                ws_data.push([
+                                                                    filterArray[i].name,
+                                                                    filterArray[i].business,
+                                                                    filterArray[i].address,
+                                                                    filterArray[i].employees,
+                                                                    filterArray[i].downFiber,
+                                                                    filterArray[i].upFiber,
+                                                                    filterArray[i].downKabel,
+                                                                    filterArray[i].upKabel,
+                                                                    filterArray[i].downDsl,
+                                                                    filterArray[i].upDsl,
+                                                                    filterArray[i].mobil
+                                                                ]);
                                                             }
-                                                            function generateLeadList() {
-                                                                var wb = XLSX.utils.book_new();
-                                                                wb.Props = {
-                                                                    Title: "Lead Liste",
-                                                                    Subject: "Liste over brancher med ønskede specifikationer",
-                                                                    Author: "Vimento"
-                                                                };
-
-                                                                wb.SheetNames.push("Leads");
-                                                                var ws_data = [['Navn', 'Branche', 'Adresse', 'Ansatte', 'Fiber ned', 'Fiber op', 'Kabel ned', 'Kabel op', 'Dsl ned', 'Dsl op', 'Mobil', 'Tlf. nr.', 'E-mail']];
-                                                                if (markersToAdd == 0) {
-                                                                    for (var i = 0; i < filterArray.length; i++) {
-                                                                        ws_data.push([
-                                                                            filterArray[i].name,
-                                                                            filterArray[i].business,
-                                                                            filterArray[i].address,
-                                                                            filterArray[i].employees,
-                                                                            filterArray[i].downFiber,
-                                                                            filterArray[i].upFiber,
-                                                                            filterArray[i].downKabel,
-                                                                            filterArray[i].upKabel,
-                                                                            filterArray[i].downDsl,
-                                                                            filterArray[i].upDsl,
-                                                                            filterArray[i].mobil
-                                                                        ]);
-                                                                    }
-                                                                }
-                                                                else {
-                                                                    for (var i = 0; i < markersToAdd.length; i++) {
-                                                                        ws_data.push([
-                                                                            markersToAdd[i].name,
-                                                                            markersToAdd[i].business,
-                                                                            markersToAdd[i].address,
-                                                                            markersToAdd[i].employees,
-                                                                            markersToAdd[i].downFiber,
-                                                                            markersToAdd[i].upFiber,
-                                                                            markersToAdd[i].downKabel,
-                                                                            markersToAdd[i].upKabel,
-                                                                            markersToAdd[i].downDsl,
-                                                                            markersToAdd[i].upDsl,
-                                                                            markersToAdd[i].mobil
-                                                                        ]);
-                                                                    }
-                                                                }
-
-                                                                var ws = XLSX.utils.aoa_to_sheet(ws_data);
-                                                                wb.Sheets["Leads"] = ws;
-                                                                var wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
-
-                                                                saveAs(new Blob([s2ab(wbout)], { type: "application/octet-stream" }), 'Lead_list.xlsx');
+                                                        }
+                                                        else {
+                                                            for (var i = 0; i < markersToAdd.length; i++) {
+                                                                ws_data.push([
+                                                                    markersToAdd[i].name,
+                                                                    markersToAdd[i].business,
+                                                                    markersToAdd[i].address,
+                                                                    markersToAdd[i].employees,
+                                                                    markersToAdd[i].downFiber,
+                                                                    markersToAdd[i].upFiber,
+                                                                    markersToAdd[i].downKabel,
+                                                                    markersToAdd[i].upKabel,
+                                                                    markersToAdd[i].downDsl,
+                                                                    markersToAdd[i].upDsl,
+                                                                    markersToAdd[i].mobil
+                                                                ]);
                                                             }
-                                                        </script>
-                                                        <button id="button-a" style="pointer-events: auto" onclick="generateLeadList();" disabled>Opret lead-liste</button>
-                                                    </div>
-                                                </div>
+                                                        }
+
+                                                        var ws = XLSX.utils.aoa_to_sheet(ws_data);
+                                                        wb.Sheets["Leads"] = ws;
+                                                        var wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
+
+                                                        saveAs(new Blob([s2ab(wbout)], { type: "application/octet-stream" }), 'Lead_list.xlsx');
+                                                        
+                                                    }
+                                                </script>
                                             </div>
+                                            <button id="button-a" style="pointer-events: auto" onclick="generateLeadList();" disabled>Opret lead-liste</button>
                                             <script>
                                                 var mymap = L.map('mapid').setView([57.047218, 9.920100], 8);
                                                 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -625,6 +624,7 @@
                                                 }
 
                                                 function addClusters(localarray, lat, long, name, business, employees, address, downFiber, upFiber, downKabel, upKabel, downDsl, upDsl, mobil) {
+
                                                     var companyMarker = new L.circleMarker([lat, long]).on('click', onClick);
                                                     companyMarker.name = name, companyMarker.business = business,
                                                         companyMarker.employees = employees, companyMarker.address = address,
@@ -639,17 +639,11 @@
                                                     searchArray.push(companyMarker.business);
                                                     
                                                     
-                                                    //companyMarker.addTo(markers);
 
                                                     localarray.push(companyMarker);
 
 
                                                     var i = (localarray.length - 1);
-                                                    console.log(i);
-
-
-
-
                                                     //laver markes med given data
                                                 }
 
@@ -670,9 +664,10 @@
                                                 </script>
                                             }
                                             <script>
-
+                                                
                                                 mymap.addLayer(markers);
                                                 //tilføjer alle lavede markers til map
+                                                document.getElementById("spinner").hidden = true;
                                             </script>
 
                                         </div>
@@ -881,7 +876,6 @@
                                                 var markersToAdd = [];
                                                 function updateMapBySpeed(downSpeed) {
                                                     markers.clearLayers();
-
                                                     for (let i = 0; i < filterArray.length; i++) {
                                                         switch (speedSwitchValue) {
                                                             case 0:
@@ -919,11 +913,11 @@
                                                     for (let i = 0; i < markersToAdd.length; i++) {
                                                         markers.addLayer(markersToAdd[i]);
                                                     }
-
                                                     mymap.addLayer(markers);
                                                     document.getElementById('unikCVR').innerHTML
                                                         = (markersToAdd.length);
                                                     document.getElementById('button-a').disabled = false;
+                                                    
                                                 }
 
                                             </script>
