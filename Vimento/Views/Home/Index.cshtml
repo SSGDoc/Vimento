@@ -5,7 +5,7 @@
     <!DOCTYPE html>
     <html lang="en">
     <head>
-        <meta charset="utf8_danish_ci">
+        <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
@@ -389,7 +389,7 @@
                                                 //var filterString = "downFiber";
                                                 var speedSwitchValue;
                                                 var searchArray = new Array();
-
+                                                
 
 
 
@@ -444,15 +444,21 @@
 
                                                 }
 
+
                                                 //Filtrer searchArray ud fra input i søgefeltet og tilføjer dem på kortet
                                                 function searchFilter(search) {
                                                     searchArray = [];
                                                     markers.clearLayers();
 
+                                                    let ser = search;
+                                                    let newSearch = ser.replace(/[æ]/g, "&#230;");
+                                                    let newSearch2 = newSearch.replace(/[ø]/g, "&#248;");
+                                                    let newSearch3 = newSearch2.replace(/[å]/g, "&#229;");
+
                                                     for (var i = 0; i < (allMarkersArray.length); i++) {
                                                         var marker = allMarkersArray[i];
 
-                                                        if (marker.business == search) {
+                                                        if (marker.business == newSearch3) {
                                                             searchArray.push(marker);
                                                             filterArray.push(marker);
                                                             document.getElementById('button-a').disabled = false;
@@ -609,7 +615,8 @@
                                                     addDataDownDsl(parseInt(marker.downDsl))
                                                     addDataUpDsl(parseInt(marker.upDsl))
                                                     addDataMobil(parseInt(marker.mobil))
-
+                                                    
+                                                    
 
 
                                                     //addDataAll(parseInt(downFiber, this.UpFiber, this.DownKabel, this.upKabel, this,downDsl, this.upDsl, this.mobil))
@@ -630,7 +637,8 @@
 
                                                     //Laver et array med Branche navne til vores tekst søgning.
                                                     searchArray.push(companyMarker.business);
-
+                                                    
+                                                    
                                                     //companyMarker.addTo(markers);
 
                                                     localarray.push(companyMarker);
@@ -653,12 +661,12 @@
                                             @foreach (var company in Model)
                                             {
                                                 //køre igennem alle firmaer i databasen og tilføjer dem som marker
-                                                <script>
+                                                <script charset="utf8_danish_ci">
                                             addClusters(allMarkersArray, @company.Address.Long, @company.Address.Lat, "@company.Name", "@company.Business", "@company.AmountOfEmployees", "@company.Address.StreetName" +
                                                 " @company.Address.HouseNr", + " @company.Address.Technology.DownFiber", + "@company.Address.Technology.UpFiber", + "@company.Address.Technology.DownCable", +
                                             "@company.Address.Technology.UpCable", + "@company.Address.Technology.DownDSL", + "@company.Address.Technology.UpDSL", + "@company.Address.Technology.MobileDownRange");
 
-
+                                                
                                                 </script>
                                             }
                                             <script>
@@ -854,7 +862,7 @@
                                             </div>
                                             <div class="form-check-inline">
                                                 <label class="form-check-label">
-                                                    <input type="radio" class="form-check-input" onclick="tekFilter(4)" name="optradio">Alle
+                                                    <input type="radio" class="form-check-input" onclick="addAllMarkers" name="optradio">Alle
                                                 </label>
                                             </div>
                                         </div>
@@ -993,12 +1001,12 @@
                                     </style>
                                     <form autocomplete="off" class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
                                         <div class="input-group">
-                                            <input class="form-control" input id="myInput" type="text" name="branche" placeholder="Søg efter branche" aria-label="Search" aria-describedby="basic-addon2">
-                                            <a class="btn btn-primary" onclick="searchFilter(document.getElementById('myInput').value);" , myInput=" ">Søg</a>
+                                            <input class="form-control"  input id="myInput" type="text" spellcheck="false" name="branche" placeholder="Søg efter branche" aria-label="Search" aria-describedby="basic-addon2">
+                                            <a class="btn btn-primary" button id="searchButton" onclick="searchFilter(document.getElementById('myInput').value);" , myInput=" ">Søg</a>
                                             <a class="btn btn-primary" onclick="clearFilters()" , myInput=" ">Ryd filter</a>
                                         </div>
                                     </form>
-                                    <script charset="utf8_danish_ci">
+                                    <script charset="utf-8">
                                         function autocomplete(inp, arr) {
                                             /*the autocomplete function takes two arguments,
                                             the text field element and an array of possible autocompleted values:*/
@@ -1060,13 +1068,19 @@
 
                                                     /*If the ENTER key is pressed, prevent the form from being submitted,*/
                                                     e.preventDefault();
-
                                                     if (currentFocus > -1) {
                                                         //    /*and simulate a click on the "active" item:*/
                                                         if (x) x[currentFocus].click();
                                                     }
                                                 }
                                             });
+                                            //Tager text fra input feltet og aktiverer søge knappen når man trykker enter.
+                                            inp.addEventListener("keyup", function (event) {
+                                                if (event.keyCode === 13) {
+                                                    event.preventDefault();
+                                                    document.getElementById("searchButton").click();
+                                                }
+                                            })
                                             function addActive(x) {
                                                 /*a function to classify an item as "active":*/
                                                 if (!x) return false;
@@ -1096,19 +1110,17 @@
                                             ///*execute a function when someone clicks in the document:*/
                                             document.addEventListener("click", function (e) {
                                                 closeAllLists(e.target);
-                                                //console.log(document.getElementById('myInput').value)
-
-                                                //if (document.getElementById('myInput').value != '')
-                                                //    searchFilter(document.getElementById('myInput').value);
                                             });
                                         }
 
-                                        /*An array containing all the country names in the world:*/
+                                        //Array der indeholder alle branche betegnelser
+
                                         var branche = searchArray;
                                         let unique = [...new Set(branche)]
 
                                         /*initiate the autocomplete function on the "myInput" element, and pass along the branche array as possible autocomplete values:*/
                                         autocomplete(document.getElementById("myInput"), unique);
+                                        
                                     </script>
 
                                 </body>
