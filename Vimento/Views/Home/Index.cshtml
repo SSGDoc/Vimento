@@ -324,7 +324,6 @@
                                                             Subject: "Liste over brancher med ønskede specifikationer",
                                                             Author: "Vimento"
                                                         };
-
                                                         wb.SheetNames.push("Leads");
                                                         var ws_data = [['Navn', 'Branche', 'Adresse', 'Ansatte', 'Fiber ned', 'Fiber op', 'Kabel ned', 'Kabel op', 'Dsl ned', 'Dsl op', 'Mobil', 'Tlf. nr.', 'E-mail']];
                                                         if (markersToAdd == 0) {
@@ -373,18 +372,35 @@
                                             </div>
                                             <button id="button-a" style="pointer-events: auto" onclick="generateLeadList();" disabled>Opret lead-liste</button>
                                             <script>
+                                                function replaceLetters(string) {
+                                                    var str1 = string;
+                                                    var str2 = str1.replace(/&#230;/g, "æ");
+                                                    var str3 = str2.replace(/&#233;/g, "é");
+                                                    var str4 = str3.replace(/&#248;/g, "ø");
+                                                    var str5 = str4.replace(/&#229;/g, "å");
+                                                    var str6 = str5.replace(/&#216;/g, "Ø");
+                                                    var str7 = str6.replace(/&#198;/g, "Æ");
+                                                    var str8 = str7.replace(/&#197;/g, "Å");
+                                                    return str8;
+                                                }
                                                 function fixFormat(array) {
                                                     for (var i = 0; i < array.length; i++) {
-                                                        if (array[i].business.includes("&#230;") || array[i].business.includes("&#248;") || array[i].business.includes("&#229;")) {
-                                                            var dirtyStr = array[i].business;
-                                                            var cleanStr = dirtyStr.replace(/&#230;/g, "æ");
-                                                            var shinyStr = cleanStr.replace(/&#233;/g, "é");
-                                                            var cleanerStr = shinyStr.replace(/&#248;/g, "ø");
-                                                            var cleanestStr = cleanerStr.replace(/&#229;/g, "å");
-                                                            array[i].business = cleanestStr;
-                                                        }
+
+                                                        var dirtyBusinessString = array[i].business;
+                                                        var cleanBusinessString = replaceLetters(dirtyBusinessString);
+                                                        array[i].business = cleanBusinessString;
+
+                                                        var dirtyNameString = array[i].name;
+                                                        var cleanNameString = replaceLetters(dirtyNameString);
+                                                        array[i].name = cleanNameString;
+
+                                                        var dirtyAddressString = array[i].address;
+                                                        var cleanAddressString = replaceLetters(dirtyAddressString);
+                                                        array[i].address = cleanAddressString;
+
                                                         searchArray.push(array[i].business);
                                                     }
+                                                    return array;
                                                 }
                                             </script>
                                             
@@ -464,6 +480,7 @@
                                                 //Filtrer searchArray ud fra input i søgefeltet og tilføjer dem på kortet
                                                 function searchFilter(search) {
                                                     searchArray = [];
+                                                    filterArray = [];
                                                     markers.clearLayers();
 
                                                     //let ser = search;
@@ -685,7 +702,7 @@
                                                 mymap.addLayer(markers);
                                                 //tilføjer alle lavede markers til map
                                                 document.getElementById("spinner").hidden = true;
-                                                fixFormat(allMarkersArray);
+                                                allMarkersArray = fixFormat(allMarkersArray);
                                                 //fixFormat(searchArray);
                                                 //fixFormat(filterArray);
                                             </script>
