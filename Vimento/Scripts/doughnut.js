@@ -17,8 +17,7 @@ var myDoughnutChart = new Chart(ctx, {
     },
     options: {
         cutoutPercentage: 70,
-        maintainAspectRatio: false
-    }
+        maintainAspectRatio: false,
         tooltips: {
             enabled: true,
             mode: 'single',
@@ -29,6 +28,7 @@ var myDoughnutChart = new Chart(ctx, {
             }
         }
     }
+    
 });
 
 var fiberBest = [];
