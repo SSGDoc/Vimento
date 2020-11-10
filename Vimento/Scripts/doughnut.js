@@ -13,9 +13,12 @@ var myDoughnutChart = new Chart(ctx, {
                 'rgba(75, 192, 192, 1)',
             ],
             borderWidth: 1
+           
         }]
     },
     options: {
+        cutoutPercentage: 70,
+        maintainAspectRatio: false
     }
 });
 
