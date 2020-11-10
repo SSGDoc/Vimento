@@ -1,37 +1,75 @@
 ﻿var ctx = document.getElementById('doughnut');
-var myChart = new Chart(ctx, {
+var myDoughnutChart = new Chart(ctx, {
     type: 'doughnut',
     data: {
-        labels: ['Yousee', 'Telia', '3', 'CBB', 'Oister', 'Duka'],
+        labels: ['Fiber', 'DSL', 'Kabel', 'Mobil'],
         datasets: [{
             label: 'Antal kunder fordelt på Teleselskaber',
-            data: [120000, 190000, 30000, 50000, 20000, 30000],
+            data: [],
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
                 'rgba(255, 99, 132, 1)',
                 'rgba(54, 162, 235, 1)',
                 'rgba(255, 206, 86, 1)',
                 'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
             ],
             borderWidth: 1
         }]
     },
     options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
     }
 });
+
+var fiberBest = [];
+var dslBest = [];
+var kabelBest = [];
+var mobilBest = [];
+
+//Sorts the addresses with best technologies into seperate arrays
+function allocateBest(arrayWithMarkers) {
+    fiberBest = [];
+    dslBest = [];
+    kabelBest = [];
+    mobilBest = [];
+    for (var i = 0; i < arrayWithMarkers.length; i++) {
+        if (arrayWithMarkers[i].downFiber > arrayWithMarkers[i].downKabel &&
+            arrayWithMarkers[i].downFiber > arrayWithMarkers[i].downDsl &&
+            arrayWithMarkers[i].downFiber > arrayWithMarkers[i].mobil) {
+            fiberBest.push(arrayWithMarkers[i]);
+        } else if
+            (arrayWithMarkers[i].downDsl > arrayWithMarkers[i].downKabel &&
+            arrayWithMarkers[i].downDsl > arrayWithMarkers[i].downFiber &&
+            arrayWithMarkers[i].downDsl > arrayWithMarkers[i].mobil) {
+            dslBest.push(arrayWithMarkers[i]);
+        } else if
+            (arrayWithMarkers[i].downKabel > arrayWithMarkers[i].downDsl &&
+            arrayWithMarkers[i].downKabel > arrayWithMarkers[i].downFiber &&
+            arrayWithMarkers[i].downKabel > arrayWithMarkers[i].mobil) {
+            kabelBest.push(arrayWithMarkers[i]);
+        } else if
+            (arrayWithMarkers[i].mobil > arrayWithMarkers[i].downDsl &&
+            arrayWithMarkers[i].mobil > arrayWithMarkers[i].downFiber &&
+            arrayWithMarkers[i].mobil > arrayWithMarkers[i].downKabel) {
+            mobilBest.push(arrayWithMarkers[i]);
+        }
+    }
+}
+
+//Calculates how many % a value is of 'something'
+function calculatePercentageOf(val, totalAmount) {
+    var result = (val / totalAmount) * 100
+    return result;
+}
+
+//Updates the chart with an array of markers
+function updateDoughnutChart(arrayWithMarkers) {
+    allocateBest(arrayWithMarkers);
+    myDoughnutChart.data.datasets[0].data[0] = calculatePercentageOf(fiberBest.length, arrayWithMarkers.length);
+    myDoughnutChart.data.datasets[0].data[1] = calculatePercentageOf(dslBest.length, arrayWithMarkers.length);
+    myDoughnutChart.data.datasets[0].data[2] = calculatePercentageOf(kabelBest.length, arrayWithMarkers.length);
+    myDoughnutChart.data.datasets[0].data[3] = calculatePercentageOf(mobilBest.length, arrayWithMarkers.length);
+    myDoughnutChart.update();
+}
+
+//Called initially when page loads
+updateDoughnutChart(allMarkersArray);
+

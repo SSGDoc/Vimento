@@ -249,17 +249,17 @@
                                         <!--SPINNER-->
                                         <div class="spinner-border" id="spinner" role="status"></div>
                                         @*<div class="dropdown no-arrow">
-            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                <div class="dropdown-header">Dropdown Header:</div>
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-        </div>*@
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                            <div class="dropdown-header">Dropdown Header:</div>
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </div>*@
                                     </div>
                                     <!-- Card Body -->
                                     <div class="card-body" style="height: 100%; padding: 0">
@@ -267,7 +267,7 @@
                                             <div id="mapid" class="chart-area" style="height: 100%">
                                                 <script>
                                                     function s2ab(s) {
-                                                        
+
                                                         var buf = new ArrayBuffer(s.length);
                                                         var view = new Uint8Array(buf);
                                                         for (var i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
@@ -323,7 +323,7 @@
                                                         var wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
 
                                                         saveAs(new Blob([s2ab(wbout)], { type: "application/octet-stream" }), 'Lead_list.xlsx');
-                                                        
+
                                                     }
                                                 </script>
                                             </div>
@@ -360,8 +360,7 @@
                                                     return array;
                                                 }
                                             </script>
-                                            
-                                            
+
                                             <script>
                                                 var mymap = L.map('mapid').setView([57.047218, 9.920100], 8);
                                                 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -378,9 +377,6 @@
                                                 //var filterString = "downFiber";
                                                 var speedSwitchValue;
                                                 var searchArray = new Array();
-                                                
-
-
 
                                                 var markers = L.markerClusterGroup({
                                                     spiderfyOnMaxZoom: false,
@@ -396,7 +392,6 @@
                                                     cordCheck(this.getLatLng().lat, this.getLatLng().lng);
                                                     displayInfo(this)  //kalder function for fremvisning af data i informations panel
                                                     myChart.update()  //updatere charts
-
                                                 }
 
                                                 var index = 0;
@@ -407,7 +402,6 @@
                                                     if (index <= 0) {
 
                                                         index = 0;
-
                                                     }
                                                     else if (index > (filterArray.length) - 1) {
                                                         index = ((filterArray.length - 1));
@@ -430,7 +424,6 @@
                                                     }
                                                     document.getElementById('side').innerHTML
                                                         = ((index + 1) + " / " + filterArray.length);
-
                                                 }
 
 
@@ -439,11 +432,6 @@
                                                     searchArray = [];
                                                     filterArray = [];
                                                     markers.clearLayers();
-
-                                                    //let ser = search;
-                                                    //let newSearch = ser.replace(/[æ]/g, "&#230;");
-                                                    //let newSearch2 = newSearch.replace(/[ø]/g, "&#248;");
-                                                    //let newSearch3 = newSearch2.replace(/[å]/g, "&#229;");
 
                                                     for (var i = 0; i < (allMarkersArray.length); i++) {
                                                         var marker = allMarkersArray[i];
@@ -458,7 +446,7 @@
                                                     mymap.addLayer(markers);
                                                     document.getElementById('unikCVR').innerHTML
                                                         = (searchArray.length);
-
+                                                    updateDoughnutChart(searchArray);
                                                 }
 
                                                 function clearFilters() {
@@ -469,6 +457,7 @@
                                                     addAllMarkers();
                                                     document.getElementById('unikCVR').innerHTML
                                                         = (allMarkersArray.length);
+                                                    updateDoughnutChart(allMarkersArray);
                                                 }
 
                                                 function addAllMarkers() {
@@ -556,17 +545,12 @@
 
 
                                                     result.forEach(m => markers.addLayer(m));
-                                                    //if (document.getElementById('myInput').value != '') {
-                                                    //    filterArray = tempSearch;
-                                                    //}
-                                                    //else {
-                                                    //    filterArray = result;
-                                                    //}
                                                     filterArray = result;
                                                     mymap.addLayer(markers);
                                                     updateTextInput(0);
                                                     document.getElementById('unikCVR').innerHTML
                                                         = (result.length);
+                                                    updateDoughnutChart(filterArray);
                                                 }
 
                                                 function checkFiber(speed) {
@@ -581,10 +565,6 @@
                                                 function checkMobil(speed) {
                                                     return speed.mobil > 0;
                                                 }
-
-
-
-
 
                                                 function displayInfo(marker) {
                                                     document.getElementById('firmanavn').innerHTML
@@ -605,13 +585,6 @@
                                                     addDataDownDsl(parseInt(marker.downDsl))
                                                     addDataUpDsl(parseInt(marker.upDsl))
                                                     addDataMobil(parseInt(marker.mobil))
-                                                    
-                                                    
-
-
-                                                    //addDataAll(parseInt(downFiber, this.UpFiber, this.DownKabel, this.upKabel, this,downDsl, this.upDsl, this.mobil))
-
-                                                    //Opdaterer chart'en efter der er indsat data.
                                                 }
 
                                                 function addClusters(localarray, lat, long, name, business, employees, address, downFiber, upFiber, downKabel, upKabel, downDsl, upDsl, mobil) {
@@ -627,41 +600,25 @@
                                                     markers.addLayer(companyMarker);
 
                                                     //Laver et array med Branche navne til vores tekst søgning.
-                                                    //searchArray.push(companyMarker.business);
-                                                    
-                                                    
-
                                                     localarray.push(companyMarker);
-
-
-                                                    var i = (localarray.length - 1);
-                                                    //laver markes med given data
                                                 }
-
-
                                             </script>
 
-
-
+                                            <!--køre igennem alle firmaer i databasen og tilføjer dem som marker-->
                                             @foreach (var company in Model)
                                             {
-                                                //køre igennem alle firmaer i databasen og tilføjer dem som marker
                                                 <script charset="utf8_danish_ci">
                                             addClusters(allMarkersArray, @company.Address.Long, @company.Address.Lat, "@company.Name", "@company.Business", "@company.AmountOfEmployees", "@company.Address.StreetName" +
                                                 " @company.Address.HouseNr", + " @company.Address.Technology.DownFiber", + "@company.Address.Technology.UpFiber", + "@company.Address.Technology.DownCable", +
                                             "@company.Address.Technology.UpCable", + "@company.Address.Technology.DownDSL", + "@company.Address.Technology.UpDSL", + "@company.Address.Technology.MobileDownRange");
-
-                                                
                                                 </script>
                                             }
+
                                             <script>
-                                                
-                                                mymap.addLayer(markers);
                                                 //tilføjer alle lavede markers til map
+                                                mymap.addLayer(markers);
                                                 document.getElementById("spinner").hidden = true;
                                                 allMarkersArray = fixFormat(allMarkersArray);
-                                                //fixFormat(searchArray);
-                                                //fixFormat(filterArray);
                                             </script>
 
                                         </div>
@@ -676,7 +633,6 @@
                                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 
                                         <h6 class="m-0 font-weight-bold text-primary">Adresse info</h6>
-                                        @*<INPUT TYPE="NUMBER" MIN="1" MAX="10" STEP="1" VALUE="1" SIZE="6">*@
                                         <a onclick="nextInfo(-1)" href="#"> <i class="fas fa-arrow-alt-circle-left fa-2x text-primary"></i></a>
                                         <h6 id="side" class="m-0  ">1 / 9</h6>
                                         <a onclick="nextInfo(1)" href="#"> <i class="fas fa-arrow-alt-circle-right fa-2x text-primary"></i></a>
@@ -717,10 +673,6 @@
                                             <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js'></script>
                                             <canvas id="bar" height: 100%></canvas>
                                             <script>
-
-
-
-
                                                 var ctx = document.getElementById('bar');
                                                 var myChart = new Chart(ctx, {
                                                     type: 'bar',
@@ -774,17 +726,6 @@
                                                     }
                                                 });
 
-                                                //function addDataAll(downFiber, upFiber, downKabel, upKabel, downDsl, upDsl, mobil) {
-                                                //    myChart.data.datasets[0].data[0] = downFiber,
-                                                //    myChart.data.datasets[1].data[0] = upFiber;
-                                                //    myChart.data.datasets[0].data[1] = downKabel;
-                                                //    myChart.data.datasets[1].data[1] = upKabel;
-                                                //    myChart.data.datasets[0].data[2] = downDsl;
-                                                //    myChart.data.datasets[1].data[2] = upDsl;
-                                                //    myChart.data.datasets[0].data[3] = mobil;
-                                                //}
-
-
                                                 function addDataDownFiber(data) {
                                                     myChart.data.datasets[0].data[0] = data;
                                                 }
@@ -806,14 +747,13 @@
                                                 function addDataMobil(data) {
                                                     myChart.data.datasets[0].data[3] = data;
                                                 }
-
                                             </script>
                                         </div>
                                     </div>
                                 </div>
-
+                                <canvas id="doughnut" height="1000" width="1500"></canvas>
+                                <script src="~/Scripts/doughnut.js"></script>
                             </div>
-
                             <div class="col-lg-4">
 
 
@@ -822,12 +762,6 @@
                                         <h6 class="m-0 font-weight-bold text-primary">Vis for hastighed</h6>
                                     </div>
                                     <div class="card-body">
-
-                                        @*<label class="switch">
-                        <input type="checkbox">
-                        <span class="slider round"></span>
-                    </label>*@
-
                                         <div class="m-auto">
                                             <div class="form-check-inline">
                                                 <label class="form-check-label">
@@ -903,7 +837,6 @@
 
                                                     }
 
-
                                                     for (let i = 0; i < markersToAdd.length; i++) {
                                                         markers.addLayer(markersToAdd[i]);
                                                     }
@@ -911,7 +844,9 @@
                                                     document.getElementById('unikCVR').innerHTML
                                                         = (markersToAdd.length);
                                                     document.getElementById('button-a').disabled = false;
-                                                    
+
+                                                    updateDoughnutChart(markersToAdd);
+
                                                 }
 
                                             </script>
@@ -989,7 +924,7 @@
                                     </style>
                                     <form autocomplete="off" class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
                                         <div class="input-group">
-                                            <input class="form-control"  input id="myInput" type="text" spellcheck="false" name="branche" placeholder="Søg efter branche" aria-label="Search" aria-describedby="basic-addon2">
+                                            <input class="form-control" input id="myInput" type="text" spellcheck="false" name="branche" placeholder="Søg efter branche" aria-label="Search" aria-describedby="basic-addon2">
                                             <a class="btn btn-primary" button id="searchButton" onclick="searchFilter(document.getElementById('myInput').value);" , myInput=" ">Søg</a>
                                             <a class="btn btn-primary" onclick="clearFilters()" , myInput=" ">Ryd filter</a>
                                         </div>
@@ -1108,7 +1043,7 @@
 
                                         /*initiate the autocomplete function on the "myInput" element, and pass along the branche array as possible autocomplete values:*/
                                         autocomplete(document.getElementById("myInput"), unique);
-                                        
+
                                     </script>
 
                                 </body>
