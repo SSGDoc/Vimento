@@ -278,16 +278,9 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <div class="form-group row">
-                                                <div class="col-lg-3">
-                                                    <input class="form-control-plaintext " placeholder="Mbit/s" id="txtMbits">
-                                                </div>
-                                            </div>
-                                            <h4 class="small font-weight-bold">0 Mbit/s <span class="float-right">1000 Mbit/s</span></h4>
+                                            <h4 class="small font-weight-bold mt-2">0 Mbit/s<span class="float-right">1000 Mbit/s</span></h4>
+
                                             <script>
-                                                function updateTextInput(val) {
-                                                    document.getElementById('txtMbits').value = 'Min ' + val + ' Mbit/s';
-                                                }
                                                 var markersToAdd = [];
                                                 function updateMapBySpeed(downSpeed) {
                                                     markers.clearLayers();
@@ -335,10 +328,14 @@
                                                     updateDoughnutChart(markersToAdd);
 
                                                 }
+                                                function updateTextInput(value) {
+                                                    document.getElementById("txtMbits").textContent = value;
+                                                }
 
                                             </script>
-                                            <input type="range" min="0" max="1000" value="0" class="form-control-range" step="10" id="formControlRange" onmousemove="updateTextInput(this.value);" onchange="markersToAdd = []; updateMapBySpeed(this.value);" , disabled>
-                                        </div>
+                                            <input type="range" min="0" max="1000" value="0" class="custom-range" step="10" id="formControlRange" onmousemove="updateTextInput(this.value);" onchange="markersToAdd = []; updateMapBySpeed(this.value);" , disabled />
+                                            <h4 class="small font-weight-bold text-center" id="txtMbits">0</h4>
+                                            </div>
                                     </div>
                                 </div>
 
@@ -346,7 +343,7 @@
                                 <div class="card shadow mb-4">
                                     <!-- Card Header - Dropdown -->
                                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                        <h6 class="m-0 font-weight-bold text-primary">Hastighed fordelt på teknologi.</h6>
+                                        <h6 class="m-0 font-weight-bold text-primary">Bedste fastnet teknologi for adresser (%)</h6>
 
                                     </div>
 
@@ -725,7 +722,7 @@
                                                         companyMarker.downKabel = downKabel, companyMarker.upKabel = upKabel,
                                                         companyMarker.downDsl = downDsl, companyMarker.upDsl = upDsl,
                                                         companyMarker.mobil = mobil;
-
+                                                    companyMarker.bindPopup(address);
                                                     markers.addLayer(companyMarker);
 
                                                     //Laver et array med Branche navne til vores tekst søgning.
@@ -791,7 +788,7 @@
                                 <div class="card shadow mb-4">
                                     <!-- Card Header - Dropdown -->
                                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                        <h6 class="m-0 font-weight-bold text-primary">Hastighed fordelt på teknologi.</h6>
+                                        <h6 class="m-0 font-weight-bold text-primary">Hastighed fordelt på teknologi</h6>
 
                                     </div>
 
