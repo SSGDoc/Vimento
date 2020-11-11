@@ -30,7 +30,9 @@
                 crossorigin=""></script>
 
         <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css">
-        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css">
+        @*<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css">*@
+        <link rel="stylesheet" href="~/Content/css/MarkerCluster.Default.css">
+
         <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
         <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"
@@ -272,7 +274,7 @@
                                             </div>
                                             <div class="form-check-inline">
                                                 <label class="form-check-label">
-                                                    <input type="radio" class="form-check-input" onclick="addAllMarkers" name="optradio">Alle
+                                                    <input type="radio" class="form-check-input" onclick="tekFilter(4)" name="optradio" id="radioAll" checked="checked">Alle
                                                 </label>
                                             </div>
                                         </div>
@@ -587,6 +589,7 @@
                                                     document.getElementById('unikCVR').innerHTML
                                                         = (allMarkersArray.length);
                                                     updateDoughnutChart(allMarkersArray);
+                                                    document.getElementById('radioAll').checked = true;
                                                 }
 
                                                 function addAllMarkers() {
@@ -1119,6 +1122,7 @@
 
                                         var branche = searchArray;
                                         let unique = [...new Set(branche)]
+                                        
 
                                         /*initiate the autocomplete function on the "myInput" element, and pass along the branche array as possible autocomplete values:*/
                                         autocomplete(document.getElementById("myInput"), unique);
