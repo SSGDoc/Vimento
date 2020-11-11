@@ -188,6 +188,7 @@
     <Content Include="Content\css\indexstyle.css" />
     <Content Include="Content\css\sb-admin-2.css" />
     <Content Include="Content\css\sb-admin-2.min.css" />
+    <Content Include="Content\css\MarkerCluster.Default.css" />
     <Content Include="Content\icons\MapCircle.png" />
     <Content Include="Content\icons\vimento2.png" />
     <Content Include="Content\js\demo\chart-area-demo.js" />
