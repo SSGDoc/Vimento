@@ -27,12 +27,13 @@ namespace Vimento.DataAccess
                 using (MySqlCommand cmdGetAllCompanies = connection.CreateCommand())
                 {
                     
-                    cmdGetAllCompanies.CommandText = "SELECT adresse.adresseId, kundeId, navn, branche, antalAnsatte, vejNavn, husNr, postNr, byNavn, breddeGrad, laengdeGrad, downFiber, upFiber, downKabel, upKabel, downDsl, upDsl, mobilDown FROM virksomhed, adresse, teknologi WHERE virksomhed.adresseId = adresse.adresseId AND adresse.tekId = teknologi.tekId";
+                    cmdGetAllCompanies.CommandText = "SELECT adresse.adresseId, CURRENT_TIMESTAMP, kundeId, navn, branche, antalAnsatte, vejNavn, husNr, postNr, byNavn, breddeGrad, laengdeGrad, downFiber, upFiber, downKabel, upKabel, downDsl, upDsl, mobilDown FROM virksomhed, adresse, teknologi WHERE virksomhed.adresseId = adresse.adresseId AND adresse.tekId = teknologi.tekId";
                     MySqlDataReader companyReader = cmdGetAllCompanies.ExecuteReader();
 
                     while (companyReader.Read())
                     {
                         Company Company = new Company();
+                        Company.TimeStamp = companyReader.GetDateTime(companyReader.GetOrdinal("CURRENT_TIMESTAMP"));
                         Company.CompanyID = companyReader.GetInt32(companyReader.GetOrdinal("kundeId"));
                         Company.Name = companyReader.GetString(companyReader.GetOrdinal("navn"));
                         Company.Business = companyReader.GetString(companyReader.GetOrdinal("branche"));

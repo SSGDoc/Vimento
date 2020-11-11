@@ -12,6 +12,9 @@ namespace Vimento.Model
         public int AmountOfEmployees { get; set; }
         public int CompanyID { get; set; }
         public Address Address { get; set; }
+
+        public DateTime TimeStamp { get; set; }
+
         public Company()
         {
             Address = new Address();
