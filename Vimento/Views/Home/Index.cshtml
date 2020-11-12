@@ -34,7 +34,10 @@
         <link rel="stylesheet" href="~/Content/css/MarkerCluster.Default.css">
 
 
-
+        <script src="~/scripts/searchUtil.js"></script>
+        <script src="~/scripts/filterUtil.js"></script>
+        <script src="~/scripts/leadUtil.js"></script>
+        <script src="~/scripts/mapUtil.js"></script>
         <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
         <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"
@@ -71,37 +74,7 @@
                 </li>
 
                 <!-- Divider -->
-                <hr class="sidebar-divider">
-
-             
-
-                <!-- Nav Item - Pages Collapse Menu -->
-                @*<li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-                <i class="fas fa-fw fa-folder"></i>
-                <span>Pages</span>
-            </a>
-            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Login Screens:</h6>
-                    <a class="collapse-item" href="login.html">Login</a>
-                    <a class="collapse-item" href="register.html">Register</a>
-                    <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                    <div class="collapse-divider"></div>
-                    <h6 class="collapse-header">Other Pages:</h6>
-                    <a class="collapse-item" href="404.html">404 Page</a>
-                    <a class="collapse-item" href="blank.html">Blank Page</a>
-                </div>
-            </div>
-        </li>*@
-
-                <!-- Nav Item - Charts -->
-                @*<li class="nav-item">
-                    <a class="nav-link" href="charts.html">
-                        <i class="fas fa-fw fa-chart-area"></i>
-                        <span>Charts</span>
-                    </a>
-                </li>*@
+                <hr class="sidebar-divider">        
 
                 <li class="nav-item">
                     <a class="nav-link text-white" href="charts.html">
@@ -124,21 +97,8 @@
                     </a>
                 </li>
 
-                <!-- Nav Item - Tables -->
-                @*<li class="nav-item">
-                    <a class="nav-link" href="tables.html">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Tables</span>
-                    </a>
-                </li>*@
-
                 <!-- Divider -->
-                <hr class="sidebar-divider d-none d-md-block">
-
-                <!-- Sidebar Toggler (Sidebar) -->
-                @*<div class="text-center d-none d-md-inline">
-                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
-                </div>*@
+                <hr class="sidebar-divider d-none d-md-block"/>
 
             </ul>
             <!-- End of Sidebar -->
@@ -240,11 +200,7 @@
                             </div>
                         </div>
 
-
-
                         <!-- Content Row -->
-
-
                         <div class="row">
 
                             <div class="col-xl-3  float-left">
@@ -283,63 +239,9 @@
 
                                         <div class="form-group">
                                             <h4 class="small font-weight-bold mt-2">0 Mbit/s<span class="float-right">1000 Mbit/s</span></h4>
-
-                                            <script>
-                                                var markersToAdd = [];
-                                                function updateMapBySpeed(downSpeed) {
-                                                    markers.clearLayers();
-                                                    for (let i = 0; i < filterArray.length; i++) {
-                                                        switch (speedSwitchValue) {
-                                                            case 0:
-
-                                                                if (filterArray[i].downFiber >= downSpeed) {
-                                                                    markersToAdd.push(filterArray[i]);
-                                                                }
-                                                                break;
-                                                            case 1:
-                                                                if (filterArray[i].downKabel >= downSpeed) {
-                                                                    markersToAdd.push(filterArray[i]);
-                                                                }
-                                                                break;
-                                                            case 2:
-                                                                if (filterArray[i].downDsl >= downSpeed) {
-                                                                    markersToAdd.push(filterArray[i]);
-                                                                }
-                                                                break;
-                                                            case 3:
-                                                                if (filterArray[i].mobil >= downSpeed) {
-                                                                    markersToAdd.push(filterArray[i]);
-                                                                }
-                                                                break;
-                                                            case 4:
-                                                                if (filterArray[i].downFiber >= downSpeed || filterArray[i].downKabel >= downSpeed || filterArray[i].downDsl >= downSpeed || filterArray[i].mobil >= downSpeed) {
-                                                                    markersToAdd.push(filterArray[i]);
-                                                                }
-
-                                                                break;
-                                                        }
-
-                                                    }
-
-                                                    for (let i = 0; i < markersToAdd.length; i++) {
-                                                        markers.addLayer(markersToAdd[i]);
-                                                    }
-                                                    mymap.addLayer(markers);
-                                                    document.getElementById('unikCVR').innerHTML
-                                                        = (markersToAdd.length);
-                                                    document.getElementById('button-a').disabled = false;
-
-                                                    updateDoughnutChart(markersToAdd);
-
-                                                }
-                                                function updateTextInput(value) {
-                                                    document.getElementById("txtMbits").textContent = value;
-                                                }
-
-                                            </script>
                                             <input type="range" min="0" max="1000" value="0" class="custom-range" step="10" id="formControlRange" onmousemove="updateTextInput(this.value);" onchange="markersToAdd = []; updateMapBySpeed(this.value);" , disabled />
                                             <h4 class="small font-weight-bold text-center" id="txtMbits">0</h4>
-                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -348,149 +250,35 @@
                                     <!-- Card Header - Dropdown -->
                                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                         <h6 class="m-0 font-weight-bold text-primary">Bedste fastnet teknologi for adresser (%)</h6>
-
                                     </div>
 
                                     <!-- Card Body -->
                                     <div class="card-body">
-
                                         <div class="text-center small">
 
-
                                             <canvas id="doughnut" height="250" width="300"></canvas>
-                                            @*<script src="~/scripts/doughnut.js"></script>*@
 
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
 
                             <!-- Area Chart -->
                             <div class="col-lg-6" style=" height: 600px; margin-bottom: 1.5rem!important;">
-                                <div class="card shadow mb-4" style="height: 100%">
+                                <div class="card shadow mb-4 " style="height: 100%">
                                     <!-- Card Header - Dropdown -->
                                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                         <h6 class="m-0 font-weight-bold text-primary">Map overview</h6>
                                         <!--SPINNER-->
                                         <div class="spinner-border" id="spinner" role="status"></div>
-                                        @*<div class="dropdown no-arrow">
-                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                <div class="dropdown-header">Dropdown Header:</div>
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </div>*@
 
                                     </div>
                                     <!-- Card Body -->
                                     <div class="card-body" style="height: 100%; padding: 0">
                                         <div class="chart-area" style="height: 100%">
                                             <div id="mapid" class="chart-area" style="height: 100%">
-                                                <script>
-                                                    function s2ab(s) {
-
-                                                        var buf = new ArrayBuffer(s.length);
-                                                        var view = new Uint8Array(buf);
-                                                        for (var i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
-                                                        return buf;
-
-                                                    }
-                                                    function generateLeadList() {
-                                                        var wb = XLSX.utils.book_new();
-                                                        wb.Props = {
-                                                            Title: "Lead Liste",
-                                                            Subject: "Liste over brancher med ønskede specifikationer",
-                                                            Author: "Vimento"
-                                                        };
-                                                        wb.SheetNames.push("Leads");
-                                                        var ws_data = [['Navn', 'Branche', 'Adresse', 'Ansatte', 'Fiber ned', 'Fiber op', 'Kabel ned', 'Kabel op', 'Dsl ned', 'Dsl op', 'Mobil', 'Tlf. nr.', 'E-mail']];
-                                                        if (markersToAdd == 0) {
-                                                            for (var i = 0; i < filterArray.length; i++) {
-                                                                ws_data.push([
-                                                                    filterArray[i].name,
-                                                                    filterArray[i].business,
-                                                                    filterArray[i].address,
-                                                                    filterArray[i].employees,
-                                                                    filterArray[i].downFiber,
-                                                                    filterArray[i].upFiber,
-                                                                    filterArray[i].downKabel,
-                                                                    filterArray[i].upKabel,
-                                                                    filterArray[i].downDsl,
-                                                                    filterArray[i].upDsl,
-                                                                    filterArray[i].mobil
-                                                                ]);
-                                                            }
-                                                        }
-                                                        else {
-                                                            for (var i = 0; i < markersToAdd.length; i++) {
-                                                                ws_data.push([
-                                                                    markersToAdd[i].name,
-                                                                    markersToAdd[i].business,
-                                                                    markersToAdd[i].address,
-                                                                    markersToAdd[i].employees,
-                                                                    markersToAdd[i].downFiber,
-                                                                    markersToAdd[i].upFiber,
-                                                                    markersToAdd[i].downKabel,
-                                                                    markersToAdd[i].upKabel,
-                                                                    markersToAdd[i].downDsl,
-                                                                    markersToAdd[i].upDsl,
-                                                                    markersToAdd[i].mobil
-                                                                ]);
-                                                            }
-                                                        }
-
-                                                        var ws = XLSX.utils.aoa_to_sheet(ws_data);
-                                                        wb.Sheets["Leads"] = ws;
-                                                        var wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
-
-                                                        saveAs(new Blob([s2ab(wbout)], { type: "application/octet-stream" }), 'Lead_list.xlsx');
-
-                                                    }
-                                                </script>
                                             </div>
                                             <button id="button-a" style="pointer-events: auto" onclick="generateLeadList();" disabled>Opret lead-liste</button>
-                                            <script>
-                                                function replaceLetters(string) {
-                                                    var str1 = string;
-                                                    var str2 = str1.replace(/&#230;/g, "æ");
-                                                    var str3 = str2.replace(/&#233;/g, "é");
-                                                    var str4 = str3.replace(/&#248;/g, "ø");
-                                                    var str5 = str4.replace(/&#229;/g, "å");
-                                                    var str6 = str5.replace(/&#216;/g, "Ø");
-                                                    var str7 = str6.replace(/&#198;/g, "Æ");
-                                                    var str8 = str7.replace(/&#197;/g, "Å");
-                                                    return str8;
-                                                }
-                                                function fixFormat(array) {
-                                                    for (var i = 0; i < array.length; i++) {
-
-                                                        var dirtyBusinessString = array[i].business;
-                                                        var cleanBusinessString = replaceLetters(dirtyBusinessString);
-                                                        array[i].business = cleanBusinessString;
-
-                                                        var dirtyNameString = array[i].name;
-                                                        var cleanNameString = replaceLetters(dirtyNameString);
-                                                        array[i].name = cleanNameString;
-
-                                                        var dirtyAddressString = array[i].address;
-                                                        var cleanAddressString = replaceLetters(dirtyAddressString);
-                                                        array[i].address = cleanAddressString;
-
-                                                        searchArray.push(array[i].business);
-                                                    }
-                                                    return array;
-                                                }
-                                            </script>
-
-
-
-
                                             <script>
                                                 var mymap = L.map('mapid').setView([57.047218, 9.920100], 8);
                                                 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -504,7 +292,6 @@
 
                                                 var allMarkersArray = new Array();
                                                 var filterArray = new Array();
-                                                //var filterString = "downFiber";
                                                 var speedSwitchValue;
                                                 var searchArray = new Array();
 
@@ -516,237 +303,8 @@
                                                     emp: 5,
                                                     name: 'placeholder name'
                                                 });
-
-                                                function onClick(e) {
-
-                                                    cordCheck(this.getLatLng().lat, this.getLatLng().lng);
-                                                    displayInfo(this)  //kalder function for fremvisning af data i informations panel
-                                                    myChart.update()  //updatere charts
-                                                }
-
-                                                var index = 0;
-                                                function nextInfo(sum) {
-
-                                                    index = (index + sum);
-
-                                                    if (index <= 0) {
-
-                                                        index = 0;
-                                                    }
-                                                    else if (index > (filterArray.length) - 1) {
-                                                        index = ((filterArray.length - 1));
-
-                                                    }
-                                                    displayInfo(filterArray[index]);
-                                                    document.getElementById('side').innerHTML
-                                                        = ((index + 1) + " / " + filterArray.length);
-                                                }
-
-                                                function cordCheck(clickLat, clicklng) {
-                                                    filterArray = [];
-                                                    index = 0;
-                                                    for (var i = 0; i < (allMarkersArray.length); i++) {
-                                                        var marker = allMarkersArray[i];
-
-                                                        if (marker.getLatLng().lng == clicklng && marker.getLatLng().lat == clickLat) {
-                                                            filterArray.push(marker);
-                                                        }
-                                                    }
-                                                    document.getElementById('side').innerHTML
-                                                        = ((index + 1) + " / " + filterArray.length);
-                                                }
-
-                                                function enableSpinner() {
-                                                    document.getElementById("spinner").hidden = false;
-                                                }
-                                                function disableSpinner() {
-                                                    document.getElementById("spinner").hidden = true;
-                                                }
-
-                                                //Filtrer searchArray ud fra input i søgefeltet og tilføjer dem på kortet
-                                                function searchFilter(search) {
-                                                    searchArray = [];
-                                                    filterArray = [];
-                                                    markers.clearLayers();
-
-                                                    for (var i = 0; i < (allMarkersArray.length); i++) {
-                                                        var marker = allMarkersArray[i];
-
-                                                        if (marker.business == search) {
-                                                            searchArray.push(marker);
-                                                            filterArray.push(marker);
-                                                            document.getElementById('button-a').disabled = false;
-                                                        }
-                                                    }
-                                                    searchArray.forEach(m => markers.addLayer(m));
-                                                    mymap.addLayer(markers);
-                                                    document.getElementById('unikCVR').innerHTML
-                                                        = (searchArray.length);
-                                                    updateDoughnutChart(searchArray);
-                                                    
-                                                }
-
-                                                function clearFilters() {
-                                                    document.getElementById("formControlRange").disabled = true;
-                                                    document.getElementById('button-a').disabled = true;
-                                                    document.getElementById("formControlRange").value = "0";
-                                                    document.getElementById('myInput').value = '';
-                                                    addAllMarkers();
-                                                    document.getElementById('unikCVR').innerHTML
-                                                        = (allMarkersArray.length);
-                                                    updateDoughnutChart(allMarkersArray);
-                                                    document.getElementById('radioAll').checked = true;
-                                                }
-
-                                                function addAllMarkers() {
-                                                    markers.clearLayers();
-                                                    for (let i = 0; i < allMarkersArray.length; i++) {
-                                                        markers.addLayer(allMarkersArray[i]);
-                                                    }
-                                                    mymap.addLayer(markers);
-                                                    
-                                                }
-
-                                                function tekFilter(selectSwitch) {
-                                                    markers.clearLayers();
-                                                    switch (selectSwitch) {
-                                                        case 0:
-                                                            document.getElementById('button-a').disabled = false;
-                                                            document.getElementById("formControlRange").disabled = false;
-                                                            if (document.getElementById('myInput').value != '') {
-                                                                var result = searchArray.filter(checkFiber);
-                                                                speedSwitchValue = 0;
-                                                                document.getElementById("formControlRange").value = "0";
-                                                                break;
-                                                            } else {
-                                                                var result = allMarkersArray.filter(checkFiber);
-                                                                speedSwitchValue = 0;
-                                                                document.getElementById("formControlRange").value = "0";
-                                                                break;
-                                                            }
-                                                        case 1:
-                                                            document.getElementById('button-a').disabled = false;
-                                                            document.getElementById("formControlRange").disabled = false;
-                                                            if (document.getElementById('myInput').value != '') {
-                                                                var result = searchArray.filter(checkKabel);
-                                                                speedSwitchValue = 1;
-                                                                document.getElementById("formControlRange").value = "0";
-                                                                break;
-                                                            } else {
-                                                                var result = allMarkersArray.filter(checkKabel);
-                                                                speedSwitchValue = 1;
-                                                                document.getElementById("formControlRange").value = "0";
-                                                                break;
-                                                            }
-                                                        case 2:
-                                                            document.getElementById('button-a').disabled = false;
-                                                            document.getElementById("formControlRange").disabled = false;
-                                                            if (document.getElementById('myInput').value != '') {
-                                                                var result = searchArray.filter(checkDsl);
-                                                                speedSwitchValue = 2;
-                                                                document.getElementById("formControlRange").value = "0";
-                                                                break;
-                                                            } else {
-                                                                var result = allMarkersArray.filter(checkDsl);
-                                                                speedSwitchValue = 2;
-                                                                document.getElementById("formControlRange").value = "0";
-                                                                break;
-                                                            }
-                                                        case 3:
-                                                            document.getElementById('button-a').disabled = false;
-                                                            document.getElementById("formControlRange").disabled = false;
-                                                            if (document.getElementById('myInput').value != '') {
-                                                                var result = searchArray.filter(checkMobil);
-                                                                speedSwitchValue = 3;
-                                                                document.getElementById("formControlRange").value = "0";
-                                                                break;
-                                                            } else {
-                                                                var result = allMarkersArray.filter(checkMobil);
-                                                                speedSwitchValue = 3;
-                                                                document.getElementById("formControlRange").value = "0";
-                                                                break;
-                                                            }
-                                                        case 4:
-                                                            document.getElementById('button-a').disabled = false;
-                                                            document.getElementById("formControlRange").disabled = false;
-                                                            if (document.getElementById('myInput').value != '') {
-                                                                var result = searchArray;
-                                                                speedSwitchValue = 4;
-                                                                document.getElementById("formControlRange").value = "0";
-                                                                break;
-                                                            } else {
-                                                                var result = allMarkersArray;
-                                                                speedSwitchValue = 4;
-                                                                document.getElementById("formControlRange").value = "0";
-                                                                break;
-                                                            }
-                                                    }
-
-
-                                                    result.forEach(m => markers.addLayer(m));
-                                                    filterArray = result;
-                                                    mymap.addLayer(markers);
-                                                    updateTextInput(0);
-                                                    document.getElementById('unikCVR').innerHTML
-                                                        = (result.length);
-                                                    updateDoughnutChart(filterArray);
-                                                }
-
-                                                function checkFiber(speed) {
-                                                    return speed.downFiber > 0;
-                                                }
-                                                function checkKabel(speed) {
-                                                    return speed.downKabel > 0;
-                                                }
-                                                function checkDsl(speed) {
-                                                    return speed.downDsl > 0;
-                                                }
-                                                function checkMobil(speed) {
-                                                    return speed.mobil > 0;
-                                                }
-
-                                                function displayInfo(marker) {
-                                                    document.getElementById('firmanavn').innerHTML
-                                                        = marker.name;
-                                                    document.getElementById('branchenavn').innerHTML
-                                                        = marker.business;
-                                                    document.getElementById('antalansatte').innerHTML
-                                                        = marker.employees;
-                                                    document.getElementById('vejnavn').innerHTML
-                                                        = marker.address;
-                                                    // onclick function til at vise given data fra et firma
-
-                                                    //Tilføjer data til chart.
-                                                    addDataDownFiber(parseInt(marker.downFiber))
-                                                    addDataUpFiber(parseInt(marker.upFiber))
-                                                    addDataDownKabel(parseInt(marker.downKabel))
-                                                    addDataUpKabel(parseInt(marker.upKabel))
-                                                    addDataDownDsl(parseInt(marker.downDsl))
-                                                    addDataUpDsl(parseInt(marker.upDsl))
-                                                    addDataMobil(parseInt(marker.mobil))
-
-                                                }
-
-                                                function addClusters(localarray, lat, long, createdAt, name, business, employees, address, downFiber, upFiber, downKabel, upKabel, downDsl, upDsl, mobil) {
-
-                                                    var companyMarker = new L.circleMarker([lat, long]).on('click', onClick);
-                                                    companyMarker.createdAt = createdAt,
-                                                    companyMarker.name = name, companyMarker.business = business,
-                                                        companyMarker.employees = employees, companyMarker.address = address,
-                                                        companyMarker.downFiber = downFiber, companyMarker.upFiber = upFiber,
-                                                        companyMarker.downKabel = downKabel, companyMarker.upKabel = upKabel,
-                                                        companyMarker.downDsl = downDsl, companyMarker.upDsl = upDsl,
-                                                        companyMarker.mobil = mobil;
-                                                    companyMarker.bindPopup(address);
-                                                    markers.addLayer(companyMarker);
-
-                                                    //Laver et array med Branche navne til vores tekst søgning.
-                                                    localarray.push(companyMarker);
-                                                                                                      
-
-                                                }
                                             </script>
-                                            
+
                                             <!--køre igennem alle firmaer i databasen og tilføjer dem som marker-->
                                             @foreach (var company in Model)
                                             {
@@ -765,12 +323,10 @@
                                                 document.getElementById("updateDate").innerHTML = allMarkersArray[0].createdAt;
                                                 //console.log(allMarkersArray.length);
                                             </script>
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
 
                             <div class="col-xl-3 col-lg-2">
                                 <div class="card shadow mb-4">
@@ -784,7 +340,6 @@
                                         <div class="col-auto">
                                             <i class="fas fa-map-marker-alt fa-2x text-danger"></i>
                                         </div>
-
                                     </div>
 
                                     @*Card Body*@
@@ -797,224 +352,33 @@
                                         <h6 id="antalansatte"> ... </h6>
                                         <div class="text-xs font-weight-bold text-primary text-uppercase mt-1">Adresse</div>
                                         <h6 id="vejnavn"> ... </h6>
-
-
-
                                     </div>
                                 </div>
-
 
                                 <div class="card shadow mb-4">
                                     <!-- Card Header - Dropdown -->
                                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                         <h6 class="m-0 font-weight-bold text-primary">Hastighed fordelt på teknologi</h6>
-
                                     </div>
 
                                     <!-- Card Body -->
                                     <div class="card-body">
-
                                         <div class="text-center small">
                                             <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js'></script>
                                             <canvas id="bar" height="250" width="300"></canvas>
-                                            <script>
-                                                var ctx = document.getElementById('bar');
-                                                var myChart = new Chart(ctx, {
-                                                    type: 'bar',
-                                                    data: {
-                                                        labels: ['Fiber', 'Kabel', 'Dsl', 'Mobil'],
-                                                        datasets: [{
-                                                            label: 'Max Download Hastighed (Mbit)',
-                                                            data: [],
-                                                            backgroundColor: [
-                                                                'rgba(78, 115, 223, 1)',
-                                                                'rgba(78, 115, 223, 1)',
-                                                                'rgba(78, 115, 223, 1)',
-                                                                'rgba(78, 115, 223, 1)'
-                                                            ],
-                                                            borderColor: [
-                                                                'rgba(189, 180, 180, 0.8)',
-                                                                'rgba(189, 180, 180, 0.8)',
-                                                                'rgba(189, 180, 180, 0.8)',
-                                                                'rgba(189, 180, 180, 0.8)'
-                                                            ],
-                                                            borderWidth: 1
-                                                        }, {
+                                            <script src="~/Scripts/barChart.js"></script>
 
-                                                            label: 'Max Upload Hastighed (Mbit)',
-                                                            data: [],
-                                                            backgroundColor: [
-                                                                'rgba(28, 200, 138, 1)',
-                                                                'rgba(28, 200, 138, 1)',
-                                                                'rgba(28, 200, 138, 1)',
-                                                                'rgba(28, 200, 138, 1)'
-                                                            ],
-                                                            borderColor: [
-                                                                'rgba(189, 180, 180, 0.8)',
-                                                                'rgba(189, 180, 180, 0.8)',
-                                                                'rgba(189, 180, 180, 0.8)',
-                                                                'rgba(189, 180, 180, 0.8)'
-                                                            ],
-                                                            borderWidth: 1
-                                                        }]
-                                                    },
-                                                    options: {
-                                                        maintainAspectRatio: false,
-                                                        scales: {
-                                                            yAxes: [{
-                                                                ticks: {
-                                                                    beginAtZero: true   
-                                                                }
-                                                            }]
-                                                        }
-                                                    }
-                                                });
-
-                                                function addDataDownFiber(data) {
-                                                    myChart.data.datasets[0].data[0] = data;
-                                                }
-                                                function addDataUpFiber(data) {
-                                                    myChart.data.datasets[1].data[0] = data;
-                                                }
-                                                function addDataDownKabel(data) {
-                                                    myChart.data.datasets[0].data[1] = data;
-                                                }
-                                                function addDataUpKabel(data) {
-                                                    myChart.data.datasets[1].data[1] = data;
-                                                }
-                                                function addDataDownDsl(data) {
-                                                    myChart.data.datasets[0].data[2] = data;
-                                                }
-                                                function addDataUpDsl(data) {
-                                                    myChart.data.datasets[1].data[2] = data;
-                                                }
-                                                function addDataMobil(data) {
-                                                    myChart.data.datasets[0].data[3] = data;
-                                                }
-                                            </script>
                                         </div>
                                     </div>
                                 </div>
-
                                 <script src="~/Scripts/doughnut.js"></script>
                             </div>
-
-
-
                         </div>
-                        @*end of main row*@
-
-
-
+                        <!-- End of main row -->
                         <!-- Content Row -->
-                        <div class="row" >
-
-                            @*<div class="col-lg-4">
-
-
-                                <div class="card shadow">
-                                    <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">Vis for hastighed</h6>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="m-auto">
-                                            <div class="form-check-inline">
-                                                <label class="form-check-label">
-                                                    <input type="radio" class="form-check-input" onclick="tekFilter(0)" name="optradio">Fiber
-                                                </label>
-                                            </div>
-                                            <div class="form-check-inline">
-                                                <label class="form-check-label">
-                                                    <input type="radio" class="form-check-input" onclick="tekFilter(1)" name="optradio">Kabel
-                                                </label>
-                                            </div>
-                                            <div class="form-check-inline disabled">
-                                                <label class="form-check-label">
-                                                    <input type="radio" class="form-check-input" onclick="tekFilter(2)" name="optradio">Dsl
-                                                </label>
-                                            </div>
-                                            <div class="form-check-inline">
-                                                <label class="form-check-label">
-                                                    <input type="radio" class="form-check-input" onclick="tekFilter(3)" name="optradio">Mobil
-                                                </label>
-                                            </div>
-                                            <div class="form-check-inline">
-                                                <label class="form-check-label">
-                                                    <input type="radio" class="form-check-input" onclick="addAllMarkers" name="optradio">Alle
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="form-group row">
-                                                <div class="col-lg-3">
-                                                    <input class="form-control-plaintext " placeholder="Mbit/s" id="txtMbits">
-                                                </div>
-                                            </div>
-                                            <h4 class="small font-weight-bold">0 Mbit/s <span class="float-right">1000 Mbit/s</span></h4>
-                                            <script>
-                                                function updateTextInput(val) {
-                                                    document.getElementById('txtMbits').value = 'Min ' + val + ' Mbit/s';
-                                                }
-                                                var markersToAdd = [];
-                                                function updateMapBySpeed(downSpeed) {
-                                                    markers.clearLayers();
-                                                    for (let i = 0; i < filterArray.length; i++) {
-                                                        switch (speedSwitchValue) {
-                                                            case 0:
-
-                                                                if (filterArray[i].downFiber >= downSpeed) {
-                                                                    markersToAdd.push(filterArray[i]);
-                                                                }
-                                                                break;
-                                                            case 1:
-                                                                if (filterArray[i].downKabel >= downSpeed) {
-                                                                    markersToAdd.push(filterArray[i]);
-                                                                }
-                                                                break;
-                                                            case 2:
-                                                                if (filterArray[i].downDsl >= downSpeed) {
-                                                                    markersToAdd.push(filterArray[i]);
-                                                                }
-                                                                break;
-                                                            case 3:
-                                                                if (filterArray[i].mobil >= downSpeed) {
-                                                                    markersToAdd.push(filterArray[i]);
-                                                                }
-                                                                break;
-                                                            case 4:
-                                                                if (filterArray[i].downFiber >= downSpeed || filterArray[i].downKabel >= downSpeed || filterArray[i].downDsl >= downSpeed || filterArray[i].mobil >= downSpeed) {
-                                                                    markersToAdd.push(filterArray[i]);
-                                                                }
-
-                                                                break;
-                                                        }
-
-                                                    }
-
-                                                    for (let i = 0; i < markersToAdd.length; i++) {
-                                                        markers.addLayer(markersToAdd[i]);
-                                                    }
-                                                    mymap.addLayer(markers);
-                                                    document.getElementById('unikCVR').innerHTML
-                                                        = (markersToAdd.length);
-                                                    document.getElementById('button-a').disabled = false;
-
-                                                    updateDoughnutChart(markersToAdd);
-
-                                                }
-
-                                            </script>
-                                            <input type="range" min="0" max="1000" value="0" class="form-control-range" step="10" id="formControlRange" onmousemove="updateTextInput(this.value);" onchange="markersToAdd = []; updateMapBySpeed(this.value);" , disabled>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                            </div>*@
+                        <div class="row">
                             <div>
                                 <div>
-                                   
                                     <form autocomplete="off" class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
                                         <div class="input-group">
                                             <input class="form-control" input id="myInput" type="text" spellcheck="false" name="branche" placeholder="Søg efter branche" aria-label="Search" aria-describedby="basic-addon2">
@@ -1022,147 +386,22 @@
                                             <a class="btn btn-primary" onclick="clearFilters()" , myInput=" ">Ryd filter</a>
                                         </div>
                                     </form>
-                                    <script charset="utf-8">
-                                        function autocomplete(inp, arr) {
-                                            /*the autocomplete function takes two arguments,
-                                            the text field element and an array of possible autocompleted values:*/
-                                            var currentFocus;
-                                            /*execute a function when someone writes in the text field:*/
-                                            inp.addEventListener("input", function (e) {
-                                                var a, b, i, val = this.value;
-                                                /*close any already open lists of autocompleted values*/
-                                                closeAllLists();
-                                                if (!val) { return false; }
-                                                currentFocus = -1;
-                                                /*create a DIV element that will contain the items (values):*/
-                                                a = document.createElement("DIV");
-                                                a.setAttribute("id", this.id + "autocomplete-list");
-                                                a.setAttribute("class", "autocomplete-items");
-                                                /*append the DIV element as a child of the autocomplete container:*/
-                                                this.parentNode.appendChild(a);
-                                                /*for each item in the array...*/
-                                                for (i = 0; i < arr.length; i++) {
-                                                    /*check if the item contains the same letters as the text field value:*/
-                                                    if ((arr[i].substr(val.length).toUpperCase().includes(val.toUpperCase())) || (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase())){
-                                                        /*create a DIV element for each matching element:*/
-                                                        b = document.createElement("DIV");
-                                                        /*make the matching letters bold:*/
-                                                        b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
-                                                        b.innerHTML += arr[i].substr(val.length);
-                                                        /*insert a input field that will hold the current array item's value:*/
-                                                        b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
-                                                        /*execute a function when someone clicks on the item value (DIV element):*/
-                                                        b.addEventListener("click", function (e) {
-                                                            /*insert the value for the autocomplete text field:*/
-                                                            inp.value = this.getElementsByTagName("input")[0].value;
-                                                            /*close the list of autocompleted values,
-                                                            (or any other open lists of autocompleted values:*/
-                                                            closeAllLists();
-                                                        });
-                                                        a.appendChild(b);
-                                                    }
-                                                }
-                                            });
-                                            /*execute a function presses a key on the keyboard:*/
-                                            inp.addEventListener("keydown", function (e) {
-                                                var x = document.getElementById(this.id + "autocomplete-list");
-                                                if (x) x = x.getElementsByTagName("div");
-                                                if (e.keyCode == 40) {
-                                                    /*If the arrow DOWN key is pressed,
-                                                    increase the currentFocus variable:*/
-                                                    currentFocus++;
-                                                    /*and and make the current item more visible:*/
-                                                    addActive(x);
-                                                } else if (e.keyCode == 38) { //up
-                                                    /*If the arrow UP key is pressed,
-                                                    decrease the currentFocus variable:*/
-                                                    currentFocus--;
-                                                    /*and and make the current item more visible:*/
-                                                    addActive(x);
-                                                } else if (e.keyCode == 13) {
-                                                    console.log(inp)
-
-                                                    /*If the ENTER key is pressed, prevent the form from being submitted,*/
-                                                    e.preventDefault();
-                                                    if (currentFocus > -1) {
-                                                        //    /*and simulate a click on the "active" item:*/
-                                                        if (x) x[currentFocus].click();
-                                                    }
-                                                }
-                                            });
-                                            //Tager text fra input feltet og aktiverer søge knappen når man trykker enter.
-                                            inp.addEventListener("keyup", function (event) {
-                                                if (event.keyCode === 13) {
-                                                    event.preventDefault();
-                                                    document.getElementById("searchButton").click();
-                                                }
-                                            })
-                                            function addActive(x) {
-                                                /*a function to classify an item as "active":*/
-                                                if (!x) return false;
-                                                /*start by removing the "active" class on all items:*/
-                                                removeActive(x);
-                                                if (currentFocus >= x.length) currentFocus = 0;
-                                                if (currentFocus < 0) currentFocus = (x.length - 1);
-                                                /*add class "autocomplete-active":*/
-                                                x[currentFocus].classList.add("autocomplete-active");
-                                            }
-                                            function removeActive(x) {
-                                                /*a function to remove the "active" class from all autocomplete items:*/
-                                                for (var i = 0; i < x.length; i++) {
-                                                    x[i].classList.remove("autocomplete-active");
-                                                }
-                                            }
-                                            function closeAllLists(elmnt) {
-                                                /*close all autocomplete lists in the document,
-                                                except the one passed as an argument:*/
-                                                var x = document.getElementsByClassName("autocomplete-items");
-                                                for (var i = 0; i < x.length; i++) {
-                                                    if (elmnt != x[i] && elmnt != inp) {
-                                                        x[i].parentNode.removeChild(x[i]);
-                                                    }
-                                                }
-                                            }
-                                            ///*execute a function when someone clicks in the document:*/
-                                            document.addEventListener("click", function (e) {
-                                                closeAllLists(e.target);
-                                            });
-                                        }
-
+                                    <script charset="utf-8">                  
                                         //Array der indeholder alle branche betegnelser
-
                                         var branche = searchArray;
                                         let unique = [...new Set(branche)]
-                                        
 
                                         /*initiate the autocomplete function on the "myInput" element, and pass along the branche array as possible autocomplete values:*/
                                         autocomplete(document.getElementById("myInput"), unique);
-
                                     </script>
-
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
-
-                    
                 </div>
                 <!-- /.container-fluid -->
-
             </div>
             <!-- End of Main Content -->
-            <!-- Footer -->
-            @*<footer class="sticky-footer bg-white">
-                    <div class="container my-auto">
-                        <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; Your Website 2020</span>
-                        </div>
-                    </div>
-                </footer>*@
-            <!-- End of Footer -->
-
         </div>
         <!-- End of Content Wrapper -->
         </div>
@@ -1171,25 +410,6 @@
         <a class="scroll-to-top rounded" href="#page-top">
             <i class="fas fa-angle-up"></i>
         </a>
-
-        <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <!-- Bootstrap core JavaScript-->
         <script src="~/Content/vendor/jquery/jquery.min.js"></script>

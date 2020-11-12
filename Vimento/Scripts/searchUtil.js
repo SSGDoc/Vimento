@@ -1,4 +1,62 @@
-﻿function autocomplete(inp, arr) {
+﻿function replaceLetters(string) {
+    var str1 = string;
+    var str2 = str1.replace(/&#230;/g, "æ");
+    var str3 = str2.replace(/&#233;/g, "é");
+    var str4 = str3.replace(/&#248;/g, "ø");
+    var str5 = str4.replace(/&#229;/g, "å");
+    var str6 = str5.replace(/&#216;/g, "Ø");
+    var str7 = str6.replace(/&#198;/g, "Æ");
+    var str8 = str7.replace(/&#197;/g, "Å");
+    return str8;
+}
+
+
+function fixFormat(array) {
+    for (var i = 0; i < array.length; i++) {
+
+        var dirtyBusinessString = array[i].business;
+        var cleanBusinessString = replaceLetters(dirtyBusinessString);
+        array[i].business = cleanBusinessString;
+
+        var dirtyNameString = array[i].name;
+        var cleanNameString = replaceLetters(dirtyNameString);
+        array[i].name = cleanNameString;
+
+        var dirtyAddressString = array[i].address;
+        var cleanAddressString = replaceLetters(dirtyAddressString);
+        array[i].address = cleanAddressString;
+
+        searchArray.push(array[i].business);
+    }
+    return array;
+}
+
+//Filtrer searchArray ud fra input i søgefeltet og tilføjer dem på kortet
+function searchFilter(search) {
+    searchArray = [];
+    filterArray = [];
+    markers.clearLayers();
+
+    for (var i = 0; i < (allMarkersArray.length); i++) {
+        var marker = allMarkersArray[i];
+
+        if (marker.business == search) {
+            searchArray.push(marker);
+            filterArray.push(marker);
+            document.getElementById('button-a').disabled = false;
+        }
+    }
+    searchArray.forEach(m => markers.addLayer(m));
+    mymap.addLayer(markers);
+    document.getElementById('unikCVR').innerHTML
+        = (searchArray.length);
+    updateDoughnutChart(searchArray);
+
+}
+
+
+
+function autocomplete(inp, arr) {
     /*the autocomplete function takes two arguments,
     the text field element and an array of possible autocompleted values:*/
     var currentFocus;
@@ -17,8 +75,8 @@
         this.parentNode.appendChild(a);
         /*for each item in the array...*/
         for (i = 0; i < arr.length; i++) {
-            /*check if the item starts with the same letters as the text field value:*/
-            if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+            /*check if the item contains the same letters as the text field value:*/
+            if ((arr[i].substr(val.length).toUpperCase().includes(val.toUpperCase())) || (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase())) {
                 /*create a DIV element for each matching element:*/
                 b = document.createElement("DIV");
                 /*make the matching letters bold:*/
@@ -56,6 +114,7 @@
             addActive(x);
         } else if (e.keyCode == 13) {
             console.log(inp)
+
             /*If the ENTER key is pressed, prevent the form from being submitted,*/
             e.preventDefault();
             if (currentFocus > -1) {
@@ -64,6 +123,13 @@
             }
         }
     });
+    //Tager text fra input feltet og aktiverer søge knappen når man trykker enter.
+    inp.addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            document.getElementById("searchButton").click();
+        }
+    })
     function addActive(x) {
         /*a function to classify an item as "active":*/
         if (!x) return false;
@@ -90,12 +156,8 @@
             }
         }
     }
-    /*execute a function when someone clicks in the document:*/
+    ///*execute a function when someone clicks in the document:*/
     document.addEventListener("click", function (e) {
         closeAllLists(e.target);
-        console.log(document.getElementById('myInput').value)
-
-        if (document.getElementById('myInput').value != '')
-            searchFilter(document.getElementById('myInput').value);
     });
 }
