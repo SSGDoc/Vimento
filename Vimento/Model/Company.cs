@@ -13,7 +13,7 @@ namespace Vimento.Model
         public int CompanyID { get; set; }
         public Address Address { get; set; }
 
-        public DateTime TimeStamp { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         public Company()
         {

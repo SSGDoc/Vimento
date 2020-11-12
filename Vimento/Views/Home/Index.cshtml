@@ -727,10 +727,10 @@
 
                                                 }
 
-                                                function addClusters(localarray, lat, long, timestamp, name, business, employees, address, downFiber, upFiber, downKabel, upKabel, downDsl, upDsl, mobil) {
+                                                function addClusters(localarray, lat, long, createdAt, name, business, employees, address, downFiber, upFiber, downKabel, upKabel, downDsl, upDsl, mobil) {
 
                                                     var companyMarker = new L.circleMarker([lat, long]).on('click', onClick);
-                                                    companyMarker.timestamp = timestamp,
+                                                    companyMarker.createdAt = createdAt,
                                                     companyMarker.name = name, companyMarker.business = business,
                                                         companyMarker.employees = employees, companyMarker.address = address,
                                                         companyMarker.downFiber = downFiber, companyMarker.upFiber = upFiber,
@@ -751,7 +751,7 @@
                                             @foreach (var company in Model)
                                             {
                                                 <script charset="utf8_danish_ci">
-                                            addClusters(allMarkersArray, @company.Address.Long, @company.Address.Lat, "@company.TimeStamp", "@company.Name", "@company.Business", "@company.AmountOfEmployees", "@company.Address.StreetName" +
+                                            addClusters(allMarkersArray, @company.Address.Long, @company.Address.Lat, "@company.CreatedAt", "@company.Name", "@company.Business", "@company.AmountOfEmployees", "@company.Address.StreetName" +
                                                 " @company.Address.HouseNr", + " @company.Address.Technology.DownFiber", + "@company.Address.Technology.UpFiber", + "@company.Address.Technology.DownCable", +
                                             "@company.Address.Technology.UpCable", + "@company.Address.Technology.DownDSL", + "@company.Address.Technology.UpDSL", + "@company.Address.Technology.MobileDownRange");
                                                 </script>
@@ -762,8 +762,8 @@
                                                 mymap.addLayer(markers);
                                                 document.getElementById("spinner").hidden = true;
                                                 allMarkersArray = fixFormat(allMarkersArray);
-                                                document.getElementById("updateDate").innerHTML = allMarkersArray[0].timestamp;
-                                                
+                                                document.getElementById("updateDate").innerHTML = allMarkersArray[0].createdAt;
+                                                //console.log(allMarkersArray.length);
                                             </script>
 
                                         </div>
@@ -831,14 +831,12 @@
                                                                 'rgba(78, 115, 223, 1)',
                                                                 'rgba(78, 115, 223, 1)',
                                                                 'rgba(78, 115, 223, 1)'
-
                                                             ],
                                                             borderColor: [
                                                                 'rgba(189, 180, 180, 0.8)',
                                                                 'rgba(189, 180, 180, 0.8)',
                                                                 'rgba(189, 180, 180, 0.8)',
                                                                 'rgba(189, 180, 180, 0.8)'
-
                                                             ],
                                                             borderWidth: 1
                                                         }, {
@@ -865,7 +863,7 @@
                                                         scales: {
                                                             yAxes: [{
                                                                 ticks: {
-                                                                    beginAtZero: true
+                                                                    beginAtZero: true   
                                                                 }
                                                             }]
                                                         }
@@ -1045,7 +1043,7 @@
                                                 /*for each item in the array...*/
                                                 for (i = 0; i < arr.length; i++) {
                                                     /*check if the item contains the same letters as the text field value:*/
-                                                    if (arr[i].substr(val.length).toUpperCase().includes(val.toUpperCase())) {
+                                                    if ((arr[i].substr(val.length).toUpperCase().includes(val.toUpperCase())) || (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase())){
                                                         /*create a DIV element for each matching element:*/
                                                         b = document.createElement("DIV");
                                                         /*make the matching letters bold:*/
