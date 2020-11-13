@@ -53,17 +53,6 @@ function updateMapBySpeed(downSpeed) {
 }
 
 
-function clearFilters() {
-    document.getElementById("formControlRange").disabled = true;
-    document.getElementById('button-a').disabled = true;
-    document.getElementById("formControlRange").value = "0";
-    document.getElementById('myInput').value = '';
-    addAllMarkers();
-    document.getElementById('unikCVR').innerHTML
-        = (allMarkersArray.length);
-    updateDoughnutChart(allMarkersArray);
-    document.getElementById('radioAll').checked = true;
-}
 
 
 function tekFilter(selectSwitch) {

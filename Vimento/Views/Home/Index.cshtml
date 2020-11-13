@@ -199,7 +199,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <!-- Content Row -->
                         <div class="row">
 
@@ -212,39 +211,55 @@
                                         <div class="m-auto">
                                             <div class="form-check-inline">
                                                 <label class="form-check-label">
-                                                    <input type="radio" class="form-check-input" onclick="tekFilter(0)" name="optradio">Fiber
+                                                    <input type="radio" class="form-check-input" onclick="radioBtnFilter(0)" name="optradio">Fiber
                                                 </label>
                                             </div>
                                             <div class="form-check-inline">
                                                 <label class="form-check-label">
-                                                    <input type="radio" class="form-check-input" onclick="tekFilter(1)" name="optradio">Kabel
+                                                    <input type="radio" class="form-check-input" onclick="radioBtnFilter(1)" name="optradio">Kabel
                                                 </label>
                                             </div>
                                             <div class="form-check-inline disabled">
                                                 <label class="form-check-label">
-                                                    <input type="radio" class="form-check-input" onclick="tekFilter(2)" name="optradio">Dsl
+                                                    <input type="radio" class="form-check-input" onclick="radioBtnFilter(2)" name="optradio">Dsl
                                                 </label>
                                             </div>
                                             <div class="form-check-inline">
                                                 <label class="form-check-label">
-                                                    <input type="radio" class="form-check-input" onclick="tekFilter(3)" name="optradio">Mobil
+                                                    <input type="radio" class="form-check-input" onclick="radioBtnFilter(3)" name="optradio">Mobil
                                                 </label>
                                             </div>
                                             <div class="form-check-inline">
                                                 <label class="form-check-label">
-                                                    <input type="radio" class="form-check-input" onclick="tekFilter(4)" name="optradio" id="radioAll" checked="checked">Alle
+                                                    <input type="radio" class="form-check-input" onclick="radioBtnFilter(4)" name="optradio" id="radioAll" checked="checked">Alle
                                                 </label>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <h4 class="small font-weight-bold mt-2">0 Mbit/s<span class="float-right">1000 Mbit/s</span></h4>
-                                            <input type="range" min="0" max="1000" value="0" class="custom-range" step="10" id="formControlRange" onmousemove="updateTextInput(this.value);" onchange="markersToAdd = []; updateMapBySpeed(this.value);" , disabled />
+                                            <input type="range" min="0" max="1000" value="0" class="custom-range" step="10" id="formControlRange" onmousemove="updateTextInput(this.value);" onchange="markersToAdd = []; sliderSpeedFilter(this.value);" , disabled />
                                             <h4 class="small font-weight-bold text-center" id="txtMbits">0</h4>
                                         </div>
                                     </div>
                                 </div>
+                                <script>
+                                    function radioBtnFilter(switchValue) {
+                                        document.getElementById("spinner").hidden = false;
+                                        setTimeout(function () {
+                                            tekFilter(switchValue)
+                                            document.getElementById("spinner").hidden = true;
+                                        }, 0);
+                                    }
+                                    function sliderSpeedFilter(value) {
+                                        document.getElementById("spinner").hidden = false;
+                                        setTimeout(function () {
+                                            updateMapBySpeed(value);
+                                            document.getElementById("spinner").hidden = true;
+                                        }, 0);
+                                    }
 
+                                </script>
 
                                 <div class="card shadow mb-4">
                                     <!-- Card Header - Dropdown -->
@@ -270,7 +285,7 @@
                                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                         <h6 class="m-0 font-weight-bold text-primary">Map overview</h6>
                                         <!--SPINNER-->
-                                        <div class="spinner-border" id="spinner" role="status"></div>
+                                        <div class="spinner-border" id="spinner" role="status" hidden></div>
 
                                     </div>
                                     <!-- Card Body -->
@@ -317,10 +332,19 @@
 
                                             <script>
                                                 //tilføjer alle lavede markers til map
-                                                mymap.addLayer(markers);
-                                                document.getElementById("spinner").hidden = true;
-                                                allMarkersArray = fixFormat(allMarkersArray);
-                                                document.getElementById("updateDate").innerHTML = allMarkersArray[0].createdAt;
+                                                function performCalculations() {
+
+                                                    document.getElementById("spinner").hidden = false;
+                                                    setTimeout(function () {
+                                                        mymap.addLayer(markers);
+                                                        allMarkersArray = fixFormat(allMarkersArray);
+                                                        document.getElementById("updateDate").innerHTML = allMarkersArray[0].createdAt;
+                                                        document.getElementById("spinner").hidden = true;
+                                                    }, 0);
+
+
+                                                }
+                                                performCalculations();
                                                 //console.log(allMarkersArray.length);
                                             </script>
                                         </div>
@@ -383,16 +407,35 @@
                                         <div class="input-group">
                                             <input class="form-control" input id="myInput" type="text" spellcheck="false" name="branche" placeholder="Søg efter branche" aria-label="Search" aria-describedby="basic-addon2">
                                             <a class="btn btn-primary" button id="searchButton" onclick="searchFilter(document.getElementById('myInput').value);" , myInput=" ">Søg</a>
-                                            <a class="btn btn-primary" onclick="clearFilters()" , myInput=" ">Ryd filter</a>
+                                            <a class="btn btn-primary" onclick="removeFilters();" myInput=" ">Ryd filter</a>
                                         </div>
                                     </form>
-                                    <script charset="utf-8">                  
+                                    <script charset="utf-8">
                                         //Array der indeholder alle branche betegnelser
                                         var branche = searchArray;
                                         let unique = [...new Set(branche)]
 
                                         /*initiate the autocomplete function on the "myInput" element, and pass along the branche array as possible autocomplete values:*/
                                         autocomplete(document.getElementById("myInput"), unique);
+                                        function removeFilters() {
+                                            console.log("working...");
+                                            document.getElementById("spinner").hidden = false;
+                                            console.log("Spinner status..." + document.getElementById("spinner").hidden);
+                                            setTimeout(function () {
+                                                document.getElementById("formControlRange").disabled = true;
+                                                document.getElementById('button-a').disabled = true;
+                                                document.getElementById("formControlRange").value = "0";
+                                                document.getElementById('myInput').value = '';
+                                                addAllMarkers();
+                                                document.getElementById('unikCVR').innerHTML
+                                                    = (allMarkersArray.length);
+                                                updateDoughnutChart(allMarkersArray);
+                                                document.getElementById('radioAll').checked = true;
+                                                document.getElementById("spinner").hidden = true;
+                                                console.log("spinner hidden!");
+                                                console.log("done");
+                                            }, 100);
+                                        }
                                     </script>
                                 </div>
                             </div>
