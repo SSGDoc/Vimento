@@ -43,6 +43,41 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"
                 integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ=="
                 crossorigin="anonymous"></script>
+
+        <script>
+
+            var allMarkersArray = new Array();
+            var filterArray = new Array();
+            var speedSwitchValue;
+            var searchArray = new Array();
+
+
+            var markers = L.markerClusterGroup({
+                spiderfyOnMaxZoom: false,
+                showCoverageOnHover: true,
+                zoomToBoundsOnClick: true,
+                disableClusteringAtZoom: 18,
+                emp: 5,
+                name: 'placeholder name'
+            });
+
+        </script>
+
+        <!--køre igennem alle firmaer i databasen og tilføjer dem som marker-->
+        @foreach (var company in Model)
+        {
+            <script charset="utf8_danish_ci">
+                                            addClusters(allMarkersArray, @company.Address.Long, @company.Address.Lat, "@company.CreatedAt", "@company.Name", "@company.Business", "@company.AmountOfEmployees", "@company.Address.StreetName" +
+                                                " @company.Address.HouseNr", + " @company.Address.Technology.DownFiber", + "@company.Address.Technology.UpFiber", + "@company.Address.Technology.DownCable", +
+                                            "@company.Address.Technology.UpCable", + "@company.Address.Technology.DownDSL", + "@company.Address.Technology.UpDSL", + "@company.Address.Technology.MobileDownRange");
+            </script>
+        }
+
+
+        <script>
+            allMarkersArray = fixFormat(allMarkersArray);
+
+        </script>
     </head>
 
     <body id="page-top">
@@ -265,12 +300,31 @@
 
                             <!-- Area Chart -->
                             <div class="col-lg-6" style=" height: 600px; margin-bottom: 1.5rem!important;">
-                                <div class="card shadow mb-4 " style="height: 100%">
+                                <div class="card shadow mb-4 mapWrapper" style="height: 100%">
                                     <!-- Card Header - Dropdown -->
                                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                         <h6 class="m-0 font-weight-bold text-primary">Map overview</h6>
                                         <!--SPINNER-->
                                         <div class="spinner-border" id="spinner" role="status"></div>
+                                        <div>
+                                            <div>
+                                                <form autocomplete="off" class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0 ">
+                                                    <div class="input-group ">
+                                                        <input class="form-control" input id="myInput" type="text" spellcheck="false" name="branche" placeholder="Søg efter branche" aria-label="Search" aria-describedby="basic-addon2">
+                                                        <a class="btn btn-primary" button id="searchButton" onclick="searchFilter(document.getElementById('myInput').value);" , myInput=" ">Søg</a>
+                                                        <a class="btn btn-primary" onclick="clearFilters()" , myInput=" ">Ryd filter</a>
+                                                    </div>
+                                                </form>
+                                                <script charset="utf-8">
+                                                    //Array der indeholder alle branche betegnelser
+                                                    var branche = searchArray;
+                                                    let unique = [...new Set(branche)]
+
+                                                    /*initiate the autocomplete function on the "myInput" element, and pass along the branche array as possible autocomplete values:*/
+                                                    autocomplete(document.getElementById("myInput"), unique);
+                                                </script>
+                                            </div>
+                                        </div>
 
                                     </div>
                                     <!-- Card Body -->
@@ -289,46 +343,21 @@
                                                     zoomOffset: -1,
                                                     accessToken: 'pk.eyJ1IjoibXJzYWdneSIsImEiOiJja2ZiamQ4ajYwcXh3MnhvODU4NjZrZ29xIn0.JXSCWFKMGdFElSPErRk-Zg'
                                                 }).addTo(mymap);
-
-                                                var allMarkersArray = new Array();
-                                                var filterArray = new Array();
-                                                var speedSwitchValue;
-                                                var searchArray = new Array();
-
-                                                var markers = L.markerClusterGroup({
-                                                    spiderfyOnMaxZoom: false,
-                                                    showCoverageOnHover: true,
-                                                    zoomToBoundsOnClick: true,
-                                                    disableClusteringAtZoom: 18,
-                                                    emp: 5,
-                                                    name: 'placeholder name'
-                                                });
-                                            </script>
-
-                                            <!--køre igennem alle firmaer i databasen og tilføjer dem som marker-->
-                                            @foreach (var company in Model)
-                                            {
-                                                <script charset="utf8_danish_ci">
-                                            addClusters(allMarkersArray, @company.Address.Long, @company.Address.Lat, "@company.CreatedAt", "@company.Name", "@company.Business", "@company.AmountOfEmployees", "@company.Address.StreetName" +
-                                                " @company.Address.HouseNr", + " @company.Address.Technology.DownFiber", + "@company.Address.Technology.UpFiber", + "@company.Address.Technology.DownCable", +
-                                            "@company.Address.Technology.UpCable", + "@company.Address.Technology.DownDSL", + "@company.Address.Technology.UpDSL", + "@company.Address.Technology.MobileDownRange");
-                                                </script>
-                                            }
-
-                                            <script>
+                                 
                                                 //tilføjer alle lavede markers til map
                                                 mymap.addLayer(markers);
                                                 document.getElementById("spinner").hidden = true;
-                                                allMarkersArray = fixFormat(allMarkersArray);
+                                               
                                                 document.getElementById("updateDate").innerHTML = allMarkersArray[0].createdAt;
                                                 //console.log(allMarkersArray.length);
                                             </script>
+         
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-xl-3 col-lg-2">
+                            <div class="col-xl-3">
                                 <div class="card shadow mb-4">
                                     @*Card Header - Dropdown*@
                                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -377,25 +406,7 @@
                         <!-- End of main row -->
                         <!-- Content Row -->
                         <div class="row">
-                            <div>
-                                <div>
-                                    <form autocomplete="off" class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-                                        <div class="input-group">
-                                            <input class="form-control" input id="myInput" type="text" spellcheck="false" name="branche" placeholder="Søg efter branche" aria-label="Search" aria-describedby="basic-addon2">
-                                            <a class="btn btn-primary" button id="searchButton" onclick="searchFilter(document.getElementById('myInput').value);" , myInput=" ">Søg</a>
-                                            <a class="btn btn-primary" onclick="clearFilters()" , myInput=" ">Ryd filter</a>
-                                        </div>
-                                    </form>
-                                    <script charset="utf-8">                  
-                                        //Array der indeholder alle branche betegnelser
-                                        var branche = searchArray;
-                                        let unique = [...new Set(branche)]
-
-                                        /*initiate the autocomplete function on the "myInput" element, and pass along the branche array as possible autocomplete values:*/
-                                        autocomplete(document.getElementById("myInput"), unique);
-                                    </script>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>

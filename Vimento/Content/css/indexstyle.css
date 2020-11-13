@@ -161,3 +161,17 @@ input {
     background-color: DodgerBlue !important;
     color: #ffffff;
 }
+
+.mapWrapper{
+
+    position: relative;
+}
+
+.search-group {
+    position: absolute;
+    z-index: 99;
+}
+
+#mapid {
+    z-index: 1;
+}
