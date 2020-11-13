@@ -298,7 +298,7 @@
 
                                 <div class="card shadow mb-4">
                                     <!-- Card Header - Dropdown -->
-                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" >
                                         <h6 class="m-0 font-weight-bold text-primary">Bedste fastnet teknologi for adresser (%)</h6>
                                     </div>
 
@@ -317,24 +317,23 @@
                             <div class="col-lg-6" style=" height: 600px; margin-bottom: 1.5rem!important;">
                                 <div class="card shadow mb-4 mapWrapper" style="height: 100%">
                                     <!-- Card Header - Dropdown -->
-                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="height: 52px;">
                                         <h6 class="m-0 font-weight-bold text-primary">Map overview</h6>
-                                        <!--SPINNER-->
-                                        <div class="spinner-border" id="spinner" role="status"></div>
+                                        <!--SPINNER-->                      
+                                        <div class="spinner-border " id="spinner" role="status" hidden></div>
                                         <div>
                                             <div>
-                                                <form autocomplete="off" class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+                                                <form autocomplete="off" class="d-none d-md-inline-block form-inline">
                                                     <div class="input-group">
-                                                        <input class="form-control" input id="myInput" type="text" spellcheck="false" name="branche" placeholder="Søg efter branche" aria-label="Search" aria-describedby="basic-addon2">
-                                                        <a class="btn btn-primary" button id="searchButton" onclick="searchFilter(document.getElementById('myInput').value);" , myInput=" ">Søg</a>
-                                                        <a class="btn btn-primary" onclick="removeFilters();" myInput=" ">Ryd filter</a>
+                                                        <input class="form-control mr-2" input id="myInput" type="text" spellcheck="false" name="branche" placeholder="Søg efter branche" aria-label="Search" aria-describedby="basic-addon2">
+                                                        <a class="btn btn-primary mr-2 text-white" button id="searchButton" onclick="searchFilter(document.getElementById('myInput').value);" , myInput=" ">Søg</a>
+                                                        <a class="btn btn-primary m-auto text-white" onclick="removeFilters();" myInput=" ">Ryd filter</a>
                                                     </div>
                                                 </form>
                                                 <script charset="utf-8">
                                                     //Array der indeholder alle branche betegnelser
                                                     var branche = searchArray;
                                                     let unique = [...new Set(branche)]
-                                        <div class="spinner-border" id="spinner" role="status" hidden></div>
 
                                                     /*initiate the autocomplete function on the "myInput" element, and pass along the branche array as possible autocomplete values:*/
                                                     autocomplete(document.getElementById("myInput"), unique);
@@ -410,7 +409,7 @@
                             <div class="col-xl-3">
                                 <div class="card shadow mb-4">
                                     @*Card Header - Dropdown*@
-                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between " style="height: 52px;">
 
                                         <h6 class="m-0 font-weight-bold text-primary">Adresse info</h6>
                                         <a onclick="nextInfo(-1)" href="#"> <i class="fas fa-arrow-alt-circle-left fa-2x text-primary"></i></a>

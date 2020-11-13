@@ -79,7 +79,7 @@ function autocomplete(inp, arr) {
             if ((arr[i].substr(val.length).toUpperCase().includes(val.toUpperCase())) || (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase())) {
                 /*create a DIV element for each matching element:*/
                 b = document.createElement("DIV");
-                b.setAttribute("class", "");
+               
                 /*make the matching letters bold:*/
                 b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
                 b.innerHTML += arr[i].substr(val.length);
