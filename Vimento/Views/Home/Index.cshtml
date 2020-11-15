@@ -197,14 +197,23 @@
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Adresser med adgang til fiber</div>
+                                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Adresser med fiber som bedste fastnet teknologi</div>
                                                 <div class="row no-gutters align-items-center">
                                                     <div class="col-auto">
-                                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">86%</div>
+                                                        <div id="fiberSpeedTopCard" class="h5 mb-0 mr-3 font-weight-bold text-gray-800">00.00</div>
+                                                        <script>
+                                                            //Updates the top card (%Fiber)
+                                                            function updateTopCardFiber(array) {
+                                                                var fiberPercentageToken = calculatePercentageOf(fiberBest.length, array.length);
+                                                                document.getElementById("fiberSpeedTopCard").innerHTML = fiberPercentageToken.toString() + "%";
+                                                                var fiberPercentageAttrString = "width: " + fiberPercentageToken.toString() + "%";
+                                                                document.getElementById("progressFiberPercent").setAttribute("style", fiberPercentageAttrString);
+                                                            }
+                                                        </script>
                                                     </div>
                                                     <div class="col">
                                                         <div class="progress progress-sm mr-2">
-                                                            <div class="progress-bar bg-info" role="progressbar" style="width: 86%" aria-valuenow="86" aria-valuemin="0" aria-valuemax="100"></div>
+                                                            <div id="progressFiberPercent" class="progress-bar bg-info" role="progressbar" style="width: 0%" aria-valuemin="0" aria-valuemax="100"></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -347,7 +356,7 @@
                                         <div class="chart-area" style="height: 100%">
                                             <div id="mapid" class="chart-area" style="height: 100%">
                                             </div>
-                                            <button id="button-a" style="pointer-events: auto" onclick="generateLeadList();" disabled>Opret lead-liste</button>
+                                            <button class="btn btn-primary m-auto text-white" id="button-a" style="pointer-events: auto" onclick="generateLeadList();" disabled>Opret lead-liste</button>
                                             <script>
                                                 var mymap = L.map('mapid').setView([57.047218, 9.920100], 8);
                                                 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -466,9 +475,7 @@
                                         /*initiate the autocomplete function on the "myInput" element, and pass along the branche array as possible autocomplete values:*/
                                         autocomplete(document.getElementById("myInput"), unique);
                                         function removeFilters() {
-                                            console.log("working...");
                                             document.getElementById("spinner").hidden = false;
-                                            console.log("Spinner status..." + document.getElementById("spinner").hidden);
                                             setTimeout(function () {
                                                 document.getElementById("formControlRange").disabled = true;
                                                 document.getElementById('button-a').disabled = true;
@@ -480,8 +487,6 @@
                                                 updateDoughnutChart(allMarkersArray);
                                                 document.getElementById('radioAll').checked = true;
                                                 document.getElementById("spinner").hidden = true;
-                                                console.log("spinner hidden!");
-                                                console.log("done");
                                             }, 100);
                                         }
                                     </script>

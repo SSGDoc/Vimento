@@ -80,6 +80,9 @@ function updateDoughnutChart(arrayWithMarkers) {
     myDoughnutChart.data.datasets[0].data[2] = calculatePercentageOf(kabelBest.length, arrayWithMarkers.length);
     myDoughnutChart.data.datasets[0].data[3] = calculatePercentageOf(mobilBest.length, arrayWithMarkers.length);
     myDoughnutChart.update();
+
+    //Updates aditional %Display in the top card
+    updateTopCardFiber(arrayWithMarkers);
 }
 //Called initially when page loads
 updateDoughnutChart(allMarkersArray);
