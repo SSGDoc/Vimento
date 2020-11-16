@@ -83,6 +83,8 @@ function updateDoughnutChart(arrayWithMarkers) {
 
     //Updates aditional %Display in the top card
     updateTopCardFiber(arrayWithMarkers);
+    unikAdd(arrayWithMarkers);
+    
 }
 //Called initially when page loads
 updateDoughnutChart(allMarkersArray);

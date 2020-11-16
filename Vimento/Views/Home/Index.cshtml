@@ -181,7 +181,7 @@
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Unikke adgansadresser</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">6838</div>
+                                                <div id="unikAdd" class="h5 mb-0 font-weight-bold text-gray-800">6838</div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-home fa-2x text-gray-300"></i>
@@ -368,6 +368,7 @@
 
                                                     /*initiate the autocomplete function on the "myInput" element, and pass along the branche array as possible autocomplete values:*/
                                                     autocomplete(document.getElementById("myInput"), unique);
+
                                                 </script>
                                             </div>
                                         </div>
@@ -417,7 +418,7 @@
 
                                             <script>
                                                 //tilføjer alle lavede markers til map
-                                                function performCalculations() {
+                                                function prepareInitialLoad() {
 
                                                     document.getElementById("spinner").hidden = false;
                                                     setTimeout(function () {
@@ -426,11 +427,18 @@
                                                         document.getElementById("updateDate").innerHTML = allMarkersArray[0].createdAt;
                                                         document.getElementById("spinner").hidden = true;
                                                     }, 0);
-
-
                                                 }
-                                                performCalculations();
-                                                //console.log(allMarkersArray.length);
+                                                prepareInitialLoad();
+
+                                                //Funktion der viser unikke adgangsadresser
+                                                function unikAdd(array) {
+                                                    var addrList = [];
+                                                    for (var i = 0; i < array.length; i++){
+                                                        addrList.push(array[i].address);
+                                                    }
+                                                    let unikkeAdresser = [...new Set(addrList)]
+                                                    document.getElementById("unikAdd").innerHTML = unikkeAdresser.length;
+                                                }
                                             </script>
                                         </div>
                                     </div>
