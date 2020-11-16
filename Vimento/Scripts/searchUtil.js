@@ -51,9 +51,17 @@ function searchFilter(search) {
     document.getElementById('unikCVR').innerHTML
         = (searchArray.length);
     updateDoughnutChart(searchArray);
-
+    clearFilterButtons();
+   
 }
 
+
+function clearFilterButtons() {
+    document.getElementById('txtMbits').innerHTML = "0";
+    document.getElementById('radioAll').checked = true;
+    document.getElementById("formControlRange").value = "0";
+
+}
 
 
 function autocomplete(inp, arr) {
