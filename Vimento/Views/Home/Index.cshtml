@@ -112,21 +112,21 @@
                 <hr class="sidebar-divider">        
 
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="charts.html">
+                    <a class="nav-link text-white">
                         <i class="fas fa-fw fa-user-tie  text-white"></i>
                         <span>Sælger</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="charts.html">
+                    <a class="nav-link">
                         <i class="fas fa-fw fa-user-cog"></i>
                         <span>Netværksingeniør</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="charts.html">
+                    <a class="nav-link">
                         <i class="fas fa-fw fa-user-astronaut"></i>
                         <span>Marketingsansvarlig</span>
                     </a>
@@ -150,7 +150,8 @@
 
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                            <h1 class="h3 mb-0 text-gray-800"> <i class="fas fa-fw fa-user-tie text-primary"></i> Sælger Dashboard  </h1>
+                            
 
                         </div>
 
@@ -280,7 +281,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group">
+                                        <div class="form-group mt-4">
                                             <h4 class="small font-weight-bold mt-2">0 Mbit/s<span class="float-right">1000 Mbit/s</span></h4>
                                             <input type="range" min="0" max="1000" value="0" class="custom-range" step="10" id="formControlRange" onmousemove="updateTextInput(this.value);" onchange="markersToAdd = []; sliderSpeedFilter(this.value);" , disabled />
                                             <h4 class="small font-weight-bold text-center" id="txtMbits">0</h4>
@@ -349,7 +350,7 @@
                                 <div class="card shadow mb-4 mapWrapper" style="height: 100%">
                                     <!-- Card Header - Dropdown -->
                                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="height: 52px;">
-                                        <h6 class="m-0 font-weight-bold text-primary">Map overview</h6>
+                                        <h6 class="m-0 font-weight-bold text-primary">Kort</h6>
                                         <!--SPINNER-->
                                         <div class="spinner-border " id="spinner" role="status" hidden></div>
                                         <div>
@@ -377,9 +378,11 @@
                                     <!-- Card Body -->
                                     <div class="card-body" style="height: 100%; padding: 0">
                                         <div class="chart-area" style="height: 100%">
+                                            <button class="btn btn-primary m-auto text-white search-group test" id="button-a" style="pointer-events: auto" onclick="generateLeadList();" disabled>Opret lead-liste</button>
+
                                             <div id="mapid" class="chart-area" style="height: 100%">
+
                                             </div>
-                                            <button class="btn btn-primary m-auto text-white" id="button-a" style="pointer-events: auto" onclick="generateLeadList();" disabled>Opret lead-liste</button>
                                             <script>
                                                 var mymap = L.map('mapid').setView([57.047218, 9.920100], 8);
                                                 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -435,7 +438,7 @@
                                                 //Funktion der viser unikke adgangsadresser
                                                 function unikAdd(array) {
                                                     var addrList = [];
-                                                    for (var i = 0; i < array.length; i++){
+                                                    for (var i = 0; i < array.length; i++) {
                                                         addrList.push(array[i].address);
                                                     }
                                                     let unikkeAdresser = [...new Set(addrList)]

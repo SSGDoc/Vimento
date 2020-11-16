@@ -1,6 +1,6 @@
 ﻿
 function updateTextInput(value) {
-    document.getElementById("txtMbits").textContent = value;
+    document.getElementById("txtMbits").textContent = "Minimum " + value + " Mbit/s";
 }
 
 
