@@ -197,7 +197,7 @@
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Adresser med fiber som bedste fastnet teknologi</div>
+                                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Adresser med fiber som hurtigste teknologi</div>
                                                 <div class="row no-gutters align-items-center">
                                                     <div class="col-auto">
                                                         <div id="fiberSpeedTopCard" class="h5 mb-0 mr-3 font-weight-bold text-gray-800">00.00</div>
@@ -307,8 +307,8 @@
 
                                 <div class="card shadow mb-4">
                                     <!-- Card Header - Dropdown -->
-                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" >
-                                        <h6 class="m-0 font-weight-bold text-primary">Bedste fastnet teknologi for adresser (%)</h6>
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary">Hurtigste teknologi for adresser (%)</h6>
                                     </div>
 
                                     <!-- Card Body -->
@@ -321,14 +321,35 @@
                                     </div>
                                 </div>
                             </div>
+                           
+                            <script>
 
+                                
+
+
+                                function removeFilters() {
+                                    document.getElementById("spinner").hidden = false;
+                                    setTimeout(function () {
+                                        document.getElementById("formControlRange").disabled = true;
+                                        document.getElementById('button-a').disabled = true;
+                                        document.getElementById("formControlRange").value = "0";
+                                        document.getElementById('myInput').value = '';
+                                        addAllMarkers();
+                                        document.getElementById('unikCVR').innerHTML
+                                            = (allMarkersArray.length);
+                                        updateDoughnutChart(allMarkersArray);
+                                        document.getElementById('radioAll').checked = true;
+                                        document.getElementById("spinner").hidden = true;
+                                    }, 100);
+                                }
+                            </script>
                             <!-- Area Chart -->
                             <div class="col-lg-6" style=" height: 600px; margin-bottom: 1.5rem!important;">
                                 <div class="card shadow mb-4 mapWrapper" style="height: 100%">
                                     <!-- Card Header - Dropdown -->
                                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="height: 52px;">
                                         <h6 class="m-0 font-weight-bold text-primary">Map overview</h6>
-                                        <!--SPINNER-->                      
+                                        <!--SPINNER-->
                                         <div class="spinner-border " id="spinner" role="status" hidden></div>
                                         <div>
                                             <div>
@@ -468,27 +489,9 @@
                                 <div>
                                    
                                     <script charset="utf-8">
-                                        //Array der indeholder alle branche betegnelser
-                                        var branche = searchArray;
-                                        let unique = [...new Set(branche)]
+                                       
 
-                                        /*initiate the autocomplete function on the "myInput" element, and pass along the branche array as possible autocomplete values:*/
-                                        autocomplete(document.getElementById("myInput"), unique);
-                                        function removeFilters() {
-                                            document.getElementById("spinner").hidden = false;
-                                            setTimeout(function () {
-                                                document.getElementById("formControlRange").disabled = true;
-                                                document.getElementById('button-a').disabled = true;
-                                                document.getElementById("formControlRange").value = "0";
-                                                document.getElementById('myInput').value = '';
-                                                addAllMarkers();
-                                                document.getElementById('unikCVR').innerHTML
-                                                    = (allMarkersArray.length);
-                                                updateDoughnutChart(allMarkersArray);
-                                                document.getElementById('radioAll').checked = true;
-                                                document.getElementById("spinner").hidden = true;
-                                            }, 100);
-                                        }
+                                        
                                     </script>
                                 </div>
                             </div>
@@ -518,11 +521,11 @@
         <script src="~/Content/js/sb-admin-2.min.js"></script>
 
         <!-- Page level plugins -->
-        <script src="~/Content/vendor/chart.js/Chart.min.js"></script>
+        @*<script src="~/Content/vendor/chart.js/Chart.min.js"></script>*@
 
         <!-- Page level custom scripts -->
-        <script src="~/Content/js/demo/chart-area-demo.js"></script>
-        <script src="~/Content/js/demo/chart-pie-demo.js"></script>
+        @*<script src="~/Content/js/demo/chart-area-demo.js"></script>
+        <script src="~/Content/js/demo/chart-pie-demo.js"></script>*@
 
     </body>
 
