@@ -104,3 +104,13 @@ function addClusters(localarray, lat, long, createdAt, name, business, employees
 
 
 }
+
+//Function that shows all unique acess addresses
+function unikAdd(array) {
+    var addrList = [];
+    for (var i = 0; i < array.length; i++) {
+        addrList.push(array[i].address);
+    }
+    let unikkeAdresser = [...new Set(addrList)]
+    document.getElementById("unikAdd").innerHTML = unikkeAdresser.length;
+}

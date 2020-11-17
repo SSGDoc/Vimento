@@ -33,7 +33,6 @@
         @*<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css">*@
         <link rel="stylesheet" href="~/Content/css/MarkerCluster.Default.css">
 
-
         <script src="~/scripts/searchUtil.js"></script>
         <script src="~/scripts/filterUtil.js"></script>
         <script src="~/scripts/leadUtil.js"></script>
@@ -45,12 +44,10 @@
                 crossorigin="anonymous"></script>
 
         <script>
-
             var allMarkersArray = new Array();
             var filterArray = new Array();
             var speedSwitchValue;
             var searchArray = new Array();
-
 
             var markers = L.markerClusterGroup({
                 spiderfyOnMaxZoom: false,
@@ -60,7 +57,6 @@
                 emp: 5,
                 name: 'placeholder name'
             });
-
         </script>
 
         <!--køre igennem alle firmaer i databasen og tilføjer dem som marker-->
@@ -73,10 +69,8 @@
             </script>
         }
 
-
         <script>
             allMarkersArray = fixFormat(allMarkersArray);
-
         </script>
     </head>
 
@@ -109,8 +103,9 @@
                 </li>
 
                 <!-- Divider -->
-                <hr class="sidebar-divider">        
+                <hr class="sidebar-divider">
 
+                <!-- Sælger menu button -->
                 <li class="nav-item">
                     <a class="nav-link text-white">
                         <i class="fas fa-fw fa-user-tie  text-white"></i>
@@ -118,6 +113,7 @@
                     </a>
                 </li>
 
+                <!-- Netværksingeniør menu button -->
                 <li class="nav-item">
                     <a class="nav-link">
                         <i class="fas fa-fw fa-user-cog"></i>
@@ -125,6 +121,7 @@
                     </a>
                 </li>
 
+                <!-- Marketingsansvarlig menu button -->
                 <li class="nav-item">
                     <a class="nav-link">
                         <i class="fas fa-fw fa-user-astronaut"></i>
@@ -133,7 +130,7 @@
                 </li>
 
                 <!-- Divider -->
-                <hr class="sidebar-divider d-none d-md-block"/>
+                <hr class="sidebar-divider d-none d-md-block" />
 
             </ul>
             <!-- End of Sidebar -->
@@ -143,7 +140,6 @@
                 <!-- Main Content -->
                 <div id="content">
 
-
                     <!-- End of Topbar -->
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
@@ -151,14 +147,12 @@
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800"> <i class="fas fa-fw fa-user-tie text-primary"></i> Sælger Dashboard  </h1>
-                            
-
                         </div>
 
                         <!-- Content Row -->
                         <div class="row">
 
-                            <!-- Unikker CVR Card Example -->
+                            <!-- Unikke CVR Card -->
                             <div class="col-xl-3 col-md-6 mb-4" style=" margin: auto ">
                                 <div class="card border-left-success shadow h-100 py-2">
                                     <div class="card-body">
@@ -175,7 +169,7 @@
                                 </div>
                             </div>
 
-                            <!-- Adgansadresser Card Example -->
+                            <!-- Adgansadresser Card -->
                             <div class="col-xl-3 col-md-6 mb-4" style=" margin: auto ">
                                 <div class="card border-left-primary shadow h-100 py-2">
                                     <div class="card-body">
@@ -192,7 +186,7 @@
                                 </div>
                             </div>
 
-                            <!-- Fiber (procent) Card Example -->
+                            <!-- Fiber (procent) Card -->
                             <div class="col-xl-3 col-md-6 mb-4">
                                 <div class="card border-left-info shadow h-100 py-2">
                                     <div class="card-body">
@@ -202,15 +196,6 @@
                                                 <div class="row no-gutters align-items-center">
                                                     <div class="col-auto">
                                                         <div id="fiberSpeedTopCard" class="h5 mb-0 mr-3 font-weight-bold text-gray-800">00.00</div>
-                                                        <script>
-                                                            //Updates the top card (%Fiber)
-                                                            function updateTopCardFiber(array) {
-                                                                var fiberPercentageToken = calculatePercentageOf(fiberBest.length, array.length);
-                                                                document.getElementById("fiberSpeedTopCard").innerHTML = fiberPercentageToken.toString() + "%";
-                                                                var fiberPercentageAttrString = "width: " + fiberPercentageToken.toString() + "%";
-                                                                document.getElementById("progressFiberPercent").setAttribute("style", fiberPercentageAttrString);
-                                                            }
-                                                        </script>
                                                     </div>
                                                     <div class="col">
                                                         <div class="progress progress-sm mr-2">
@@ -227,10 +212,11 @@
                                 </div>
                             </div>
 
-                            <!-- Data Card Example -->
+                            <!-- Data Card -->
                             <div class="col-xl-3 col-md-6 mb-4" style=" margin: auto ">
                                 <div class="card border-left-warning shadow h-100 py-2">
                                     <div class="card-body">
+                                        <!-- Database lates update text -->
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Data senest opdateret</div>
@@ -247,33 +233,42 @@
                         <!-- Content Row -->
                         <div class="row">
 
+                            <!-- Card Column 1 -->
                             <div class="col-xl-3  float-left">
+                                <!-- Filter Card -->
                                 <div class="card shadow mb-4 " style=" height: 218px">
+                                    <!-- Card Header -->
                                     <div class="card-header py-3">
                                         <h6 class="m-0 font-weight-bold text-primary">Vis for hastighed</h6>
                                     </div>
+                                    <!-- Card Body -->
                                     <div class="card-body">
                                         <div class="m-auto">
+                                            <!-- Fiber radio button -->
                                             <div class="form-check-inline">
                                                 <label class="form-check-label">
                                                     <input type="radio" class="form-check-input" onclick="radioBtnFilter(0)" name="optradio">Fiber
                                                 </label>
                                             </div>
+                                            <!-- Kabel radio button -->
                                             <div class="form-check-inline">
                                                 <label class="form-check-label">
                                                     <input type="radio" class="form-check-input" onclick="radioBtnFilter(1)" name="optradio">Kabel
                                                 </label>
                                             </div>
+                                            <!-- DSL radio button -->
                                             <div class="form-check-inline disabled">
                                                 <label class="form-check-label">
                                                     <input type="radio" class="form-check-input" onclick="radioBtnFilter(2)" name="optradio">Dsl
                                                 </label>
                                             </div>
+                                            <!-- Mobile radio button -->
                                             <div class="form-check-inline">
                                                 <label class="form-check-label">
                                                     <input type="radio" class="form-check-input" onclick="radioBtnFilter(3)" name="optradio">Mobil
                                                 </label>
                                             </div>
+                                            <!-- ALL radio button -->
                                             <div class="form-check-inline">
                                                 <label class="form-check-label">
                                                     <input type="radio" class="form-check-input" onclick="radioBtnFilter(4)" name="optradio" id="radioAll" checked="checked">Alle
@@ -281,14 +276,16 @@
                                             </div>
                                         </div>
 
+                                        <!-- Internet speed slider -->
                                         <div class="form-group mt-4">
                                             <h4 class="small font-weight-bold mt-2">0 Mbit/s<span class="float-right">1000 Mbit/s</span></h4>
                                             <input type="range" min="0" max="1000" value="0" class="custom-range" step="10" id="formControlRange" onmousemove="updateTextInput(this.value);" onchange="markersToAdd = []; sliderSpeedFilter(this.value);" , disabled />
-                                            <h4 class="small font-weight-bold text-center" id="txtMbits">0</h4>
+                                            <h4 class="small font-weight-bold text-center" id="txtMbits">Minimum 0 Mbit/s</h4>
                                         </div>
                                     </div>
                                 </div>
                                 <script>
+                                    //Function for filtering markers by technology
                                     function radioBtnFilter(switchValue) {
                                         document.getElementById("spinner").hidden = false;
                                         setTimeout(function () {
@@ -296,6 +293,7 @@
                                             document.getElementById("spinner").hidden = true;
                                         }, 0);
                                     }
+                                    //Function for filtering markers by technology speed
                                     function sliderSpeedFilter(value) {
                                         document.getElementById("spinner").hidden = false;
                                         setTimeout(function () {
@@ -305,9 +303,10 @@
                                     }
 
                                 </script>
-
+                                <!-- End of Filter Card -->
+                                <!-- Doughnut Card -->
                                 <div class="card shadow mb-4" style=" height: 358px">
-                                    <!-- Card Header - Dropdown -->
+                                    <!-- Card Header -->
                                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                         <h6 class="m-0 font-weight-bold text-primary">Hurtigste teknologi for adresser (%)</h6>
                                     </div>
@@ -315,19 +314,16 @@
                                     <!-- Card Body -->
                                     <div class="card-body">
                                         <div class="text-center small">
-
+                                            <!-- Doughnut chart canvas -->
                                             <canvas id="doughnut" height="250" width="300"></canvas>
-
                                         </div>
                                     </div>
                                 </div>
+                                <!-- End of Doughnut Card -->
                             </div>
-                           
+                            <!-- End of Card Column 1 -->
                             <script>
-
-
-                               
-
+                                //Function for clearing all filters on the dashboard, and re-setting to default
                                 function removeFilters() {
                                     document.getElementById("spinner").hidden = false;
                                     setTimeout(function () {
@@ -345,16 +341,20 @@
                                     }, 100);
                                 }
                             </script>
-                            <!-- Area Chart -->
+
+                            <!-- Card Column 2 -->
                             <div class="col-lg-6" style=" height: 600px; margin-bottom: 1.5rem!important;">
+                                <!-- Map Card -->
                                 <div class="card shadow mb-4 mapWrapper" style="height: 100%">
-                                    <!-- Card Header - Dropdown -->
+                                    <!-- Card Header -->
                                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="height: 52px;">
                                         <h6 class="m-0 font-weight-bold text-primary">Kort</h6>
-                                        <!--SPINNER-->
+                                        <!--Loading spinner-->
                                         <div class="spinner-border " id="spinner" role="status" hidden></div>
+
                                         <div>
                                             <div>
+                                                <!-- Search button group -->
                                                 <form autocomplete="off" class="d-none d-md-inline-block form-inline">
                                                     <div class="input-group">
                                                         <input class="form-control mr-2" input id="myInput" type="text" spellcheck="false" name="branche" placeholder="Søg efter branche" aria-label="Search" aria-describedby="basic-addon2">
@@ -367,7 +367,7 @@
                                                     var branche = searchArray;
                                                     let unique = [...new Set(branche)]
 
-                                                    /*initiate the autocomplete function on the "myInput" element, and pass along the branche array as possible autocomplete values:*/
+                                                    // initiate the autocomplete function on the "myInput" element, and pass along the branche array as possible autocomplete values
                                                     autocomplete(document.getElementById("myInput"), unique);
 
                                                 </script>
@@ -380,10 +380,11 @@
                                         <div class="chart-area" style="height: 100%">
                                             <button class="btn btn-primary m-auto text-white search-group test" id="button-a" style="pointer-events: auto" onclick="generateLeadList();" disabled>Opret lead-liste</button>
 
+                                            <!-- Map Area -->
                                             <div id="mapid" class="chart-area" style="height: 100%">
-
                                             </div>
                                             <script>
+                                                //Script for loading in map and adding "cluster" effect
                                                 var mymap = L.map('mapid').setView([57.047218, 9.920100], 8);
                                                 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
                                                     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -394,11 +395,13 @@
                                                     accessToken: 'pk.eyJ1IjoibXJzYWdneSIsImEiOiJja2ZiamQ4ajYwcXh3MnhvODU4NjZrZ29xIn0.JXSCWFKMGdFElSPErRk-Zg'
                                                 }).addTo(mymap);
 
+                                                //Setup of array's used in the map and filters
                                                 var allMarkersArray = new Array();
                                                 var filterArray = new Array();
                                                 var speedSwitchValue;
                                                 var searchArray = new Array();
 
+                                                //Setup of marker clusters on map
                                                 var markers = L.markerClusterGroup({
                                                     spiderfyOnMaxZoom: false,
                                                     showCoverageOnHover: true,
@@ -409,7 +412,8 @@
                                                 });
                                             </script>
 
-                                            <!--køre igennem alle firmaer i databasen og tilføjer dem som marker-->
+                                          
+                                            <!-- Loads all companies from the database via Model on page load -->
                                             @foreach (var company in Model)
                                             {
                                                 <script charset="utf8_danish_ci">
@@ -420,7 +424,7 @@
                                             }
 
                                             <script>
-                                                //tilføjer alle lavede markers til map
+                                                //Add all found markes to the map on page load
                                                 function prepareInitialLoad() {
 
                                                     document.getElementById("spinner").hidden = false;
@@ -435,36 +439,32 @@
                                                 }
                                                 prepareInitialLoad();
 
-                                                //Funktion der viser unikke adgangsadresser
-                                                function unikAdd(array) {
-                                                    var addrList = [];
-                                                    for (var i = 0; i < array.length; i++) {
-                                                        addrList.push(array[i].address);
-                                                    }
-                                                    let unikkeAdresser = [...new Set(addrList)]
-                                                    document.getElementById("unikAdd").innerHTML = unikkeAdresser.length;
-                                                }
                                             </script>
                                         </div>
                                     </div>
                                 </div>
+                                <!-- End of Map Card -->
                             </div>
-
+                            <!-- End of Card column 2 -->
+                            <!-- Card Column 3 -->
                             <div class="col-xl-3" style=" height: 600px">
+                                <!-- Adress Info Card -->
                                 <div class="card shadow mb-4" style=" height: 258px">
-                                    @*Card Header - Dropdown*@
+                                    <!-- Card Header -->
                                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between " style="height: 52px;">
 
+                                        <!-- Buttons to look trough the diffrent companies at the selected address -->
                                         <h6 class="m-0 font-weight-bold text-primary">Adresse info</h6>
                                         <a onclick="nextInfo(-1)" href="#"> <i class="fas fa-arrow-alt-circle-left fa-2x text-primary"></i></a>
-                                        <h6 id="side" class="m-0  ">1 / 9</h6>
+                                        <h6 id="side" class="m-0  ">1 / 1</h6>
                                         <a onclick="nextInfo(1)" href="#"> <i class="fas fa-arrow-alt-circle-right fa-2x text-primary"></i></a>
                                         <div class="col-auto">
                                             <i class="fas fa-map-marker-alt fa-2x text-danger"></i>
                                         </div>
                                     </div>
 
-                                    @*Card Body*@
+                                    <!-- Card Body -->
+                                    <!-- Display area for address information -->
                                     <div class="card-body">
                                         <div class="text-xs font-weight-bold text-primary text-uppercase">Virksomhed</div>
                                         <h6 id="firmanavn"> ... </h6>
@@ -477,8 +477,9 @@
                                     </div>
                                 </div>
 
+                                <!-- Bar Chart Card -->
                                 <div class="card shadow mb-4" style=" height: 318px">
-                                    <!-- Card Header - Dropdown -->
+                                    <!-- Card Header -->
                                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                         <h6 class="m-0 font-weight-bold text-primary">Hastighed fordelt på teknologi</h6>
                                     </div>
@@ -486,30 +487,18 @@
                                     <!-- Card Body -->
                                     <div class="card-body">
                                         <div class="text-center small">
+                                            <!-- Bar chart canvas -->
                                             <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js'></script>
                                             <canvas id="bar" height="250" width="300"></canvas>
                                             <script src="~/Scripts/barChart.js"></script>
-
                                         </div>
                                     </div>
                                 </div>
                                 <script src="~/Scripts/doughnut.js"></script>
                             </div>
+                            <!-- End of Card Column 3 -->
                         </div>
                         <!-- End of main row -->
-                        <!-- Content Row -->
-                        <div class="row">
-                            <div>
-                                <div>
-                                   
-                                    <script charset="utf-8">
-                                       
-
-                                        
-                                    </script>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <!-- /.container-fluid -->
@@ -517,7 +506,7 @@
             <!-- End of Main Content -->
         </div>
         <!-- End of Content Wrapper -->
-        </div>
+        
         <!-- End of Page Wrapper -->
         <!-- Scroll to Top Button-->
         <a class="scroll-to-top rounded" href="#page-top">

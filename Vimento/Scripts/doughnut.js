@@ -72,6 +72,14 @@ function calculatePercentageOf(val, totalAmount) {
     return result.toFixed(2);
 }
 
+//Updates the top card (%Fiber)
+function updateTopCardFiber(array) {
+    var fiberPercentageToken = calculatePercentageOf(fiberBest.length, array.length);
+    document.getElementById("fiberSpeedTopCard").innerHTML = fiberPercentageToken.toString() + "%";
+    var fiberPercentageAttrString = "width: " + fiberPercentageToken.toString() + "%";
+    document.getElementById("progressFiberPercent").setAttribute("style", fiberPercentageAttrString);
+}
+
 //Updates the chart with an array of markers
 function updateDoughnutChart(arrayWithMarkers) {
     allocateBest(arrayWithMarkers);

@@ -1,12 +1,15 @@
 ﻿
+//Updates the number in filter card with selected MB/S speed
 function updateTextInput(value) {
     document.getElementById("txtMbits").textContent = "Minimum " + value + " Mbit/s";
 }
 
 
+//Filters and runs trough array of markers to add on map, by selected internet technology, and selected minimum speed, in the filter card.
 var markersToAdd = [];
 function updateMapBySpeed(downSpeed) {
     markers.clearLayers();
+    //Switch depending on selected radio button in the filter card
     for (let i = 0; i < filterArray.length; i++) {
         switch (speedSwitchValue) {
             case 0:
@@ -54,9 +57,10 @@ function updateMapBySpeed(downSpeed) {
 
 
 
-
+//Filters markers on map by selected technology in the filter card
 function tekFilter(selectSwitch) {
     markers.clearLayers();
+    //Switch depending on selected radio button in the filter card
     switch (selectSwitch) {
         case 0:
             document.getElementById('button-a').disabled = false;
@@ -130,7 +134,7 @@ function tekFilter(selectSwitch) {
             }
     }
 
-
+    //Add's found markers to map and arrays
     result.forEach(m => markers.addLayer(m));
     filterArray = result;
     mymap.addLayer(markers);
@@ -140,16 +144,19 @@ function tekFilter(selectSwitch) {
     updateDoughnutChart(filterArray);
 }
 
-
+//checks if fiber is avalible for a marker
 function checkFiber(speed) {
     return speed.downFiber > 0;
 }
+//checks if kabel is avalible for a marker
 function checkKabel(speed) {
     return speed.downKabel > 0;
 }
+//checks if DSL is avalible for a marker
 function checkDsl(speed) {
     return speed.downDsl > 0;
 }
+//checks if Mobil is avalible for a marker
 function checkMobil(speed) {
     return speed.mobil > 0;
 }
