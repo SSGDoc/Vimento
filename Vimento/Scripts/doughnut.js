@@ -1,4 +1,7 @@
-﻿var ctx = document.getElementById('doughnut');
+﻿// Context of doughnut element in index
+var ctx = document.getElementById('doughnut');
+
+// Instantiates a new Chart (Doughnut)
 var myDoughnutChart = new Chart(ctx, {
     type: 'doughnut',
     data: {
@@ -12,7 +15,6 @@ var myDoughnutChart = new Chart(ctx, {
                 'rgba(75, 192, 192, 1)',
             ],
             borderWidth: 1
-           
         }]
     },
     options: {
@@ -21,22 +23,22 @@ var myDoughnutChart = new Chart(ctx, {
         tooltips: {
             enabled: true,
             mode: 'single',
-            callbacks: {
+            callbacks: { // Creates function, showing calculated percentages and '%', in the tooltip element
                 label: function (tooltipItem, data) {
                     return data.labels[tooltipItem.index] + ': ' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index] + '%';
                 }
             }
         }
-    }
-    
+    } 
 });
 
+// Arrays to contain the sorted markers
 var fiberBest = [];
 var dslBest = [];
 var kabelBest = [];
 var mobilBest = [];
 
-//Sorts the addresses with best technologies into seperate arrays
+// Sorts the addresses with best technologies into seperate arrays, from the array with markers given in param.
 function allocateBest(arrayWithMarkers) {
     fiberBest = [];
     dslBest = [];
@@ -66,13 +68,14 @@ function allocateBest(arrayWithMarkers) {
     }
 }
 
-//Calculates how many % a value is of 'something'
+// Calculates how many % a value is of 'something'
 function calculatePercentageOf(val, totalAmount) {
     var result = (val / totalAmount) * 100
     return result.toFixed(2);
 }
 
-//Updates the chart with an array of markers
+/* Updates the chart with an array of markers, by allocating into 'best' catagories,
+ * then calculating how many % each 'best' array is of all the markers, and sets that as the data to be added*/
 function updateDoughnutChart(arrayWithMarkers) {
     allocateBest(arrayWithMarkers);
     myDoughnutChart.data.datasets[0].data[0] = calculatePercentageOf(fiberBest.length, arrayWithMarkers.length);
@@ -81,10 +84,9 @@ function updateDoughnutChart(arrayWithMarkers) {
     myDoughnutChart.data.datasets[0].data[3] = calculatePercentageOf(mobilBest.length, arrayWithMarkers.length);
     myDoughnutChart.update();
 
-    //Updates aditional %Display in the top card
+    // Updates additional % Display in the top card
     updateTopCardFiber(arrayWithMarkers);
     unikAdd(arrayWithMarkers);
-    
 }
-//Called initially when page loads
+// Called initially when page loads (index declutter)
 updateDoughnutChart(allMarkersArray);
