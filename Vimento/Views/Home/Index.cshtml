@@ -332,7 +332,7 @@
                                     document.getElementById("spinner").hidden = false;
                                     setTimeout(function () {
                                         document.getElementById("formControlRange").disabled = true;
-                                        document.getElementById('button-a').disabled = true;
+                                        document.getElementById('leadLstBtn').disabled = true;
                                         document.getElementById("formControlRange").value = "0";
                                         document.getElementById('myInput').value = '';
                                         addAllMarkers();
@@ -378,7 +378,7 @@
                                     <!-- Card Body -->
                                     <div class="card-body" style="height: 100%; padding: 0">
                                         <div class="chart-area" style="height: 100%">
-                                            <button class="btn btn-primary m-auto text-white search-group test" id="button-a" style="pointer-events: auto" onclick="generateLeadList();" disabled>Opret lead-liste</button>
+                                            <button class="btn btn-primary m-auto text-white search-group test" id="leadLstBtn" style="pointer-events: auto" onclick="generateLeadList();" disabled>Opret lead-liste</button>
 
                                             <div id="mapid" class="chart-area" style="height: 100%">
 
