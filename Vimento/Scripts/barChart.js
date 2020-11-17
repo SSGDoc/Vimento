@@ -1,4 +1,5 @@
-﻿var ctx = document.getElementById('bar');
+﻿//Creates the barchart with labels, colors etc. 
+var ctx = document.getElementById('bar');
 var myBarChart = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -54,24 +55,31 @@ var myBarChart = new Chart(ctx, {
     }
 });
 
+//Insert fiber download speed to chart
 function addDataDownFiber(data) {
     myBarChart.data.datasets[0].data[0] = data;
 }
+//Insert fiber upload speed to chart
 function addDataUpFiber(data) {
     myBarChart.data.datasets[1].data[0] = data;
 }
+//Insert kabel download speed to chart
 function addDataDownKabel(data) {
     myBarChart.data.datasets[0].data[1] = data;
 }
+//Insert kabel upload speed to chart
 function addDataUpKabel(data) {
     myBarChart.data.datasets[1].data[1] = data;
 }
+//Insert dsl download speed to chart
 function addDataDownDsl(data) {
     myBarChart.data.datasets[0].data[2] = data;
 }
+//Insert dsl upload speed to chart
 function addDataUpDsl(data) {
     myBarChart.data.datasets[1].data[2] = data;
 }
+//Insert mobil download speed to chart
 function addDataMobil(data) {
     myBarChart.data.datasets[0].data[3] = data;
 }
