@@ -1,4 +1,6 @@
-﻿function replaceLetters(string) {
+﻿
+//Replaces unicode with Dk chars. ÆØÅ - æøå
+function replaceLetters(string) {
     var str1 = string;
     var str2 = str1.replace(/&#230;/g, "æ");
     var str3 = str2.replace(/&#233;/g, "é");
@@ -10,7 +12,7 @@
     return str8;
 }
 
-
+//Used to clean up search array in several steps.
 function fixFormat(array) {
     for (var i = 0; i < array.length; i++) {
 
@@ -31,7 +33,8 @@ function fixFormat(array) {
     return array;
 }
 
-//Filtrer searchArray ud fra input i søgefeltet og tilføjer dem på kortet
+
+//Takes the result from search/autocomplete and adds the markers to the map.
 function searchFilter(search) {
     searchArray = [];
     filterArray = [];
@@ -43,7 +46,7 @@ function searchFilter(search) {
         if (marker.business == search) {
             searchArray.push(marker);
             filterArray.push(marker);
-            document.getElementById('button-a').disabled = false;
+            document.getElementById('leadLstBtn').disabled = false;
         }
     }
     searchArray.forEach(m => markers.addLayer(m));
@@ -55,7 +58,7 @@ function searchFilter(search) {
    
 }
 
-
+//Clears ther filter. Sets the button/values to default values.
 function clearFilterButtons() {
     document.getElementById('txtMbits').innerHTML = "0";
     document.getElementById('radioAll').checked = true;
@@ -63,7 +66,7 @@ function clearFilterButtons() {
 
 }
 
-
+//Autocomplete with wildcard search.
 function autocomplete(inp, arr) {
     /*the autocomplete function takes two arguments,
     the text field element and an array of possible autocompleted values:*/
@@ -132,7 +135,8 @@ function autocomplete(inp, arr) {
             }
         }
     });
-    //Tager text fra input feltet og aktiverer søge knappen når man trykker enter.
+    
+    //Get text from input field and activates the search button when pressing enter.
     inp.addEventListener("keyup", function (event) {
         if (event.keyCode === 13) {
             event.preventDefault();

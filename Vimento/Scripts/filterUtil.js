@@ -49,7 +49,7 @@ function updateMapBySpeed(downSpeed) {
     mymap.addLayer(markers);
     document.getElementById('unikCVR').innerHTML
         = (markersToAdd.length);
-    document.getElementById('button-a').disabled = false;
+    document.getElementById('leadLstBtn').disabled = false;
 
     updateDoughnutChart(markersToAdd);
 
@@ -63,7 +63,7 @@ function tekFilter(selectSwitch) {
     //Switch depending on selected radio button in the filter card
     switch (selectSwitch) {
         case 0:
-            document.getElementById('button-a').disabled = false;
+            document.getElementById('leadLstBtn').disabled = false;
             document.getElementById("formControlRange").disabled = false;
             if (document.getElementById('myInput').value != '') {
                 var result = searchArray.filter(checkFiber);
@@ -77,7 +77,7 @@ function tekFilter(selectSwitch) {
                 break;
             }
         case 1:
-            document.getElementById('button-a').disabled = false;
+            document.getElementById('leadLstBtn').disabled = false;
             document.getElementById("formControlRange").disabled = false;
             if (document.getElementById('myInput').value != '') {
                 var result = searchArray.filter(checkKabel);
@@ -91,7 +91,7 @@ function tekFilter(selectSwitch) {
                 break;
             }
         case 2:
-            document.getElementById('button-a').disabled = false;
+            document.getElementById('leadLstBtn').disabled = false;
             document.getElementById("formControlRange").disabled = false;
             if (document.getElementById('myInput').value != '') {
                 var result = searchArray.filter(checkDsl);
@@ -105,7 +105,7 @@ function tekFilter(selectSwitch) {
                 break;
             }
         case 3:
-            document.getElementById('button-a').disabled = false;
+            document.getElementById('leadLstBtn').disabled = false;
             document.getElementById("formControlRange").disabled = false;
             if (document.getElementById('myInput').value != '') {
                 var result = searchArray.filter(checkMobil);
@@ -119,7 +119,7 @@ function tekFilter(selectSwitch) {
                 break;
             }
         case 4:
-            document.getElementById('button-a').disabled = false;
+            document.getElementById('leadLstBtn').disabled = false;
             document.getElementById("formControlRange").disabled = false;
             if (document.getElementById('myInput').value != '') {
                 var result = searchArray;
