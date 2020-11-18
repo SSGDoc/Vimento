@@ -3,7 +3,7 @@
 function onClick(e) {
     cordCheck(this.getLatLng().lat, this.getLatLng().lng);
     displayInfo(this);
-    myChart.update();
+    myBarChart.update();
 }
 
 //Index of the displaying company of the array of markers, to be used in nextInfo(sum)
@@ -19,30 +19,30 @@ function nextInfo(sum) {
 
         index = 0;
     }
-    else if (index > (filterArray.length) - 1) {
-        index = ((filterArray.length - 1));
+    else if (index > (infoArray.length) - 1) {
+        index = ((infoArray.length - 1));
 
     }
-    displayInfo(filterArray[index]);
+    displayInfo(infoArray[index]);
     document.getElementById('side').innerHTML
-        = ((index + 1) + " / " + filterArray.length);
+        = ((index + 1) + " / " + infoArray.length);
 }
 
 /* Clears filterArray and resets the global index variable, used in the infocard.
  * Takes the clicked markers coordinates, and then iterates all markers to find markers with same coordinates.
  * Then updates the x/x of the infocard*/
 function cordCheck(clickLat, clicklng) {
-    filterArray = [];
+    infoArray = [];
     index = 0;
     for (var i = 0; i < (allMarkersArray.length); i++) {
         var marker = allMarkersArray[i];
 
         if (marker.getLatLng().lng == clicklng && marker.getLatLng().lat == clickLat) {
-            filterArray.push(marker);
+            infoArray.push(marker);
         }
     }
     document.getElementById('side').innerHTML
-        = ((index + 1) + " / " + filterArray.length);
+        = ((index + 1) + " / " + infoArray.length);
 }
 
 // Show/Hide functions for the spinner, to declutter index

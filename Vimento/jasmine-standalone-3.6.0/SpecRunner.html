@@ -16,15 +16,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"
             integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ=="
             crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css">
+    <link rel="stylesheet" href="~/Content/css/MarkerCluster.Default.css">
     <script src="../Scripts/leadUtil.js"></script>
     <script src="../Scripts/doughnut.js"></script>
+    <script src="../Scripts/filterUtil.js"></script>
 
     <!--Jasmine scripts-->
     <script src="lib/jasmine-3.6.0/jasmine.js"></script>
     <script src="lib/jasmine-3.6.0/jasmine-html.js"></script>
-    <script src="lib/jasmine-3.6.0/boot.js"></script>
 
     <!-- include spec files here... -->
+
+    <script src="../../jasmine-standalone-3.6.0/spec/FilterTest.js"></script>
     <script src="spec/DoughnutTest.js"></script>
     <script src="spec/LeadListTest.js"></script>
 
