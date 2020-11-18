@@ -1864,6 +1864,7 @@
     <Content Include="jasmine-standalone-3.6.0\lib\jasmine-3.6.0\jasmine.js" />
     <Content Include="jasmine-standalone-3.6.0\lib\jasmine-3.6.0\jasmine_favicon.png" />
     <Content Include="jasmine-standalone-3.6.0\SpecRunner.html" />
+    <Content Include="jasmine-standalone-3.6.0\spec\FilterTest.js" />
     <Content Include="jasmine-standalone-3.6.0\spec\DoughnutTest.js" />
     <Content Include="jasmine-standalone-3.6.0\spec\PlayerSpec.js" />
     <Content Include="jasmine-standalone-3.6.0\spec\SpecHelper.js" />
