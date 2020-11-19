@@ -1866,6 +1866,7 @@
     <Content Include="jasmine-standalone-3.6.0\SpecRunner.html" />
     <Content Include="jasmine-standalone-3.6.0\spec\DoughnutTest.js" />
     <Content Include="jasmine-standalone-3.6.0\spec\PlayerSpec.js" />
+    <Content Include="jasmine-standalone-3.6.0\spec\searchTest.js" />
     <Content Include="jasmine-standalone-3.6.0\spec\SpecHelper.js" />
     <Content Include="jasmine-standalone-3.6.0\src\Player.js" />
     <Content Include="jasmine-standalone-3.6.0\src\Song.js" />

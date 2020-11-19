@@ -55,7 +55,6 @@ function searchFilter(search) {
         = (searchArray.length);
     updateDoughnutChart(searchArray);
     clearFilterButtons();
-   
 }
 
 //Clears ther filter. Sets the button/values to default values.
@@ -65,6 +64,7 @@ function clearFilterButtons() {
     document.getElementById("formControlRange").value = "0";
 
 }
+
 
 //Autocomplete with wildcard search.
 function autocomplete(inp, arr) {
