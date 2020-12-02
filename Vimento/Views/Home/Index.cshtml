@@ -42,6 +42,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"
                 integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ=="
                 crossorigin="anonymous"></script>
+        <!--Chart.js implementation-->
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js'></script>
 
         <script>
             var allMarkersArray = new Array();
@@ -317,6 +319,7 @@
                                         <div class="text-center small">
                                             <!-- Doughnut chart canvas -->
                                             <canvas id="doughnut" height="250" width="300"></canvas>
+                                            <script src="~/Scripts/doughnut.js"></script>
                                         </div>
                                     </div>
                                 </div>
@@ -489,13 +492,13 @@
                                     <div class="card-body">
                                         <div class="text-center small">
                                             <!-- Bar chart canvas -->
-                                            <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js'></script>
+                                          
                                             <canvas id="bar" height="250" width="300"></canvas>
                                             <script src="~/Scripts/barChart.js"></script>
                                         </div>
                                     </div>
                                 </div>
-                                <script src="~/Scripts/doughnut.js"></script>
+                                
                             </div>
                             <!-- End of Card Column 3 -->
                         </div>
