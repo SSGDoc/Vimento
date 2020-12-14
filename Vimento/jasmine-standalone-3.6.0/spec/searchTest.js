@@ -56,16 +56,19 @@ describe("string should be FÅR", () => {
     })
 });
 
+var searchArray = new Array();
+var markersArray2 = new Array();
+var mMob2 = new L.circleMarker([0.00, 0.00]);
+mMob2.business = "r&#248;dgr&#248;d k&#229;lorm &#230;sel";
+mMob2.name = "k&#229;lorm";
+mMob2.address = "&#230;sel";
 
-//var markersArray = new Array();
-//var mMob = new L.circleMarker([0.00, 0.00]);
-//mMob.business = "r&#248;dgr&#248;d k&#229;lorm &#230;sel";
-//markersArray.push(mMob);
+markersArray2.push(mMob2);
 
-//fixFormat(markersArray);
-//describe("Array business should be rødgrød kålorm æsel", () => {
+fixFormat(markersArray2);
+describe("Array business should be rødgrød kålorm æsel", () => {
 
-//    it('Expected rødgrød kålorm æsel', () => {
-//        expect(markersArray[0].business).toBe('rødgrød kålorm æsel');
-//    })
-//});
+    it('Expected rødgrød kålorm æsel', () => {
+        expect(searchArray[0]).toBe('rødgrød kålorm æsel');
+    })
+});

@@ -43,36 +43,6 @@
                 integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ=="
                 crossorigin="anonymous"></script>
 
-        <script>
-            var allMarkersArray = new Array();
-            var filterArray = new Array();
-            var infoArray = new Array();
-            var speedSwitchValue;
-            var searchArray = new Array();
-
-            var markers = L.markerClusterGroup({
-                spiderfyOnMaxZoom: false,
-                showCoverageOnHover: true,
-                zoomToBoundsOnClick: true,
-                disableClusteringAtZoom: 18,
-                emp: 5,
-                name: 'placeholder name'
-            });
-        </script>
-
-        <!--køre igennem alle firmaer i databasen og tilføjer dem som marker-->
-        @foreach (var company in Model)
-        {
-            <script charset="utf8_danish_ci">
-                                            addClusters(allMarkersArray, @company.Address.Long, @company.Address.Lat, "@company.CreatedAt", "@company.Name", "@company.Business", "@company.AmountOfEmployees", "@company.Address.StreetName" +
-                                                " @company.Address.HouseNr", + " @company.Address.Technology.DownFiber", + "@company.Address.Technology.UpFiber", + "@company.Address.Technology.DownCable", +
-                                            "@company.Address.Technology.UpCable", + "@company.Address.Technology.DownDSL", + "@company.Address.Technology.UpDSL", + "@company.Address.Technology.MobileDownRange");
-            </script>
-        }
-
-        <script>
-            allMarkersArray = fixFormat(allMarkersArray);
-        </script>
     </head>
 
     <body id="page-top">
@@ -363,15 +333,7 @@
                                                         <a class="btn btn-primary m-auto text-white" onclick="removeFilters();" myInput=" ">Ryd filter</a>
                                                     </div>
                                                 </form>
-                                                <script charset="utf-8">
-                                                    //Array der indeholder alle branche betegnelser
-                                                    var branche = searchArray;
-                                                    let unique = [...new Set(branche)]
 
-                                                    // initiate the autocomplete function on the "myInput" element, and pass along the branche array as possible autocomplete values
-                                                    autocomplete(document.getElementById("myInput"), unique);
-
-                                                </script>
                                             </div>
                                         </div>
 
@@ -399,6 +361,7 @@
                                                 //Setup of array's used in the map and filters
                                                 var allMarkersArray = new Array();
                                                 var filterArray = new Array();
+                                                var infoArray = new Array();
                                                 var speedSwitchValue;
                                                 var searchArray = new Array();
 
@@ -413,7 +376,7 @@
                                                 });
                                             </script>
 
-                                          
+
                                             <!-- Loads all companies from the database via Model on page load -->
                                             @foreach (var company in Model)
                                             {
@@ -429,16 +392,25 @@
                                                 function prepareInitialLoad() {
 
                                                     document.getElementById("spinner").hidden = false;
+                                                    allMarkersArray = fixFormat(allMarkersArray);
                                                     setTimeout(function () {
                                                         mymap.addLayer(markers);
-                                                        allMarkersArray = fixFormat(allMarkersArray);
                                                         document.getElementById("updateDate").innerHTML = allMarkersArray[0].createdAt;
                                                         document.getElementById("spinner").hidden = true;
                                                         document.getElementById('unikCVR').innerHTML
                                                             = (allMarkersArray.length);
-                                                    }, 0);
+                                                    }, 10);
                                                 }
                                                 prepareInitialLoad();
+
+                                            </script>
+                                            <script charset="utf-8">
+                                                //Array der indeholder alle branche betegnelser
+                                                var branche = searchArray;
+                                                let unique = [...new Set(branche)]
+
+                                                // initiate the autocomplete function on the "myInput" element, and pass along the branche array as possible autocomplete values
+                                                autocomplete(document.getElementById("myInput"), unique);
 
                                             </script>
                                         </div>
