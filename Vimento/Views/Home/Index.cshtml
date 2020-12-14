@@ -398,34 +398,7 @@
                                                     zoomOffset: -1,
                                                     accessToken: 'pk.eyJ1IjoibXJzYWdneSIsImEiOiJja2ZiamQ4ajYwcXh3MnhvODU4NjZrZ29xIn0.JXSCWFKMGdFElSPErRk-Zg'
                                                 }).addTo(mymap);
-
-                                                //Setup of array's used in the map and filters
-                                                var allMarkersArray = new Array();
-                                                var filterArray = new Array();
-                                                var speedSwitchValue;
-                                                var searchArray = new Array();
-
-                                                //Setup of marker clusters on map
-                                                var markers = L.markerClusterGroup({
-                                                    spiderfyOnMaxZoom: false,
-                                                    showCoverageOnHover: true,
-                                                    zoomToBoundsOnClick: true,
-                                                    disableClusteringAtZoom: 18,
-                                                    emp: 5,
-                                                    name: 'placeholder name'
-                                                });
                                             </script>
-
-                                          
-                                            <!-- Loads all companies from the database via Model on page load -->
-                                            @foreach (var company in Model)
-                                            {
-                                                <script charset="utf8_danish_ci">
-                                            addClusters(allMarkersArray, @company.Address.Long, @company.Address.Lat, "@company.CreatedAt", "@company.Name", "@company.Business", "@company.AmountOfEmployees", "@company.Address.StreetName" +
-                                                " @company.Address.HouseNr", + " @company.Address.Technology.DownFiber", + "@company.Address.Technology.UpFiber", + "@company.Address.Technology.DownCable", +
-                                            "@company.Address.Technology.UpCable", + "@company.Address.Technology.DownDSL", + "@company.Address.Technology.UpDSL", + "@company.Address.Technology.MobileDownRange");
-                                                </script>
-                                            }
 
                                             <script>
                                                 //Add all found markes to the map on page load
