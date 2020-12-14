@@ -275,7 +275,7 @@
 
                                 </script>
                                 <!-- End of Filter Card -->
-                                <!-- Doughnut Card -->
+                                <!-- Doughnut Chart Card -->
                                 <div class="card shadow mb-4" style=" height: 358px">
                                     <!-- Card Header -->
                                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -287,6 +287,7 @@
                                         <div class="text-center small">
                                             <!-- Doughnut chart canvas -->
                                             <canvas id="doughnut" height="250" width="300"></canvas>
+                                            <script src="~/Scripts/doughnut.js"></script>
                                         </div>
                                     </div>
                                 </div>
@@ -360,6 +361,7 @@
 
                                                 //Setup of array's used in the map and filters
                                                 var allMarkersArray = new Array();
+                                                var infoArray = new Array();
                                                 var filterArray = new Array();
                                                 var infoArray = new Array();
                                                 var speedSwitchValue;
@@ -390,7 +392,7 @@
                                             <script>
                                                 //Add all found markes to the map on page load
                                                 function prepareInitialLoad() {
-
+                                                    allMarkersArray = fixFormat(allMarkersArray);
                                                     document.getElementById("spinner").hidden = false;
                                                     allMarkersArray = fixFormat(allMarkersArray);
                                                     setTimeout(function () {
@@ -460,14 +462,13 @@
                                     <!-- Card Body -->
                                     <div class="card-body">
                                         <div class="text-center small">
-                                            <!-- Bar chart canvas -->
-                                            <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js'></script>
+                                            <!-- Bar chart canvas -->    
                                             <canvas id="bar" height="250" width="300"></canvas>
                                             <script src="~/Scripts/barChart.js"></script>
                                         </div>
                                     </div>
                                 </div>
-                                <script src="~/Scripts/doughnut.js"></script>
+                                
                             </div>
                             <!-- End of Card Column 3 -->
                         </div>
